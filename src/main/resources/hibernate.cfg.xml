@@ -15,7 +15,7 @@
 
         <!-- Database connection settings -->
         <property name="connection.url">
-            jdbc:mysql://localhost/adlister_db
+            jdbc:mysql://localhost/blog_db_hibernate?createDatabaseIfNotExist=true
         </property>
         <property name="connection.username">root</property>
         <property name="connection.password">pass</property>
