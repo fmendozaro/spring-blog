@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header('Blog posts')">
+</head>
+
+<body>
+<div class="container">
+    <div th:replace="fragments/navbar :: navbar"></div>
+    <br/>
+    <br/>
+    <br/>
+
+    <h1>Blog posts</h1>
+    <div class="col-lg-9">
+        <div th:each="post : ${posts}" th:object="${post}">
+            <h3 th:text="${title}"></h3>
+            <p th:text="${body}"></p>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div th:replace="fragments/footer :: footer"></div>
+    </div>
+</div>
+</body>
+</html>

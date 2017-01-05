@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header(${'Login Page'})">
+</head>
+
+<body>
+<div class="container">
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <br/>
+    <br/>
+    <br/>
+
+    <form class="form-group col-lg-6" th:action="@{/posts/create}" th:method="POST" th:object="${post}">
+        <label for="title">Title</label>
+        <input class="form-control" th:field="*{title}" />
+        <label for="body">Blog post</label>
+        <textarea class="form-control" th:field="*{body}"></textarea>
+        <br/>
+        <input class="btn btn-primary" type="submit" />
+    </form>
+
+    <div class="col-lg-12">
+        <div th:replace="fragments/footer :: footer"></div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+</head>
+<body>
+<h2>Product information</h2>
+<dl>
+    <dt>Product name</dt>
+    <dd th:text="${productName + '!!!!'}">Default item</dd>
+
+    <dt>Product price</dt>
+    <!-- Formatting numbers and concat strings -->
+    <dd th:text="${'$' + #numbers.formatDecimal(productPrice, 1, 4)}">0.00</dd>
+
+    <dt>Product available from</dt>
+    <dd th:text="${#dates.format(productDate, 'dd-MM-yyyy')}">00-000-0000</dd>
+</dl>
+
+<!-- Bonus: Generate a table with at least 10 items with formated values with the following columns: Description, Price, Available from -->
+</body>
+</html>

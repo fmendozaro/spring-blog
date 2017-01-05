@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header(${'Login Page'})">
+</head>
+
+<body>
+<div class="container">
+    <div th:replace="fragments/navbar :: navbar"></div>
+    <br/>
+    <br/>
+    <br/>
+
+    <form th:action="@{/login}" th:method="POST" >
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" />
+        <br/>
+        <label for="password">Password</label>
+        <input type="text" name="password" id="password" />
+        <input class="btn btn-primary" type="submit" th:value="Login" />
+    </form>
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+</body>
+</html>

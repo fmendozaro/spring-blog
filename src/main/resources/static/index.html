@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+    Howdy, this is the index.
+    <div th:if="${true}">
+        This is true
+    </div>
+
+    <div th:if="${false}">
+        This is false and will not show
+    </div>
+
+    <div th:text="${msg}"></div>
+    <p>Get your greeting <a href="/greeting">here</a></p>
+</body>
+</html>

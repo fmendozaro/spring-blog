@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+    <span th:if="${status eq '200'}">
+        200.- This is a really specific status code
+    </span>
+
+    <div th:switch="${status}">
+        <p th:case="'404'">Not found</p>
+        <p th:case="'500'">Server problem</p>
+        <p th:case="'401'">Unauthorized</p>
+        <p th:case="*">Unknown status code</p>
+    </div>
+
+</body>
+</html>

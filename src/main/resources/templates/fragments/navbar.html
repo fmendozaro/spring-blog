@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<!-- Navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top" th:fragment="navbar">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="@{/posts}">My Blog</a>
+            <a class="navbar-brand" href="@{/posts/create}">Create new post</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
