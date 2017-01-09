@@ -14,11 +14,11 @@
 
     <form class="form-group col-lg-6" th:action="@{'/posts/'+ *{id} +'/edit'}" th:method="POST" th:object="${post}">
         <label for="title">Title</label>
-        <input class="form-control" th:field="*{title}" />
-        <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
+        <input class="form-control" th:field="*{title}" required="required" />
+        <p class="alert alert-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
         <label for="body">Blog post</label>
         <textarea rows="20" cols="20" class="form-control" th:field="*{body}"></textarea>
-        <p th:if="${#fields.hasErrors('body')}" th:errors="*{body}"></p>
+        <p class="alert alert-danger" th:if="${#fields.hasErrors('body')}" th:errors="*{body}"></p>
         <br/>
         <input class="btn btn-primary" type="submit" th:value="Edit" />
         <!--<input class="btn btn-danger" type="submit" th:value="Delete" />-->
