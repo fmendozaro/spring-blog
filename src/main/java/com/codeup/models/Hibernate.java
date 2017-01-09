@@ -8,7 +8,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 /**
  * Created by Fer on 1/5/17.
  */
-public class HibernateUtil {
+public class Hibernate {
 
     public static SessionFactory getSessionFactory() {
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder()

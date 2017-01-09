@@ -8,7 +8,8 @@ import java.util.List;
 public interface Posts {
 
     List<Post> all();
-    void insert(Post p);
+    void save(Post p);
+    void update(Post p);
     Post getById(int id);
     List<Post> generatePosts();
 

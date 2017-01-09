@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/header :: header('Blog posts')">
+<head th:replace="fragments/header :: header('Show Post')">
 </head>
 
 <body>
@@ -11,12 +11,11 @@
     <br/>
     <br/>
 
-    <h1>Blog posts</h1>
     <div class="col-lg-9">
-        <div th:each="post : ${posts}">
-            <h3 th:text="${post.title}"></h3>
-            <p th:text="${post.body}"></p>
-            <a class="btn btn-primary" th:href="@{'/posts/'+ ${post.id} }">Show Post</a>
+        <div th:object="${post}">
+            <h3 th:text="*{title}"></h3>
+            <p th:text="*{body}"></p>
+            <a class="btn btn-primary" th:href="@{'/posts/'+ ${post.id} +'/edit' }">Edit Post</a>
         </div>
     </div>
     <div class="col-lg-12">

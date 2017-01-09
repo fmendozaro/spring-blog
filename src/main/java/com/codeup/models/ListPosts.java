@@ -19,9 +19,14 @@ public class ListPosts implements Posts {
     }
 
     @Override
-    public void insert(Post post) {
+    public void save(Post post) {
         post.setId(posts.size()+1);
         posts.add(post);
+    }
+
+    @Override
+    public void update(Post p) {
+
     }
 
     @Override

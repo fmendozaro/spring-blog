@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/header :: header(${'Create a post'})">
+<head th:replace="fragments/header :: header(${'Edit Post'})">
 </head>
 
 <body>
@@ -12,17 +12,16 @@
     <br/>
     <br/>
 
-    <form class="form-group col-lg-6" th:action="@{/posts/create}" th:method="POST" th:object="${post}">
+    <form class="form-group col-lg-6" th:action="@{'/posts/'+ *{id} +'/edit'}" th:method="POST" th:object="${post}">
         <label for="title">Title</label>
         <input class="form-control" th:field="*{title}" />
-        <br/>
-        <p class="alert alert-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
+        <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
         <label for="body">Blog post</label>
         <textarea rows="20" cols="20" class="form-control" th:field="*{body}"></textarea>
+        <p th:if="${#fields.hasErrors('body')}" th:errors="*{body}"></p>
         <br/>
-            <p class="alert alert-danger" th:if="${#fields.hasErrors('body')}" th:errors="*{body}"></p>
-        <br/>
-        <input class="btn btn-primary" type="submit" />
+        <input class="btn btn-primary" type="submit" th:value="Edit" />
+        <!--<input class="btn btn-danger" type="submit" th:value="Delete" />-->
     </form>
 
     <div class="col-lg-12">

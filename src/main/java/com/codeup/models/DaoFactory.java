@@ -10,13 +10,19 @@ public class DaoFactory {
 
     private static Posts postsDao;
     private static Users usersDao;
-    private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    private static SessionFactory sessionFactory = Hibernate.getSessionFactory();
     private static Session session = sessionFactory.openSession();
 
-
-    public static Posts getPostsDao() {
+    public static Posts getPostsListDao() {
         if (postsDao == null) {
             postsDao = new ListPosts();
+        }
+        return postsDao;
+    }
+
+    public static Posts getPostsDao(){
+        if(postsDao == null){
+            postsDao = new PostsDao(session);
         }
         return postsDao;
     }

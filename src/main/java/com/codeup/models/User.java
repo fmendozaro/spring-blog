@@ -1,6 +1,7 @@
 package com.codeup.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Fer on 1/3/17.
@@ -21,6 +22,7 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+
 
     public User() {
     }
