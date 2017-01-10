@@ -11,14 +11,22 @@
     <br/>
     <br/>
 
-    <form th:action="@{/login}" th:method="POST" >
+    <h1>Log In</h1>
+    <div th:if="${param.error}">
+        Invalid Username and Password.
+    </div>
+    <div th:if="${param.logout}">
+        You have been logged out.
+    </div>
+
+    <form th:action="@{/login}" th:method="POST">
         <label for="username">Username</label>
-        <input type="text" name="username" id="username" />
-        <br/>
+        <input id="username" name="username" type="text" />
         <label for="password">Password</label>
-        <input type="text" name="password" id="password" />
-        <input class="btn btn-primary" type="submit" th:value="Login" />
+        <input id="password" name="password" type="password" />
+        <input type="submit" value="Log In" />
     </form>
+
     <div th:replace="fragments/footer :: footer"></div>
 </div>
 </body>

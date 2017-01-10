@@ -1,9 +1,12 @@
 package com.codeup.models;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.Date;
 
 /**
  * Created by Fer on 1/5/17.
@@ -25,9 +28,18 @@ public class Post {
     @Column(nullable = false, length = 2000)
     private String body;
 
-//    @ManyToOne
-//    @JoinColumn(name="user_id")
-//    private User user;
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "create_date")
+    private Date createDate;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "modify_date")
+    private Date modifyDate;
+
+    @OneToOne
+    private User owner;
 
     public Post(int id, String title, String body) {
         this.id = id;

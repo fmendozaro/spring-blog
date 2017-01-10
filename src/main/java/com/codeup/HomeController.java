@@ -17,20 +17,8 @@ import javax.servlet.ServletRequest;
 public class HomeController {
 
     @GetMapping("/")
-    @ResponseBody
     public String index(Model model){
         model.addAttribute("msg", "Howdy, World");
         return "index";
-    }
-
-    @GetMapping("/login")
-    public String showLogin() {
-        return "login";
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String doLogin(Model m, ServletRequest request) {
-        m.addAttribute("username", request.getParameter("username"));
-        return "home";
     }
 }
