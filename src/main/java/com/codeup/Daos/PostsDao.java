@@ -1,5 +1,7 @@
-package com.codeup.models;
+package com.codeup.Daos;
 
+import com.codeup.Repositories.Posts;
+import com.codeup.models.Post;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;

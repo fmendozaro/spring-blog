@@ -1,12 +1,11 @@
-package com.codeup;
+package com.codeup.controllers;
 
 /**
  * Created by Fer on 1/5/17.
  */
 
-import com.codeup.models.DaoFactory;
 import com.codeup.models.User;
-import com.codeup.models.UsersRepo;
+import com.codeup.Repositories.UsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("users")
-public class UsersController {
+public class UsersController extends BaseController {
 
     @Autowired
     UsersRepo usersDao;
@@ -23,7 +22,7 @@ public class UsersController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @GetMapping("/create")
+    @GetMapping("/register")
     public String saveUser(Model m){
         m.addAttribute("user", new User());
         return "users/create";
@@ -39,7 +38,9 @@ public class UsersController {
 
     @GetMapping("/{id}")
     public String saveUser(@PathVariable Long id, Model m){
-        m.addAttribute("user", usersDao.findById(id));
+        User user = usersDao.findById(id);
+        m.addAttribute("user", user);
+        m.addAttribute("showEditControls", isLoggedIn() && user.getUsername() == loggedInUser().getUsername());
         return "users/show";
     }
 

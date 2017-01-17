@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header(${error})"></head>
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container error">
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-2">
+            <th:block th:switch="${error}">
+                <h1 th:text="${error}"></h1>
+                <div th:case="'Not Found'">
+                    <img src="https://httpstatusdogs.com/img/404.jpg" />
+                </div>
+                <div th:case="'Bad Request'">
+                    <img src="https://httpstatusdogs.com/img/400.jpg" />
+                </div>
+                <div th:case="'Forbidden'">
+                    <img src="https://httpstatusdogs.com/img/401.jpg" />
+                </div>
+            </th:block>
+            <div th:replace="fragments/footer :: footer"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

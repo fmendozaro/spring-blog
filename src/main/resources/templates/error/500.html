@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header(${error})"></head>
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container error">
+    <div class="col-lg-10 col-lg-offset-2">
+        <h1 th:text="${error}"></h1>
+        <img class="center" src="https://httpstatusdogs.com/img/500.jpg" />
+        <div th:replace="fragments/footer :: footer"></div>
+    </div>
+</div>
+
+</body>
+</html>

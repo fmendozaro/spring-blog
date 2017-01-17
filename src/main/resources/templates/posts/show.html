@@ -11,10 +11,16 @@
     <br/>
     <br/>
 
-    <div class="col-lg-9">
+    <div class="col-lg-9 col-lg-offset-3">
         <div th:object="${post}">
-            <h3 th:text="*{title}"></h3>
+            <h1 th:text="*{title}"></h1>
+            <img th:src="*{imageUrl}" width="200px" height="200px;" />
             <p th:text="*{body}"></p>
+            <hr/>
+            <b>
+                <p>Posted by <span th:text="*{user.username}">some user</span> on <span th:text="${#dates.format(post.createDate,'MMM dd YYYY')}"></span>
+                </p>
+            </b>
             <a class="btn btn-primary" th:href="@{'/posts/'+ ${post.id} +'/edit' }">Edit Post</a>
         </div>
     </div>

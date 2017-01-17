@@ -11,21 +11,25 @@
     <br/>
     <br/>
 
-    <h1>Log In</h1>
-    <div th:if="${param.error}">
-        Invalid Username and Password.
-    </div>
-    <div th:if="${param.logout}">
-        You have been logged out.
-    </div>
+    <row>
+        <div class="col-lg-10 col-lg-offset-2">
+            <h1>Log In</h1>
+            <div th:if="${param.error}">
+                Invalid Username and Password.
+            </div>
+            <div th:if="${param.logout}">
+                You have been logged out.
+            </div>
 
-    <form th:action="@{/login}" th:method="POST">
-        <label for="username">Username</label>
-        <input id="username" name="username" type="text" />
-        <label for="password">Password</label>
-        <input id="password" name="password" type="password" />
-        <input type="submit" value="Log In" />
-    </form>
+            <form class="form" th:action="@{/login}" th:method="POST">
+                <label for="username">Username</label>
+                <input class="form-control" id="username" name="username" type="text" />
+                <label for="password">Password</label>
+                <input class="form-control" id="password" name="password" type="password" />
+                <input class="btn btn-primary" type="submit" value="Log In" />
+            </form>
+        </div>
+    </row>
 
     <div th:replace="fragments/footer :: footer"></div>
 </div>

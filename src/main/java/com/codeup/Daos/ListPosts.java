@@ -1,4 +1,7 @@
-package com.codeup.models;
+package com.codeup.Daos;
+
+import com.codeup.Repositories.Posts;
+import com.codeup.models.Post;
 
 import java.util.ArrayList;
 import java.util.List;

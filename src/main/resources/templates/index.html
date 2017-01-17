@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
-</head>
+<head th:replace="fragments/header :: header('Server error')"></head>
 <body>
-    Howdy, this is the index.
-    <a th:href="@{/posts]}"></a>
-    <div th:if="${true}">
-        This is true
-    </div>
 
-    <div th:if="${false}">
-        This is false and will not show
-    </div>
+<div th:replace="fragments/navbar :: navbar"></div>
 
-    <div th:text="${msg}"></div>
-    <p>Get your greeting <a href="/greeting">here</a></p>
+<div class="container">
+    <div class="col-lg-10 col-lg-offset-2">
+        Howdy, this is the index.
+        <a th:href="@{/posts]}"></a>
+        <div th:if="${true}">
+            This is true
+        </div>
+
+        <div th:if="${false}">
+            This is false and will not show
+        </div>
+
+        <div th:text="${msg}"></div>
+        <p>Get your greeting <a href="/greeting">here</a></p>
+
+        <div th:replace="fragments/footer :: footer"></div>
+    </div>
+</div>
+
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head th:replace="fragments/header :: header('Blog posts')">
 </head>
@@ -10,15 +10,75 @@
     <br/>
     <br/>
     <br/>
+    <row>
+        <div class="-collg-8 col-lg-offset-4">
+            <h1>Blog posts</h1>
+            <div sec:authorize="isAuthenticated()">
+                <a class="btn btn-primary" th:href="@{/posts/create}">Create a post</a>
+            </div>
 
-    <h1>Blog posts</h1>
-    <div class="col-lg-9">
-        <div th:each="post : ${posts}">
-            <h3 th:text="${post.title}"></h3>
-            <p th:text="${post.body}"></p>
-            <a class="btn btn-primary" th:href="@{'/posts/'+ ${post.id} }">Show Post</a>
-        </div>
+            <div th:each="post : ${page}">
+                <h3 th:text="${post.title}"></h3>
+                <img th:src="${post.imageUrl}" width="200px" height="200px;" />
+                <p th:text="${post.body}"></p>
+                <a class="btn btn-primary" th:href="@{'/posts/'+ ${post.id} }">Show Post</a>
+            </div>
     </div>
+    </row>
+    <!-- Build the pagination component -->
+    <nav class="text-center">
+        <ul class="pagination">
+            <li th:class="${page.isFirst()}? 'disabled' : ''">
+                <span th:if='${page.isFirst()}'>← First</span>
+                <a th:if='${not page.isFirst()}' th:href="'?page=0'">
+                    ← First
+                </a>
+            </li>
+            <li th:class="${page.hasPrevious()}? '' : 'disabled'">
+                <span th:if='${not page.hasPrevious()}'>«</span>
+                <a
+                        th:if='${page.hasPrevious()}'
+                        th:href="'?page=' + ${page.getNumber() - 1}"
+                        title='Go to previous page'
+                >
+                    «
+                </a>
+            </li>
+            <li th:each="i : ${#numbers.sequence(1, page.getTotalPages())}">
+                <span
+                        th:if='${(i - 1) == param.page}'
+                        th:text='${i}'>
+                    1
+                </span>
+                <a
+                        th:if='${not ((i - 1) == param.page)}'
+                        th:href="'?page=' + ${(i -1)}"
+                >
+                    <span th:text='${i}'>1</span>
+                </a>
+            </li>
+            <li th:class="${page.hasNext()} ? '' : 'disabled'">
+                <span th:if='${not page.hasNext()}'>»</span>
+                <a
+                        th:if='${page.hasNext()}'
+                        th:href="'?page=' + ${page.getNumber() + 1}"
+                        title='Go to next page'
+                >
+                    »
+                </a>
+            </li>
+            <li th:class="${page.isLast()}? 'disabled' : ''">
+                <span th:if='${page.isLast()}'>Last →</span>
+                <a
+                        th:if='${not page.isLast()}'
+                        th:href="'?page=' + ${page.getTotalPages() - 1}"
+                >
+                    Last →
+                </a>
+            </li>
+        </ul>
+    </nav>
+
     <div class="col-lg-12">
         <div th:replace="fragments/footer :: footer"></div>
     </div>

@@ -12,7 +12,7 @@
     <br/>
     <br/>
 
-    <form class="form-group col-lg-6" th:action="@{/posts/create}" th:method="POST" th:object="${post}">
+    <form class="form-group col-lg-6" th:action="@{/posts/create}" th:method="POST" th:object="${post}" enctype="multipart/form-data">
         <label for="title">Title</label>
         <input class="form-control" th:field="*{title}" />
         <br/>
@@ -22,6 +22,8 @@
         <br/>
             <p class="alert alert-danger" th:if="${#fields.hasErrors('body')}" th:errors="*{body}"></p>
         <br/>
+        <label for="file">Image</label>
+        <input type="file" name="file" id="file"/>
         <input class="btn btn-primary" type="submit" />
     </form>
 

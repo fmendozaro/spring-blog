@@ -1,4 +1,6 @@
-package com.codeup.models;
+package com.codeup.Repositories;
+
+import com.codeup.models.Post;
 
 import java.util.List;
 

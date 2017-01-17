@@ -1,5 +1,6 @@
-package com.codeup.models;
+package com.codeup.Repositories;
 
+import com.codeup.models.User;
 import org.hibernate.Session;
 
 import java.util.List;

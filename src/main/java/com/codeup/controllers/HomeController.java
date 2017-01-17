@@ -1,4 +1,4 @@
-package com.codeup;
+package com.codeup.controllers;
 
 import jdk.nashorn.internal.ir.RuntimeNode;
 import org.springframework.stereotype.Controller;

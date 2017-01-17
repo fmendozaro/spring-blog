@@ -1,4 +1,4 @@
-package com.codeup.models;
+package com.codeup.Repositories;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

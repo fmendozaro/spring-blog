@@ -1,4 +1,4 @@
-package com.codeup;
+package com.codeup.controllers;
 
 /**
  * Created by Fer on 1/2/17.

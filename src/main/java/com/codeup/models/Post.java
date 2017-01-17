@@ -38,8 +38,11 @@ public class Post {
     @Column(name = "modify_date")
     private Date modifyDate;
 
-    @OneToOne
-    private User owner;
+    @Column(nullable = true, name="image_url")
+    private String imageUrl;
+
+    @ManyToOne
+    private User user;
 
     public Post(int id, String title, String body) {
         this.id = id;
@@ -78,5 +81,37 @@ public class Post {
     @Override
     public String toString(){
         return "Title: "+ this.getTitle() + " Body: "+ this.getBody();
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Date getModifyDate() {
+        return modifyDate;
+    }
+
+    public void setModifyDate(Date modifyDate) {
+        this.modifyDate = modifyDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
