@@ -1,6 +1,6 @@
 package com.codeup.Daos;
 
-import com.codeup.Repositories.Posts;
+import com.codeup.Repositories.PostsWithLists;
 import com.codeup.models.Post;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Fer on 1/6/17.
  */
-public class PostsDao implements Posts {
+public class PostsDao implements PostsWithLists {
     private Session session;
 
     public PostsDao(Session session){

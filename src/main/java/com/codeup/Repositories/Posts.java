@@ -1,18 +1,22 @@
 package com.codeup.Repositories;
 
 import com.codeup.models.Post;
+import com.codeup.models.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
- * Created by Fer on 1/5/17.
+ * Created by Fer on 1/10/17.
  */
-public interface Posts {
+@Repository
+public interface Posts extends CrudRepository<Post, Long> {
 
-    List<Post> all();
-    void save(Post p);
-    void update(Post p);
-    Post getById(int id);
-    List<Post> generatePosts();
+    public Post findByUser(User user);
+    public Post findById(int id);
+    public Page<Post> findAll(Pageable pageable);
 
 }

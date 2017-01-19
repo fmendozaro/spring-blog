@@ -29,6 +29,7 @@
         <!-- Add mapped classes here -->
         <mapping class="com.codeup.models.User"/>
         <mapping class="com.codeup.models.Post"/>
+        <mapping class="com.codeup.models.Role"/>
         <!-- ... -->
     </session-factory>
 </hibernate-configuration>

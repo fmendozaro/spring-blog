@@ -2,7 +2,7 @@ package com.codeup.controllers;
 
 import com.codeup.Daos.DaoFactory;
 import com.codeup.models.Post;
-import com.codeup.Repositories.PostsRepo;
+import com.codeup.Repositories.Posts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Pageable;
@@ -30,7 +30,7 @@ public class PostsController extends BaseController {
     private String uploadPath;
 
     @Autowired
-    PostsRepo postsDao;
+    Posts postsDao;
 
     @GetMapping("/posts")
     public String getPosts(Model m, @PageableDefault(value=3, direction = Sort.Direction.DESC, sort = "createDate") Pageable pageable){
@@ -80,8 +80,7 @@ public class PostsController extends BaseController {
                 e.printStackTrace();
                 m.addAttribute("message", "Oops! Something went wrong! " + e);
             }
-
-            postCreated.setImageUrl(filepath);
+            postCreated.setImageUrl("/uploads/" + filename);
         }
 
         postCreated.setUser(loggedInUser());

@@ -1,6 +1,6 @@
 package com.codeup.Daos;
 
-import com.codeup.Repositories.Posts;
+import com.codeup.Repositories.PostsWithLists;
 import com.codeup.models.Post;
 
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by Fer on 1/5/17.
  */
-public class ListPosts implements Posts {
+public class ListPosts implements PostsWithLists {
     private List<Post> posts;
 
     public  ListPosts(){

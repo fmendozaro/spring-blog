@@ -1,5 +1,6 @@
 package com.codeup.models;
 
+import com.codeup.Repositories.Roles;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
@@ -27,6 +28,9 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Post> posts;
+
+    @OneToOne
+    private Role role = new Role(1);
 
     public User() {
     }

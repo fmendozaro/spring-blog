@@ -1,15 +1,17 @@
 package com.codeup.Repositories;
 
 import com.codeup.models.User;
-import org.hibernate.Session;
-
-import java.util.List;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 /**
- * Created by Fer on 1/5/17.
+ * Created by Fer on 1/10/17.
  */
-public interface Users {
+@Repository
+public interface Users extends CrudRepository<User, Long> {
 
-    void save(User u);
+    public User findByUsername(String username);
+    public User findById(Long id);
+
 
 }
