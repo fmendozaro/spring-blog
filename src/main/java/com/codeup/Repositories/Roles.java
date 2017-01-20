@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Repository
 public interface Roles extends CrudRepository<Role, Long> {
-    @Query("select ur.role from Role ur, User u where u.username=?1 and ur.id = u.role.id")
+    @Query("select r.role from Role r, User u where u.username=?1 and r.id = u.role.id")
     public List<String> ofUserWith(String username);
     public Role findById(int id);
 }
