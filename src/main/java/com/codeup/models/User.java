@@ -30,7 +30,7 @@ public class User {
     private List<Post> posts;
 
     @OneToOne
-    private Role role = new Role(1);
+    private Role role = new Role(2);
 
     public User() {
     }

@@ -17,7 +17,7 @@
 
             <div sec:authorize="isAuthenticated()">
                 <li>
-                    <p class="navbar-text">Signed in as <a th:href="@{'/users/'+ ${id}}" class="navbar-link"><span sec:authentication="name" /></a>
+                    <p class="navbar-text">Signed in as: <span sec:authentication="name" />
                         <form style="display: inline-block;" th:action="@{/logout}" th:method="POST">
                             <button class="btn btn-danger">Logout</button>
                         </form>

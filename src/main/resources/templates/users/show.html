@@ -25,16 +25,22 @@
         </div>
 
         <div sec:authorize="isAuthenticated()">
-            This content is only shown to authenticated users.
-            Logged user: <span sec:authentication="name"></span>
-            Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
-        </div>
+            This content is only shown to authenticated users. <br/>
+            Logged user: <span sec:authentication="name"></span> <br/>
+            Existing Roles: <span sec:authentication="principal.authorities"></span> <br/>
 
-        <div sec:authorize="hasRole('ROLE_ADMIN')">
-            This content is only shown to administrators.
-        </div>
-        <div sec:authorize="hasRole('ROLE_USER')">
-            This content is only shown to users.
+            <div sec:authorize="hasRole('ADMIN')">
+                <div> show these for only for admins </div>
+            </div>
+
+            <div sec:authorize="hasRole('USER')">
+                <div> show these for only for users </div>
+            </div>
+
+            <div sec:authorize="hasRole('GUEST')">
+                <div> show these for only for Guest </div>
+            </div>
+
         </div>
         <div class="col-lg-12">
             <div th:replace="fragments/footer :: footer"></div>
