@@ -7,45 +7,44 @@
 
 <body>
 <div class="container">
+
     <div th:replace="fragments/navbar :: navbar"></div>
-    <br/>
-    <br/>
-    <br/>
-    <row>
+
+    <div class="row">
         <div class="col-lg-12 col-lg-offset-2">
             <div th:object="${user}">
                 <h3 th:text="*{username}"></h3>
                 <p th:text="*{email}"></p>
                 <!--<a class="btn btn-primary" th:href="@{'/users/'+ ${user.id} +'/edit' }">Edit User</a>-->
             </div>
-        </div>
 
-        <div th:if="${showEditControls}">
-            edit and delete buttons go here
-        </div>
-
-        <div sec:authorize="isAuthenticated()">
-            This content is only shown to authenticated users. <br/>
-            Logged user: <span sec:authentication="name"></span> <br/>
-            Existing Roles: <span sec:authentication="principal.authorities"></span> <br/>
-
-            <div sec:authorize="hasRole('ADMIN')">
-                <div> show these for only for admins </div>
+            <div th:if="${showEditControls}">
+                edit and delete buttons go here
             </div>
 
-            <div sec:authorize="hasRole('USER')">
-                <div> show these for only for users </div>
-            </div>
+            <div sec:authorize="isAuthenticated()">
+                This content is only shown to authenticated users. <br/>
+                Logged user: <span sec:authentication="name"></span> <br/>
+                Existing Roles: <span sec:authentication="principal.authorities"></span> <br/>
 
-            <div sec:authorize="hasRole('GUEST')">
-                <div> show these for only for Guest </div>
-            </div>
+                <div sec:authorize="hasRole('ADMIN')">
+                    <div> show these for only for admins </div>
+                </div>
 
+                <div sec:authorize="hasRole('USER')">
+                    <div> show these for only for users </div>
+                </div>
+
+                <div sec:authorize="hasRole('GUEST')">
+                    <div> show these for only for Guest </div>
+                </div>
+
+            </div>
         </div>
-        <div class="col-lg-12">
-            <div th:replace="fragments/footer :: footer"></div>
-        </div>
-    </row>
+    </div>
 </div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
 </body>
 </html>

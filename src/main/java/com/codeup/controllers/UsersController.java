@@ -20,16 +20,11 @@ public class UsersController extends BaseController {
     @Autowired
     Users usersDao;
 
-    @Value("${yelp-consumer-key}")
-    private String yelpCKey;
-
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("/register")
     public String showForm(Model m){
-        JSONController json = new JSONController(yelpCKey);
         m.addAttribute("user", new User());
         return "users/create";
     }

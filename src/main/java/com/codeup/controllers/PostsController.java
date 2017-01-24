@@ -80,7 +80,7 @@ public class PostsController extends BaseController {
                 e.printStackTrace();
                 m.addAttribute("message", "Oops! Something went wrong! " + e);
             }
-            postCreated.setImageUrl("/uploads/" + filename);
+            postCreated.setImageUrl("/uploads/" + filename.get);
         }
 
         postCreated.setUser(loggedInUser());

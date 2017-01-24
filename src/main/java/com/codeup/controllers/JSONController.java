@@ -17,15 +17,6 @@ public class JSONController {
     @Autowired
     Posts posts;
 
-    private String yelpCKey;
-
-    public JSONController(String yelpCKey) {
-
-        System.out.println("Param yelpCKey " + yelpCKey);
-        this.yelpCKey = yelpCKey;
-        System.out.println("Class this.yelpCKey  "+this.yelpCKey);
-    }
-
     @GetMapping(value = "/posts.json", produces = "application/json")
     public @ResponseBody
     Page<Post> viewAllPostsInJSONFormat(
