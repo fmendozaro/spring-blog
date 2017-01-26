@@ -3,6 +3,7 @@ package com.codeup.controllers;
 import com.codeup.Daos.DaoFactory;
 import com.codeup.models.Post;
 import com.codeup.Repositories.Posts;
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +19,7 @@ import javax.validation.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.List;
 
 
 /**
@@ -32,8 +34,9 @@ public class PostsController extends BaseController {
     @Autowired
     Posts postsDao;
 
-    @GetMapping("/posts")
+     @GetMapping("/posts")
     public String getPosts(Model m, @PageableDefault(value=3, direction = Sort.Direction.DESC, sort = "createDate") Pageable pageable){
+
         //List<Post> posts = DaoFactory.getPostsDao().all();
         m.addAttribute("page", postsDao.findAll(pageable) );
         return "posts/index";
@@ -70,7 +73,7 @@ public class PostsController extends BaseController {
 
         //Files
         if(!uploadedFile.getOriginalFilename().isEmpty()){
-            String filename = uploadedFile.getOriginalFilename();
+            String filename = uploadedFile.getOriginalFilename().replace(" ", "_").toLowerCase();
             String filepath = Paths.get(uploadPath, filename).toString();
             File destinationFile = new File(filepath);
             try {
@@ -80,7 +83,7 @@ public class PostsController extends BaseController {
                 e.printStackTrace();
                 m.addAttribute("message", "Oops! Something went wrong! " + e);
             }
-            postCreated.setImageUrl("/uploads/" + filename.get);
+            postCreated.setImageUrl("/uploads/" + filename);
         }
 
         postCreated.setUser(loggedInUser());
@@ -110,6 +113,25 @@ public class PostsController extends BaseController {
         postsDao.save(newPost);
 
         return "redirect:/posts/"+postEdited.getId();
+    }
+
+    // Getting posts by range of dates, just for practice.
+    @PostMapping("posts/range")
+    public String postByRange(){
+
+        //Filtered Dates
+        LocalDate today = new LocalDate().now();
+        LocalDate toDate = today.plusDays(3);
+        List<Post> filteredPosts = postsDao.findByCreateDateBetween(today.toDate(), toDate.toDate());
+
+        System.out.println("Today " + today.toDate().toString());
+
+        for (Post post: filteredPosts) {
+            System.out.println(post.getCreateDate());
+            System.out.println(post.getTitle());
+        }
+
+        return "posts/index";
     }
 
 }

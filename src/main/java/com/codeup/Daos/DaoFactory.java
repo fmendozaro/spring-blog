@@ -21,12 +21,4 @@ public class DaoFactory {
         return postsWithListsDao;
     }
 
-    public static PostsWithLists getPostsDao(){
-        if(postsWithListsDao == null){
-            postsWithListsDao = new PostsDao(session);
-        }
-        return postsWithListsDao;
-    }
-
-
 }
