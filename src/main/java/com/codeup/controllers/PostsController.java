@@ -6,6 +6,7 @@ import com.codeup.Repositories.Posts;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -132,6 +133,11 @@ public class PostsController extends BaseController {
         }
 
         return "posts/index";
+    }
+
+    @GetMapping(value = "/posts.json")
+    public @ResponseBody Page<Post> viewAllPostsInJSONFormat(@PageableDefault(value=10) Pageable pageable) {
+        return postsDao.findAll(pageable);
     }
 
 }

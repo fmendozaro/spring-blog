@@ -1,5 +1,6 @@
 package com.codeup.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.NotBlank;
@@ -42,6 +43,7 @@ public class Post {
     private String imageUrl;
 
     @ManyToOne
+    @JsonManagedReference
     private User user;
 
     public Post(int id, String title, String body) {

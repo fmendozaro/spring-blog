@@ -1,6 +1,8 @@
 package com.codeup.models;
 
 import com.codeup.Repositories.Roles;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
@@ -24,9 +26,11 @@ public class User {
     private String email;
 
     @Column(nullable = false)
+    @JsonIgnore
     private String password;
 
     @OneToMany(mappedBy = "user")
+    @JsonBackReference
     private List<Post> posts;
 
     @OneToOne
