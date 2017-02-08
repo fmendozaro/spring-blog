@@ -1,4 +1,4 @@
-package com.codeup.Repositories;
+package com.codeup.repositories;
 
 import com.codeup.models.Post;
 

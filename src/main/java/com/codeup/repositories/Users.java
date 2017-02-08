@@ -1,4 +1,4 @@
-package com.codeup.Repositories;
+package com.codeup.repositories;
 
 import com.codeup.models.User;
 import org.springframework.data.jpa.repository.Query;
@@ -19,6 +19,7 @@ public interface Users extends CrudRepository<User, Long> {
     //Same function of above but with HQL
     @Query("select u from User u where u.email = ?1")
     public User findByEmailQuery(String email);
+
 
 
 }

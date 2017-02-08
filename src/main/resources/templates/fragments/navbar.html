@@ -6,34 +6,55 @@
 </head>
 <body>
 <!-- Navbar -->
-<nav class="navbar navbar-inverse navbar-fixed-top" th:fragment="navbar">
-    <div class="container-fluid">
-        <ul class="nav navbar-nav">
-            <li><a class="navbar-brand active" th:href="@{/}">Fer's blog</a></li>
-            <li><a class="navbar-brand" th:href="@{/posts}">Posts</a></li>
+<!--<nav class="navbar navbar-inverse navbar-fixed-top" th:fragment="navbar">-->
+    <!--<div class="container-fluid">-->
+        <!--<ul class="nav navbar-nav">-->
+            <!--<li><a class="navbar-brand active" th:href="@{/}">Fer's blog</a></li>-->
+            <!--<li><a class="navbar-brand" th:href="@{/posts}">Posts</a></li>-->
+        <!--</ul>-->
+
+        <!--<ul class="nav navbar-nav navbar-right">-->
+
+            <!--<div sec:authorize="isAuthenticated()">-->
+                <!--<li>-->
+                    <!--<p class="navbar-text">Signed in as: <span sec:authentication="name" />-->
+                        <!--<form style="display: inline-block;" th:action="@{/logout}" th:method="POST">-->
+                            <!--<button class="btn btn-danger">Logout</button>-->
+                        <!--</form>-->
+                    <!--</p>-->
+                <!--</li>-->
+            <!--</div>-->
+
+            <!--<div sec:authorize="!isAuthenticated()">-->
+                <!--<li>-->
+                    <!--<a class="navbar-brand" th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a>-->
+                    <!--<a class="navbar-brand" th:href="@{/users/register}"><span class="glyphicon glyphicon-user"></span> Sign up</a>-->
+                <!--</li>-->
+
+            <!--</div>-->
+
+        <!--</ul>-->
+    <!--</div>-->
+<!--</nav>-->
+
+<ul id="dropdown1" class="dropdown-content">
+    <div sec:authorize="!isAuthenticated()">
+        <li><a th:href="@{/login}"><i class="material-icons">input</i>Login</a></li>
+        <li><a th:href="@{/users/register}"><i class="material-icons ">assignment_ind</i>Register</a></li>
+    </div>
+</ul>
+
+<nav class="blue-grey darken-3" role="navigation" th:fragment="navbar">
+    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Fer's Blog</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a th:href="@{/posts}">Posts</a></li>
+            <li><a class="dropdown-button" href="#!" data-activates="dropdown1">User<i class="material-icons right">arrow_drop_down</i></a></li>
         </ul>
 
-        <ul class="nav navbar-nav navbar-right">
-
-            <div sec:authorize="isAuthenticated()">
-                <li>
-                    <p class="navbar-text">Signed in as: <span sec:authentication="name" />
-                        <form style="display: inline-block;" th:action="@{/logout}" th:method="POST">
-                            <button class="btn btn-danger">Logout</button>
-                        </form>
-                    </p>
-                </li>
-            </div>
-
-            <div sec:authorize="!isAuthenticated()">
-                <li>
-                    <a class="navbar-brand" th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a>
-                    <a class="navbar-brand" th:href="@{/users/register}"><span class="glyphicon glyphicon-user"></span> Sign up</a>
-                </li>
-
-            </div>
-
-        </ul>
+        <!--<ul id="nav-mobile" class="side-nav">-->
+            <!--<li><a href="#">Navbar Link</a></li>-->
+        <!--</ul>-->
+        <!--<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>-->
     </div>
 </nav>
 

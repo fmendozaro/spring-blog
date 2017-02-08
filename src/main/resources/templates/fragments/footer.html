@@ -3,11 +3,19 @@
 <head></head>
 <body>
 <div th:fragment="footer">
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
     <script type="application/javascript" th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+    <script src="../../js/materialize.js" type="application/javascript"></script>
+    <script src="../../js/main.js"></script>
 
-    <footer class="footer">
-        <div class="container">
-            <p>Fer's Blog Footer.</p>
+    <footer class="page-footer blue-grey darken-3">
+        <div class="footer-copyright">
+            <div class="container">
+                Fer's blog © 2017 Copyright
+            </div>
         </div>
     </footer>
 

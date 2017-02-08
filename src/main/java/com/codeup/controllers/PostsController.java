@@ -2,7 +2,7 @@ package com.codeup.controllers;
 
 import com.codeup.Daos.DaoFactory;
 import com.codeup.models.Post;
-import com.codeup.Repositories.Posts;
+import com.codeup.repositories.Posts;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,6 +34,9 @@ public class PostsController extends BaseController {
 
     @Autowired
     Posts postsDao;
+
+//    @Autowired
+//    PostSvc postSvc;
 
      @GetMapping("/posts")
     public String getPosts(Model m, @PageableDefault(value=3, direction = Sort.Direction.DESC, sort = "createDate") Pageable pageable){

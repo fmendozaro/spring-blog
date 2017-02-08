@@ -1,6 +1,6 @@
 package com.codeup.Daos;
 
-import com.codeup.Repositories.PostsWithLists;
+import com.codeup.repositories.PostsWithLists;
 import com.codeup.models.Post;
 
 import java.util.ArrayList;

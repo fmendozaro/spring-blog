@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header('Server error')"></head>
+<head th:replace="fragments/header :: header('Spring blog')"></head>
 <body>
-<div class="container">
 
-    <div th:replace="fragments/navbar :: navbar"></div>
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container">
     <div class="row">
-        <div class="col-lg-10 col-lg-offset-2">
+        <div class="col s12 m12 l12">
             Howdy, this is the index.
-            <a th:href="@{/posts]}"></a>
+            <a th:href="@{/posts}">Posts page</a>
             <div th:if="${true}">
                 This is true
             </div>
@@ -18,13 +19,11 @@
             </div>
 
             <div th:text="${msg}"></div>
-            <p>Get your greeting <a href="/greeting">here</a></p>
+            <p>Get your greeting <a target="_self" href="/greeting?name=Fer">here</a></p>
 
         </div>
     </div>
 </div>
-
-<div th:replace="fragments/footer :: footer"></div>
-
 </body>
+<div class="test" th:replace="fragments/footer :: footer">Pie de pagina <p>Hola</p></div>
 </html>

@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
     <title>Title</title>
 </head>
 <body>
+
+<div th:include="fragments/navTest :: newNavbar">
+    This is inside content
+</div>
+
+<div th:include="fragments/navTest :: bottomLine">
+    This is inside content
+</div>
+
+This is the default page
+
+Today is: <p th:text="${date}"></p>
+My age is <p th:text="${age}"></p>
+
+<p th:if="${age == 30}"> You are 30</p>
+<p th:if="${age == 26}"> You are 26</p>
+
+<br/>
+
+<h2>List of teachers at codeup</h2>
+<ul>
+    <span th:each="name : ${ListNames}">
+        <li th:text="${name}"></li>
+    </span>
+</ul>
 
 </body>
 </html>

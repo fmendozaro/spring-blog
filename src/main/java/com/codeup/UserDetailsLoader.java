@@ -1,8 +1,8 @@
 package com.codeup;
 
-import com.codeup.Repositories.Roles;
+import com.codeup.repositories.Roles;
 import com.codeup.models.User;
-import com.codeup.Repositories.Users;
+import com.codeup.repositories.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

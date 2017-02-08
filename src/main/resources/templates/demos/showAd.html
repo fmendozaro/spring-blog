@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Show just one Ad</h1>
+
+<div th:object="${ad}">
+    <h2 th:text="*{title}"></h2>
+    <p th:text="*{body}"></p>
+</div>
+
+</body>
+</html>

@@ -28,4 +28,28 @@ public class Lectures {
         m.addAttribute("number", 1);
         return "demos/conditions";
     }
+
+    @GetMapping("/demo")
+    public String showDefault(Model model){
+
+        List<String> names = new ArrayList<>();
+
+        names.add("Fer");
+        names.add("Luis");
+        names.add("Ryan");
+        names.add("Zach");
+        names.add("Justin");
+
+        //Passing all the attributes to my view using the model
+        //This is a String
+        model.addAttribute("date", "Feb 7th");
+        //This is an Integer
+        model.addAttribute("age", 26);
+        //This is a list
+        model.addAttribute("ListNames", names);
+
+        return "/demos/default";
+    }
+
+
 }
