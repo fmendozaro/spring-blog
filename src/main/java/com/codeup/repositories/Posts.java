@@ -17,7 +17,7 @@ import java.util.List;
 public interface Posts extends CrudRepository<Post, Long> {
 
     public Post findByUser(User user);
-    public Post findById(int id);
+    public Post findById(Long id);
     public Page<Post> findAll(Pageable pageable);
 
     //Find posts between today and 3 days ahead

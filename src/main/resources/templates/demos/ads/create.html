@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <p th:if="${msg != ''}" th:text="${msg}"></p>
+        <div class="col l8 offset-l2">
+            <form th:action="@{/ads/create}" th:method="POST" th:object="${ad}">
+                <label for="title">Title</label>
+                <input type="text" th:field="*{title}" />
+                <label for="body">Ad Content</label>
+                <textarea th:field="*{body}" />
+                <input type="submit" value="Create Ad" />
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

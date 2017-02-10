@@ -1,25 +1,40 @@
 package com.codeup.models;
 
+import javax.persistence.*;
+
 /**
  * Created by Fer on 2/7/17.
  */
 
+@Entity
+@Table(name = "ads")
 public class Ad {
 
-    int id;
+    @Id
+            @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+
+    @Column(nullable = false, length = 100)
     String title;
+
+    @Column(nullable = false, length = 2000)
     String body;
+
 
     public Ad(String title, String body) {
         this.title = title;
         this.body = body;
     }
 
-    public int getId() {
+    public Ad(){
+
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

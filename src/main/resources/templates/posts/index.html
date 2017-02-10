@@ -11,7 +11,7 @@
 <div class="container">
 
     <div class="row">
-        <div class="col-lg-10 col-lg-offset-2">
+        <div class="col l8 offset-l2">
             <h1>Blog posts</h1>
             <div sec:authorize="isAuthenticated()">
                 <a class="btn btn-primary" th:href="@{/posts/create}">Create a post</a>
@@ -23,62 +23,67 @@
                 <p th:text="${post.body}"></p>
                 <a class="btn btn-primary" th:href="@{'/posts/'+ ${post.id} }">Show Post</a>
             </div>
+
+            <br/>
+
+            <!-- Build the pagination component -->
+            <nav class="text-center">
+                <ul class="pagination">
+                    <li th:class="${page.isFirst()}? 'disabled' : ''">
+                        <span th:if='${page.isFirst()}'>← First</span>
+                        <a th:if='${not page.isFirst()}' th:href="'?page=0'">
+                            ← First
+                        </a>
+                    </li>
+                    <li th:class="${page.hasPrevious()}? '' : 'disabled'">
+                        <span th:if='${not page.hasPrevious()}'>«</span>
+                        <a
+                                th:if='${page.hasPrevious()}'
+                                th:href="'?page=' + ${page.getNumber() - 1}"
+                                title='Go to previous page'
+                        >
+                            «
+                        </a>
+                    </li>
+                    <li th:each="i : ${#numbers.sequence(1, page.getTotalPages())}">
+                        <span
+                                th:if='${(i - 1) == param.page}'
+                                th:text='${i}'>
+                            1
+                        </span>
+                        <a
+                                th:if='${not ((i - 1) == param.page)}'
+                                th:href="'?page=' + ${(i -1)}"
+                        >
+                            <span th:text='${i}'>1</span>
+                        </a>
+                    </li>
+                    <li th:class="${page.hasNext()} ? '' : 'disabled'">
+                        <span th:if='${not page.hasNext()}'>»</span>
+                        <a
+                                th:if='${page.hasNext()}'
+                                th:href="'?page=' + ${page.getNumber() + 1}"
+                                title='Go to next page'
+                        >
+                            »
+                        </a>
+                    </li>
+                    <li th:class="${page.isLast()}? 'disabled' : ''">
+                        <span th:if='${page.isLast()}'>Last →</span>
+                        <a
+                                th:if='${not page.isLast()}'
+                                th:href="'?page=' + ${page.getTotalPages() - 1}"
+                        >
+                            Last →
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-        <!-- Build the pagination component -->
-        <nav class="text-center">
-            <ul class="pagination">
-                <li th:class="${page.isFirst()}? 'disabled' : ''">
-                    <span th:if='${page.isFirst()}'>← First</span>
-                    <a th:if='${not page.isFirst()}' th:href="'?page=0'">
-                        ← First
-                    </a>
-                </li>
-                <li th:class="${page.hasPrevious()}? '' : 'disabled'">
-                    <span th:if='${not page.hasPrevious()}'>«</span>
-                    <a
-                            th:if='${page.hasPrevious()}'
-                            th:href="'?page=' + ${page.getNumber() - 1}"
-                            title='Go to previous page'
-                    >
-                        «
-                    </a>
-                </li>
-                <li th:each="i : ${#numbers.sequence(1, page.getTotalPages())}">
-                    <span
-                            th:if='${(i - 1) == param.page}'
-                            th:text='${i}'>
-                        1
-                    </span>
-                    <a
-                            th:if='${not ((i - 1) == param.page)}'
-                            th:href="'?page=' + ${(i -1)}"
-                    >
-                        <span th:text='${i}'>1</span>
-                    </a>
-                </li>
-                <li th:class="${page.hasNext()} ? '' : 'disabled'">
-                    <span th:if='${not page.hasNext()}'>»</span>
-                    <a
-                            th:if='${page.hasNext()}'
-                            th:href="'?page=' + ${page.getNumber() + 1}"
-                            title='Go to next page'
-                    >
-                        »
-                    </a>
-                </li>
-                <li th:class="${page.isLast()}? 'disabled' : ''">
-                    <span th:if='${page.isLast()}'>Last →</span>
-                    <a
-                            th:if='${not page.isLast()}'
-                            th:href="'?page=' + ${page.getTotalPages() - 1}"
-                    >
-                        Last →
-                    </a>
-                </li>
-            </ul>
-        </nav>
+        <!--Content-->
     </div>
 </div>
+<!--container-->
 
 <div th:replace="fragments/footer :: footer"></div>
 

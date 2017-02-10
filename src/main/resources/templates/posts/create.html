@@ -5,12 +5,12 @@
 </head>
 
 <body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
 <div class="container">
-
-    <div th:replace="fragments/navbar :: navbar"></div>
-
     <div class="row">
-        <div class="col-lg-8 col-lg-offset-4">
+        <div class="col l8 offset-l2">
             <form class="form-group" th:action="@{/posts/create}" th:method="POST" th:object="${post}" enctype="multipart/form-data">
                 <label for="title">Title</label>
                 <input class="form-control" th:field="*{title}" />
@@ -23,6 +23,7 @@
                 <br/>
                 <label for="file">Image</label>
                 <input type="file" name="file" id="file"/>
+                <br/>
                 <input class="btn btn-primary" type="submit" />
             </form>
         </div>

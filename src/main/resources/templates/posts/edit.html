@@ -5,12 +5,14 @@
 </head>
 
 <body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
 <div class="container">
 
-    <div th:replace="fragments/navbar :: navbar"></div>
-
     <div class="row">
-        <div class="col-lg-9 col-lg-offset-3">
+        <div class="col l8 offset-l2">
+            <h3>Edit Post</h3>
             <form class="form-group" th:action="@{'/posts/'+ *{id} +'/edit'}" th:method="POST" th:object="${post}">
                 <label for="title">Title</label>
                 <input class="form-control" th:field="*{title}" required="required" />

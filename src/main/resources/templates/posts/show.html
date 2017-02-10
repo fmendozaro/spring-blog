@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
-<head th:replace="fragments/header :: header('Show Post')">
-</head>
-
+<head th:replace="fragments/header :: header(${post.title})"></head>
 <body>
-<div class="container">
-    <div th:replace="fragments/navbar :: navbar"></div>
-    <br/>
-    <br/>
-    <br/>
 
-    <div class="col-lg-9 col-lg-offset-3">
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col l8 offset-l2">
         <div th:object="${post}">
-            <h1 th:text="*{title}"></h1>
+            <h2 th:text="*{title}"></h2>
             <img th:src="*{imageUrl}" width="200px" height="200px;" />
             <p th:text="*{body}"></p>
             <hr/>
@@ -21,12 +17,14 @@
                 <p>Posted by <span th:text="*{user.username}">some user</span> on <span th:text="${#dates.format(post.createDate,'MMM dd YYYY')}"></span>
                 </p>
             </b>
-            <a class="btn btn-primary" th:href="@{'/posts/'+ ${post.id} +'/edit' }">Edit Post</a>
+            <a class="btn btn-primary" th:href="@{'/posts/'+ ${post.id} +'/edit' }">Edit</a>
+            <a class="btn btn-danger" th:href="@{'/posts/'+ ${post.id} +'/edit' }">Delete</a>
         </div>
     </div>
-    <div class="col-lg-12">
-        <div th:replace="fragments/footer :: footer"></div>
-    </div>
+   </div>
 </div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
 </body>
 </html>

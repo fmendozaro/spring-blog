@@ -5,6 +5,7 @@ package com.codeup.controllers;
  */
 
 import com.codeup.models.User;
+import com.codeup.repositories.Roles;
 import com.codeup.repositories.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,6 +23,9 @@ public class UsersController extends BaseController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    Roles roles;
+
     @GetMapping("/register")
     public String showForm(Model m){
         m.addAttribute("user", new User());
@@ -31,6 +35,7 @@ public class UsersController extends BaseController {
     @PostMapping("/create")
     public String saveUser(@ModelAttribute User user, Model m){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(roles.findByRole("User"));
         usersDao.save(user);
         m.addAttribute("user", user);
         return "redirect:/login";

@@ -20,6 +20,7 @@ import javax.validation.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.Date;
 import java.util.List;
 
 
@@ -48,12 +49,18 @@ public class PostsController extends BaseController {
 
     @GetMapping("/posts/sample")
     public String sampleData(){
-        DaoFactory.getPostsListDao().generatePosts();
+        Date today = new Date();
+        for (Post post: DaoFactory.getPostsListDao().generatePosts()) {
+            post.setUser(loggedInUser());
+            post.setCreateDate(today);
+            post.setModifyDate(today);
+            postsDao.save(post);
+        }
         return "redirect:/posts";
     }
 
     @GetMapping("posts/{id}")
-    public String show(@PathVariable int id, Model m){
+    public String show(@PathVariable Long id, Model m){
         m.addAttribute("post", postsDao.findById(id));
         return "posts/show";
     }
@@ -96,7 +103,7 @@ public class PostsController extends BaseController {
     }
 
     @GetMapping("posts/{id}/edit")
-    public String showEdit(@PathVariable int id, Model m){
+    public String showEdit(@PathVariable Long id, Model m){
         Post post = postsDao.findById(id);
         m.addAttribute("post", post);
         return "posts/edit";
@@ -141,6 +148,12 @@ public class PostsController extends BaseController {
     @GetMapping(value = "/posts.json")
     public @ResponseBody Page<Post> viewAllPostsInJSONFormat(@PageableDefault(value=10) Pageable pageable) {
         return postsDao.findAll(pageable);
+    }
+
+    @PutMapping("/posts/delete")
+    public String deletePost(@ModelAttribute Post post){
+        postsDao.delete(postsDao.findOne(post.getId()));
+        return "redirect:/posts";
     }
 
 }

@@ -18,7 +18,7 @@ public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @NotBlank(message = "Title can't be empty.")
     @Size(min = 3, message = "A title must be at least 3 characters.")
@@ -46,7 +46,7 @@ public class Post {
     @JsonManagedReference
     private User user;
 
-    public Post(int id, String title, String body) {
+    public Post(Long id, String title, String body) {
         this.id = id;
         this.title = title;
         this.body = body;
@@ -56,11 +56,11 @@ public class Post {
 
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

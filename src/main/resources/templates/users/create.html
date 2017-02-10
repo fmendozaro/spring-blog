@@ -3,14 +3,12 @@
 <head th:replace="fragments/header :: header(${'Login Page'})"></head>
 <body>
 
-<div class="container">
-    <div th:replace="fragments/navbar :: navbar"></div>
+<div th:replace="fragments/navbar :: navbar"></div>
 
-    <br/>
-    <br/>
-    <br/>
+<div class="container">
+
     <div class="row">
-        <form class="form-group col-lg-6 col-lg-offset-3" th:action="@{/users/create}" th:method="POST" th:object="${user}">
+        <form class="form-group col l8 offset-2" th:action="@{/users/create}" th:method="POST" th:object="${user}">
             <label for="username">Username</label>
             <input class="form-control" th:field="*{username}" />
 

@@ -14,4 +14,5 @@ import java.util.List;
 public interface Roles extends CrudRepository<Role, Long> {
     @Query("select r.role from Role r, User u where u.username=?1 and r.id = u.role.id")
     public List<String> ofUserWith(String username);
+    public Role findByRole(String role);
 }

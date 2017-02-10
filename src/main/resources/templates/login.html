@@ -5,12 +5,12 @@
 </head>
 
 <body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
 <div class="container">
-
-    <div th:replace="fragments/navbar :: navbar"></div>
-
     <div class="row">
-        <div class="form-group col-lg-6 col-lg-offset-3">
+        <div class="form-group col l8 offset-l2">
             <h1>Log In</h1>
             <div th:if="${param.error}">
                 Invalid Username and Password.
@@ -29,6 +29,8 @@
         </div>
     </div>
 </div>
+
 <div th:replace="fragments/footer :: footer"></div>
+
 </body>
 </html>

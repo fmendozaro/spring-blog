@@ -32,9 +32,17 @@ public class User {
     private List<Post> posts;
 
     @OneToOne
-    private Role role = new Role(2);
+    private Role role;
 
     public User() {
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public User(User user) {
