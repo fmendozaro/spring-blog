@@ -7,7 +7,7 @@
 
 <div class="container error">
     <div class="row">
-        <div class="col-lg-10 col-lg-offset-2">
+        <div class="col l8 offset-l2">
             <th:block th:switch="${error}">
                 <h1 th:text="${error}"></h1>
                 <div th:case="'Not Found'">
@@ -20,10 +20,11 @@
                     <img src="https://httpstatusdogs.com/img/401.jpg" />
                 </div>
             </th:block>
-            <div th:replace="fragments/footer :: footer"></div>
         </div>
     </div>
 </div>
+
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>

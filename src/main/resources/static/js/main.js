@@ -5,5 +5,7 @@ $(document).ready(function(){
 
     console.log("Js loaded");
     $(".dropdown-button").dropdown();
+    $('.materialboxed').materialbox();
+    $(".side-navBtn").sideNav();
 
 });

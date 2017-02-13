@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="fragments/header :: header('Blog posts')">
+</head>
+
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col l8 offset-l2">
+            <h1>Search results</h1>
+
+            <div th:if="${posts}" th:each="post : ${posts}">
+                <h3 th:text="${post.title}"></h3>
+                <!--<img class="responsive-img" th:src="${post.imageUrl}" width="300px" height="300px;" />-->
+                <img class="responsive-img" src="http://placehold.it/350x350" alt="placeholder" />
+                <p class="content" th:text="${post.body}"></p>
+                <a class="waves-effect waves-light btn-large" th:href="@{'/posts/'+ ${post.id} }">Show Post</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--container-->
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

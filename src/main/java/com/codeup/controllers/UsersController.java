@@ -26,12 +26,6 @@ public class UsersController extends BaseController {
     @Autowired
     Roles roles;
 
-    @GetMapping("/register")
-    public String showForm(Model m){
-        m.addAttribute("user", new User());
-        return "users/create";
-    }
-
     @PostMapping("/create")
     public String saveUser(@ModelAttribute User user, Model m){
         user.setPassword(passwordEncoder.encode(user.getPassword()));

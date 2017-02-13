@@ -4,59 +4,55 @@
     <meta charset="UTF-8"/>
     <title>Title</title>
 </head>
-<body>
-<!-- Navbar -->
-<!--<nav class="navbar navbar-inverse navbar-fixed-top" th:fragment="navbar">-->
-    <!--<div class="container-fluid">-->
-        <!--<ul class="nav navbar-nav">-->
-            <!--<li><a class="navbar-brand active" th:href="@{/}">Fer's blog</a></li>-->
-            <!--<li><a class="navbar-brand" th:href="@{/posts}">Posts</a></li>-->
-        <!--</ul>-->
+<body th:fragment="navbar">
 
-        <!--<ul class="nav navbar-nav navbar-right">-->
+ <nav class="blue-grey darken-3">
+     <div class="nav-wrapper">
+         <a href="/" class="brand-logo"><img class="logo" src="../../imgs/blog.png" />Fer's Blog</a>
+         <ul id="nav-mobile" class="right hide-on-med-and-down">
+             <li>
+                 <a href="#" data-activates="slide-out" class="side-navBtn">Search</a>
+             </li>
+             <li><a th:href="@{/posts}">Posts</a></li>
+             <span sec:authorize="isAuthenticated()">
+                 <li>
+                     <span class="navbar-text">Signed in as: <span sec:authentication="name" /></span>
+                     &nbsp;
+                 </li>
+                 <li>
+                     <form th:action="@{/logout}" th:method="POST">
+                        <button class="btn">Logout</button>
+                     </form>
+                     &nbsp;
+                 </li>
+             </span>
 
-            <!--<div sec:authorize="isAuthenticated()">-->
-                <!--<li>-->
-                    <!--<p class="navbar-text">Signed in as: <span sec:authentication="name" />-->
-                        <!--<form style="display: inline-block;" th:action="@{/logout}" th:method="POST">-->
-                            <!--<button class="btn btn-danger">Logout</button>-->
-                        <!--</form>-->
-                    <!--</p>-->
-                <!--</li>-->
-            <!--</div>-->
+             <span sec:authorize="!isAuthenticated()">
+                 <li><a th:href="@{/register}">Register</a></li>
+                 <li><a th:href="@{/login}">Login</a></li>
+             </span>
 
-            <!--<div sec:authorize="!isAuthenticated()">-->
-                <!--<li>-->
-                    <!--<a class="navbar-brand" th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a>-->
-                    <!--<a class="navbar-brand" th:href="@{/users/register}"><span class="glyphicon glyphicon-user"></span> Sign up</a>-->
-                <!--</li>-->
+         </ul>
+     </div>
+ </nav>
 
-            <!--</div>-->
+<!--Side nav-->
 
-        <!--</ul>-->
-    <!--</div>-->
-<!--</nav>-->
-
-<ul id="dropdown1" class="dropdown-content">
-    <div sec:authorize="!isAuthenticated()">
-        <li><a th:href="@{/login}"><i class="material-icons">input</i>Login</a></li>
-        <li><a th:href="@{/users/register}"><i class="material-icons ">assignment_ind</i>Register</a></li>
-    </div>
-</ul>
-
-<nav class="blue-grey darken-3" role="navigation" th:fragment="navbar">
-    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Fer's Blog</a>
-        <ul class="right hide-on-med-and-down">
-            <li><a th:href="@{/posts}">Posts</a></li>
-            <li><a class="dropdown-button" href="#!" data-activates="dropdown1">User<i class="material-icons right">arrow_drop_down</i></a></li>
-        </ul>
-
-        <!--<ul id="nav-mobile" class="side-nav">-->
-            <!--<li><a href="#">Navbar Link</a></li>-->
-        <!--</ul>-->
-        <!--<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>-->
-    </div>
-</nav>
+ <ul id="slide-out" class="side-nav">
+     <li>
+         <div class="userView">
+             <div class="background">
+                 <img src="../../imgs/bg-nav.jpg" />
+             </div>
+             <a href="#!user"><img class="circle" src="https://media.licdn.com/mpr/mpr/shrinknp_100_100/AAEAAQAAAAAAAAhIAAAAJDdmZDRlYzMxLTVhYzEtNGU5Ni04MDQ3LTBjMTE1MmZhMmNiZQ.jpg" /></a>
+             <a href="#!name"><span class="white-text name">Fernando Mendoza</span></a>
+             <a href="#!email"><span class="white-text email">fernando.mendoza.ro@gmail.com</span></a>
+        </div>
+     </li>
+     <li>
+         <div th:replace="fragments/forms :: searchForm"></div>
+     </li>
+ </ul>
 
 </body>
 </html>

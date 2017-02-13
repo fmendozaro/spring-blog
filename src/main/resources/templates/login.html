@@ -10,12 +10,12 @@
 
 <div class="container">
     <div class="row">
+        <h1>Log In</h1>
         <div class="form-group col l8 offset-l2">
-            <h1>Log In</h1>
-            <div th:if="${param.error}">
+            <div class="alert" th:if="${param.error}">
                 Invalid Username and Password.
             </div>
-            <div th:if="${param.logout}">
+            <div class="alert" th:if="${param.logout}">
                 You have been logged out.
             </div>
 

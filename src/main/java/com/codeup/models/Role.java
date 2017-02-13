@@ -16,7 +16,6 @@ public class Role {
     @Column(name = "role")
     private String role;
 
-
     public Role(int i) {
         this.id = i;
     }

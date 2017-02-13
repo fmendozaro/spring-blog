@@ -8,6 +8,7 @@
 <h3>List of ads</h3>
 <ul>
     <li th:each="ad : ${ads}">
+        <p>Created by: <span th:text="${ad.user.username}"></span></p>
         <h1 th:text="${ad.title}"></h1>
         <p th:text="${ad.body}"></p>
         <a th:href="@{ '/ads/' + ${ad.id} }">Click here to see the Ad</a>

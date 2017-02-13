@@ -41,8 +41,6 @@ public class PostsController extends BaseController {
 
      @GetMapping("/posts")
     public String getPosts(Model m, @PageableDefault(value=3, direction = Sort.Direction.DESC, sort = "createDate") Pageable pageable){
-
-        //List<Post> posts = DaoFactory.getPostsDao().all();
         m.addAttribute("page", postsDao.findAll(pageable) );
         return "posts/index";
     }
@@ -150,10 +148,18 @@ public class PostsController extends BaseController {
         return postsDao.findAll(pageable);
     }
 
-    @PutMapping("/posts/delete")
+    @PostMapping("/posts/delete")
     public String deletePost(@ModelAttribute Post post){
         postsDao.delete(postsDao.findOne(post.getId()));
         return "redirect:/posts";
     }
+
+    @PostMapping("/posts/search")
+    public String search(@RequestParam(name = "term") String term, Model vModel){
+        term = "%"+term+"%";
+        vModel.addAttribute("posts", postsDao.findByBodyIsLikeOrTitleIsLike(term, term));
+        return "posts/results";
+    }
+
 
 }

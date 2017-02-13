@@ -18,7 +18,12 @@
                 </p>
             </b>
             <a class="btn btn-primary" th:href="@{'/posts/'+ ${post.id} +'/edit' }">Edit</a>
-            <a class="btn btn-danger" th:href="@{'/posts/'+ ${post.id} +'/edit' }">Delete</a>
+
+            <form th:method="POST" th:action="@{/posts/delete}">
+                <input type="hidden" name="id" th:value="${post.id}" />
+                <button class="btn btn-danger">Delete</button>
+            </form>
+
         </div>
     </div>
    </div>

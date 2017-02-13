@@ -13,22 +13,25 @@
     <div class="row">
         <div class="col l8 offset-l2">
             <h1>Blog posts</h1>
+
             <div sec:authorize="isAuthenticated()">
-                <a class="btn btn-primary" th:href="@{/posts/create}">Create a post</a>
+                <a class="btn-large waves-light" th:href="@{/posts/create}">Create a post</a>
             </div>
 
-            <div th:each="post : ${page}">
+            <div th:if="${page}" th:each="post : ${page}">
                 <h3 th:text="${post.title}"></h3>
-                <img th:src="${post.imageUrl}" width="300px" height="300px;" />
-                <p th:text="${post.body}"></p>
-                <a class="btn btn-primary" th:href="@{'/posts/'+ ${post.id} }">Show Post</a>
+                <!--<img class="responsive-img" th:src="${post.imageUrl}" width="300px" height="300px;" />-->
+                <img class="responsive-img" src="http://placehold.it/350x350" alt="placeholder" />
+                <p class="content" th:text="${post.body}"></p>
+                <a class="waves-effect waves-light btn-large" th:href="@{'/posts/'+ ${post.id} }">Show Post</a>
             </div>
 
             <br/>
 
+            <!--if there is results-->
             <!-- Build the pagination component -->
-            <nav class="text-center">
-                <ul class="pagination">
+            <nav th:if="${page}" class="text-center">
+                <ul class="pagination blue-grey darken-3">
                     <li th:class="${page.isFirst()}? 'disabled' : ''">
                         <span th:if='${page.isFirst()}'>← First</span>
                         <a th:if='${not page.isFirst()}' th:href="'?page=0'">
@@ -45,7 +48,7 @@
                             «
                         </a>
                     </li>
-                    <li th:each="i : ${#numbers.sequence(1, page.getTotalPages())}">
+                    <li class="waves-effect" th:each="i : ${#numbers.sequence(1, page.getTotalPages())}">
                         <span
                                 th:if='${(i - 1) == param.page}'
                                 th:text='${i}'>

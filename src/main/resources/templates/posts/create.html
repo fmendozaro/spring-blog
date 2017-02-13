@@ -22,9 +22,9 @@
                     <p class="alert alert-danger" th:if="${#fields.hasErrors('body')}" th:errors="*{body}"></p>
                 <br/>
                 <label for="file">Image</label>
-                <input type="file" name="file" id="file"/>
+                <input class="input-field" type="file" name="file" id="file"/>
                 <br/>
-                <input class="btn btn-primary" type="submit" />
+                <input class="btn btn-primary waves-effect waves-light" type="submit" />
             </form>
         </div>
     </div>

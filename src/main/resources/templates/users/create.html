@@ -6,21 +6,22 @@
 <div th:replace="fragments/navbar :: navbar"></div>
 
 <div class="container">
-
     <div class="row">
-        <form class="form-group col l8 offset-2" th:action="@{/users/create}" th:method="POST" th:object="${user}">
-            <label for="username">Username</label>
-            <input class="form-control" th:field="*{username}" />
+        <h1>Register</h1>
+        <div class="col l8 offset-l2">
+            <form th:action="@{/users/create}" th:method="POST" th:object="${user}">
+                <label for="username">Username</label>
+                <input class="form-control" th:field="*{username}" />
 
-            <label for="email">Email</label>
-            <input class="form-control" th:field="*{email}" />
+                <label for="email">Email</label>
+                <input class="form-control" th:field="*{email}" />
 
-            <label for="password">Password</label>
-            <input type="password" class="form-control" th:field="*{password}" />
+                <label for="password">Password</label>
+                <input type="password" class="form-control" th:field="*{password}" />
 
-            <br/>
-            <input class="btn btn-primary" type="submit" />
-        </form>
+                <input class="btn btn-primary" type="submit" />
+            </form>
+        </div>
     </div>
 </div>
 

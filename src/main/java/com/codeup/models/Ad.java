@@ -20,11 +20,23 @@ public class Ad {
     @Column(nullable = false, length = 2000)
     String body;
 
+    @ManyToOne
+    UserAd user;
+
+    public UserAd getUser() {
+        return user;
+    }
+
+    public void setUser(UserAd user) {
+        this.user = user;
+    }
 
     public Ad(String title, String body) {
         this.title = title;
         this.body = body;
     }
+
+
 
     public Ad(){
 
