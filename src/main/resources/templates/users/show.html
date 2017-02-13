@@ -6,12 +6,12 @@
 </head>
 
 <body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
 <div class="container">
-
-    <div th:replace="fragments/navbar :: navbar"></div>
-
     <div class="row">
-        <div class="col-lg-12 col-lg-offset-2">
+        <div class="col l10 offset-2">
             <div th:object="${user}">
                 <h3 th:text="*{username}"></h3>
                 <p th:text="*{email}"></p>
@@ -27,15 +27,15 @@
                 Logged user: <span sec:authentication="name"></span> <br/>
                 Existing Roles: <span sec:authentication="principal.authorities"></span> <br/>
 
-                <div sec:authorize="hasRole('ADMIN')">
+                <div sec:authorize="hasRole('ROLE_ADMIN')">
                     <div> show these for only for admins </div>
                 </div>
 
-                <div sec:authorize="hasRole('USER')">
+                <div sec:authorize="hasRole('ROLE_USER')">
                     <div> show these for only for users </div>
                 </div>
 
-                <div sec:authorize="hasRole('GUEST')">
+                <div sec:authorize="hasRole('ROLE_GUEST')">
                     <div> show these for only for Guest </div>
                 </div>
 

@@ -1,6 +1,10 @@
-package com.codeup;
+package com.codeup.services;
 
+import com.codeup.UserWithRoles;
+import com.codeup.models.Role;
+import com.codeup.models.UserRole;
 import com.codeup.repositories.Roles;
+import com.codeup.repositories.UserRoles;
 import com.codeup.models.User;
 import com.codeup.repositories.Users;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +19,10 @@ import java.util.List;
 public class UserDetailsLoader implements UserDetailsService {
 
     private final Users users;
-    private final Roles roles;
+    private final UserRoles roles;
 
     @Autowired
-    public UserDetailsLoader(Users users, Roles roles) {
+    public UserDetailsLoader(Users users, UserRoles roles) {
         this.users = users;
         this.roles = roles;
     }

@@ -31,25 +31,23 @@ public class User {
     @JsonBackReference
     private List<Post> posts;
 
-    @OneToOne
-    private Role role;
-
     public User() {
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
+    // Copy constructor an alternative for clone
     public User(User user) {
         this.id = user.id;
         this.username = user.username;
         this.password = user.password;
         this.email = user.email;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getUsername() {

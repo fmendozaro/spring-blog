@@ -17,13 +17,21 @@
                 <br/>
                 <p class="alert alert-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
                 <label for="body">Blog post</label>
-                <textarea rows="20" cols="20" class="form-control" th:field="*{body}"></textarea>
+                <textarea class="materialize-textarea form-control" th:field="*{body}"></textarea>
                 <br/>
                     <p class="alert alert-danger" th:if="${#fields.hasErrors('body')}" th:errors="*{body}"></p>
                 <br/>
-                <label for="file">Image</label>
-                <input class="input-field" type="file" name="file" id="file"/>
-                <br/>
+
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span>File</span>
+                        <input type="file" name="file" id="file" />
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" />
+                    </div>
+                </div>
+
                 <input class="btn btn-primary waves-effect waves-light" type="submit" />
             </form>
         </div>

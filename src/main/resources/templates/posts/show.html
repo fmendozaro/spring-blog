@@ -8,19 +8,19 @@
 <div class="container">
     <div class="row">
         <div class="col l8 offset-l2">
-        <div th:object="${post}">
-            <h2 th:text="*{title}"></h2>
-            <img th:src="*{imageUrl}" width="200px" height="200px;" />
-            <p th:text="*{body}"></p>
+        <div>
+            <h2 th:text="${post.title}"></h2>
+            <img th:src="${post.imageUrl}" width="200px" height="200px;" />
+            <p th:text="${post.body}"></p>
             <hr/>
             <b>
-                <p>Posted by <span th:text="*{user.username}">some user</span> on <span th:text="${#dates.format(post.createDate,'MMM dd YYYY')}"></span>
+                <p>Posted by <a th:href="@{'/users/'+ ${post.user.id} }" th:text="${post.user.email}">some user</a> on <span th:text="${#dates.format(post.createDate,'MMM dd YYYY')}"></span>
                 </p>
             </b>
-            <a class="btn btn-primary" th:href="@{'/posts/'+ ${post.id} +'/edit' }">Edit</a>
 
             <form th:method="POST" th:action="@{/posts/delete}">
                 <input type="hidden" name="id" th:value="${post.id}" />
+                <a class="btn btn-primary" th:href="@{'/posts/'+ ${post.id} +'/edit' }">Edit</a>
                 <button class="btn btn-danger">Delete</button>
             </form>
 
