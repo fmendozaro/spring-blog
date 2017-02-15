@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header(${'Login Page'})"></head>
+<head th:replace="fragments/header :: header('Login Page')"></head>
 <body>
 
 <div th:replace="fragments/navbar :: navbar"></div>
@@ -12,14 +12,17 @@
             <form th:action="@{/users/create}" th:method="POST" th:object="${user}">
                 <label for="username">Username</label>
                 <input class="form-control" th:field="*{username}" />
+                <p class="alert alert-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
 
                 <label for="email">Email</label>
                 <input class="form-control" th:field="*{email}" />
+                <p class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
 
                 <label for="password">Password</label>
                 <input type="password" class="form-control" th:field="*{password}" />
+                <p class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
 
-                <input class="btn btn-primary" type="submit" />
+                <input class="btn" type="submit" />
             </form>
         </div>
     </div>

@@ -10,7 +10,11 @@
         <div class="col l8 offset-l2">
         <div>
             <h2 th:text="${post.title}"></h2>
-            <img th:src="${post.imageUrl}" width="200px" height="200px;" />
+
+            <img th:if="${post.imageUrl == ''}" class="responsive-img" src="http://placehold.it/500x500" alt="placeholder" />
+
+            <img class="responsive-img" th:if="${post.imageUrl != ''}" th:src="${'/uploads/' +post.imageUrl}" width="500px" height="500px;" />
+
             <p th:text="${post.body}"></p>
             <hr/>
             <b>
@@ -21,7 +25,7 @@
             <form th:method="POST" th:action="@{/posts/delete}">
                 <input type="hidden" name="id" th:value="${post.id}" />
                 <a class="btn btn-primary" th:href="@{'/posts/'+ ${post.id} +'/edit' }">Edit</a>
-                <button class="btn btn-danger">Delete</button>
+                <button class="btn deep-orange darken-4">Delete</button>
             </form>
 
         </div>

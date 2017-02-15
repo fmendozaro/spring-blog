@@ -6,17 +6,19 @@ package com.codeup.controllers;
 
 import com.codeup.models.User;
 import com.codeup.repositories.Roles;
-import com.codeup.repositories.UserRoles;
 import com.codeup.repositories.Users;
+import com.codeup.services.UserSvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @Controller
-@RequestMapping("users")
-public class UsersController extends BaseController {
+public class UserController {
 
     @Autowired
     Users usersDao;
@@ -27,8 +29,18 @@ public class UsersController extends BaseController {
     @Autowired
     Roles roles;
 
-    @PostMapping("/create")
-    public String saveUser(@ModelAttribute User user, Model m){
+    @Autowired
+    UserSvc userSvc;
+
+    @PostMapping("users/create")
+    public String saveUser(@Valid User user, Errors validation, Model m){
+
+        if (validation.hasErrors()) {
+            m.addAttribute("errors", validation);
+            m.addAttribute("user", user);
+            return "users/create";
+        }
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         //user.setRole(roles.findByRole("ROLE_USER"));
         usersDao.save(user);
@@ -36,11 +48,11 @@ public class UsersController extends BaseController {
         return "redirect:/login";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("users/{id}")
     public String showUser(@PathVariable Long id, Model m){
         User user = usersDao.findById(id);
         m.addAttribute("user", user);
-        m.addAttribute("showEditControls", isLoggedIn() && user.getUsername() == loggedInUser().getUsername());
+        m.addAttribute("showEditControls", userSvc.isLoggedIn() && user.getUsername() == userSvc.loggedInUser().getUsername());
         return "users/show";
     }
 

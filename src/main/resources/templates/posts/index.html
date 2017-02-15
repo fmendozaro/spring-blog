@@ -20,18 +20,24 @@
 
             <div th:if="${page}" th:each="post : ${page}">
                 <h3 th:text="${post.title}"></h3>
-                <!--<img class="responsive-img" th:src="${post.imageUrl}" width="300px" height="300px;" />-->
-                <img class="responsive-img" src="http://placehold.it/350x350" alt="placeholder" />
+
+                <img th:if="${post.imageUrl == ''}" class="responsive-img" src="http://placehold.it/500x500" alt="placeholder" />
+
+                <img class="responsive-img" th:if="${post.imageUrl != ''}" th:src="${'/uploads/' +post.imageUrl}" width="500px" height="500px;" />
+
                 <p class="content" th:text="${post.body}"></p>
                 <a class="waves-effect waves-light btn-large" th:href="@{'/posts/'+ ${post.id} }">Show Post</a>
             </div>
+        </div>
+    </div>
+    <!--Content-->
 
-            <br/>
-
+    <div class="row">
+        <div class="col l12">
             <!--if there is results-->
             <!-- Build the pagination component -->
-            <nav th:if="${page}" class="text-center">
-                <ul class="pagination blue-grey darken-3">
+            <nav th:if="${page}" class="teal darken-3">
+                <ul>
                     <li th:class="${page.isFirst()}? 'disabled' : ''">
                         <span th:if='${page.isFirst()}'>← First</span>
                         <a th:if='${not page.isFirst()}' th:href="'?page=0'">
@@ -49,11 +55,11 @@
                         </a>
                     </li>
                     <li class="waves-effect" th:each="i : ${#numbers.sequence(1, page.getTotalPages())}">
-                        <span
-                                th:if='${(i - 1) == param.page}'
-                                th:text='${i}'>
-                            1
-                        </span>
+                    <span
+                            th:if='${(i - 1) == param.page}'
+                            th:text='${i}'>
+                        1
+                    </span>
                         <a
                                 th:if='${not ((i - 1) == param.page)}'
                                 th:href="'?page=' + ${(i -1)}"
@@ -83,8 +89,8 @@
                 </ul>
             </nav>
         </div>
-        <!--Content-->
     </div>
+
 </div>
 <!--container-->
 

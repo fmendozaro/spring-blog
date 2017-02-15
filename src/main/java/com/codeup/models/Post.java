@@ -26,7 +26,7 @@ public class Post {
     private String title;
 
     @NotBlank(message = "Body can't be empty")
-    @Column(nullable = false, length = 2000)
+    @Column(nullable = false, length = 3000)
     private String body;
 
     @CreationTimestamp

@@ -3,6 +3,7 @@ package com.codeup.controllers;
 import com.codeup.Daos.DaoFactory;
 import com.codeup.models.Post;
 import com.codeup.repositories.Posts;
+import com.codeup.services.UserSvc;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,18 +24,20 @@ import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 
-
 /**
  * Created by Fer on 1/5/17.
  */
 @Controller
-public class PostsController extends BaseController {
+public class PostsController {
 
     @Value("${file-upload-path}")
     private String uploadPath;
 
     @Autowired
     Posts postsDao;
+
+    @Autowired
+    UserSvc usersSvc;
 
 //    @Autowired
 //    PostSvc postSvc;
@@ -49,7 +52,7 @@ public class PostsController extends BaseController {
     public String sampleData(){
         Date today = new Date();
         for (Post post: DaoFactory.getPostsListDao().generatePosts()) {
-            post.setUser(loggedInUser());
+            post.setUser(usersSvc.loggedInUser());
             post.setCreateDate(today);
             post.setModifyDate(today);
             postsDao.save(post);
@@ -71,7 +74,6 @@ public class PostsController extends BaseController {
 
     @PostMapping("posts/create")
     public String createPost(@Valid Post postCreated, Errors validation, Model m, @RequestParam(name = "file") MultipartFile uploadedFile){
-        //DaoFactory.getPostsListDao().save(post);
 
         if (validation.hasErrors()) {
             m.addAttribute("errors", validation);
@@ -80,11 +82,14 @@ public class PostsController extends BaseController {
             return "posts/create";
         }
 
-        //Files
+        // Files handle
         if(!uploadedFile.getOriginalFilename().isEmpty()){
+
             String filename = uploadedFile.getOriginalFilename().replace(" ", "_").toLowerCase();
             String filepath = Paths.get(uploadPath, filename).toString();
             File destinationFile = new File(filepath);
+
+            // Try to save it in the server
             try {
                 uploadedFile.transferTo(destinationFile);
                 m.addAttribute("message", "File successfully uploaded!");
@@ -92,10 +97,12 @@ public class PostsController extends BaseController {
                 e.printStackTrace();
                 m.addAttribute("message", "Oops! Something went wrong! " + e);
             }
-            postCreated.setImageUrl("/uploads/" + filename);
+
+            //Save it in the DB
+            postCreated.setImageUrl(filename);
         }
 
-        postCreated.setUser(loggedInUser());
+        postCreated.setUser(usersSvc.loggedInUser());
         postsDao.save(postCreated);
         return "redirect:/posts";
     }
@@ -144,7 +151,7 @@ public class PostsController extends BaseController {
     }
 
     @GetMapping(value = "/posts.json")
-    public @ResponseBody Page<Post> viewAllPostsInJSONFormat(@PageableDefault(value=10) Pageable pageable) {
+    public @ResponseBody Page<Post> viewAllPostsInJSONFormat( @PageableDefault(value=3, direction = Sort.Direction.DESC, sort = "createDate") Pageable pageable ) {
         return postsDao.findAll(pageable);
     }
 

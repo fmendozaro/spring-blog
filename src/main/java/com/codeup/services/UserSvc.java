@@ -1,13 +1,16 @@
-package com.codeup.controllers;
+package com.codeup.services;
 
 import com.codeup.models.User;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by Fer on 1/11/17.
  */
-public class BaseController {
+@Service("usersSvc")
+public class UserSvc {
+
     public boolean isLoggedIn() {
         boolean isAnonymousUser =
                 SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken;
@@ -20,4 +23,5 @@ public class BaseController {
         }
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
+
 }

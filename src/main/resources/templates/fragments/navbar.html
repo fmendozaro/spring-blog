@@ -16,7 +16,8 @@
              <li><a th:href="@{/posts}">Posts</a></li>
              <span sec:authorize="isAuthenticated()">
                  <li>
-                     <span class="navbar-text">Signed in as: <span sec:authentication="name" /></span>
+
+                     <span class="navbar-text">Welcome!, <span sec:authentication="name" /></span>
                      &nbsp;
                  </li>
                  <li>

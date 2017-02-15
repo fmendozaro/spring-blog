@@ -5,25 +5,34 @@
 
 <div th:replace="fragments/navbar :: navbar"></div>
 
-<div class="container">
-    <div class="row">
-        <div class="col s12 m12 l12">
-            Howdy, this is the index.
-            <a th:href="@{/posts}">Posts page</a>
-            <div th:if="${true}">
-                This is true
-            </div>
+<div class="parallax-container">
+    <div class="parallax"><img src="../../imgs/intro.jpg" /></div>
+</div>
 
-            <div th:if="${false}">
-                This is false and will not show
-            </div>
+<div class="section white">
+    <div class="row container">
+        <h2 class="header">Howdy, this is the index</h2>
+        <a th:href="@{/posts}">Posts page</a>
 
-            <div th:text="${msg}"></div>
-            <p>Get your greeting <a target="_self" href="/greeting?name=Fer">here</a></p>
-
+        <div th:if="${true}">
+            This is true
         </div>
+
+        <div th:if="${false}">
+            This is false and will not show
+        </div>
+
+        <div th:text="${msg}"></div>
+        <p>Get your greeting <a target="_self" href="/greeting?name=Fer">here</a></p>
+
     </div>
 </div>
+
+<div class="parallax-container">
+    <div class="parallax"><img src="../../imgs/bg-nav.jpg" /></div>
+</div>
+
+
 </body>
 <div class="test" th:replace="fragments/footer :: footer">Pie de pagina <p>Hola</p></div>
 </html>

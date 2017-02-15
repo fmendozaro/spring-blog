@@ -2,6 +2,8 @@ package com.codeup.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,12 +20,16 @@ public class User {
     private long id;
 
     @Column(nullable = false, length = 20, unique = true)
+    @NotBlank(message = "Username can' be empty")
     private String username;
 
     @Column(nullable = false, unique = true)
+    @Email(message = "Invalid email")
+    @NotBlank
     private String email;
 
     @Column(nullable = false)
+    @NotBlank(message = "Password can' be empty")
     @JsonIgnore
     private String password;
 
