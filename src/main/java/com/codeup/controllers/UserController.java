@@ -5,7 +5,9 @@ package com.codeup.controllers;
  */
 
 import com.codeup.models.User;
+import com.codeup.models.UserRole;
 import com.codeup.repositories.Roles;
+import com.codeup.repositories.UserRoles;
 import com.codeup.repositories.Users;
 import com.codeup.services.UserSvc;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ public class UserController {
     Roles roles;
 
     @Autowired
+    UserRoles userRoles;
+
+    @Autowired
     UserSvc userSvc;
 
     @PostMapping("users/create")
@@ -42,8 +47,14 @@ public class UserController {
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        //user.setRole(roles.findByRole("ROLE_USER"));
-        usersDao.save(user);
+
+        User newUser = usersDao.save(user);
+
+        UserRole ur = new UserRole();
+        ur.setRole("ROLE_USER");
+        ur.setUserId(newUser.getId());
+        userRoles.save(ur);
+
         m.addAttribute("user", user);
         return "redirect:/login";
     }

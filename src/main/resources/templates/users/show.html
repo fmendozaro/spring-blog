@@ -24,6 +24,7 @@
 
             <div sec:authorize="isAuthenticated()">
                 This content is only shown to authenticated users. <br/>
+
                 Logged user: <span sec:authentication="name"></span> <br/>
                 Existing Roles: <span sec:authentication="principal.authorities"></span> <br/>
 
