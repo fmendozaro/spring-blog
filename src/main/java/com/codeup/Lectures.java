@@ -51,5 +51,10 @@ public class Lectures {
         return "/demos/default";
     }
 
+    @GetMapping("/calendar")
+    public String showCAl(){
+        return "calendar-example";
+    }
+
 
 }
