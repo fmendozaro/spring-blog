@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header('Calendar test')">
+</head>
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col l8 offset-l2">
+
+            <p>Google Calendar API Quickstart</p>
+
+            <!--Add buttons to initiate auth sequence and sign out-->
+            <button id="authorize-button" style="display: none;">Authorize</button>
+            <button id="signout-button" style="display: none;">Sign Out</button>
+
+            <pre id="content"></pre>
+
+        </div>
+    </div>
+</div>
+
+<div class="test" th:replace="fragments/footer :: footer"></div>
+
+<script type="application/javascript" src="../../js/googleCalendar.js"></script>
+
+<script async="async" defer="defer" src="https://apis.google.com/js/api.js"
+        onload="this.onload=function(){};handleClientLoad()"
+        onreadystatechange="if (this.readyState === 'complete') this.onload()">
+</script>
+
+</body>
+</html>

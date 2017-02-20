@@ -25,6 +25,4 @@ public interface Posts extends CrudRepository<Post, Long> {
     //Find posts between today and 3 days ahead
     public List<Post> findByCreateDateBetween(Date from, Date to);
 
-
-
 }

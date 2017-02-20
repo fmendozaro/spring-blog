@@ -8,10 +8,12 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Fer on 1/5/17.
  */
+
 @Entity
 @Table(name="posts")
 public class Post {
@@ -45,6 +47,14 @@ public class Post {
     @ManyToOne
     @JsonManagedReference
     private User user;
+
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(
+//            name="post_tags",
+//            joinColumns={@JoinColumn(name="post_id")},
+//            inverseJoinColumns={@JoinColumn(name="tag_id")}
+//    )
+//    private List<Tag> tags;
 
     public Post(Long id, String title, String body) {
         this.id = id;
@@ -116,4 +126,13 @@ public class Post {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+//    public List<Tag> getTags() {
+//        return tags;
+//    }
+//
+//    public void setTags(List<Tag> tags) {
+//        this.tags = tags;
+//    }
+
 }

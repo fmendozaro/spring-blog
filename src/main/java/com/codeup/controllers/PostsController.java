@@ -104,6 +104,7 @@ public class PostsController {
 
         postCreated.setUser(usersSvc.loggedInUser());
         postsDao.save(postCreated);
+
         return "redirect:/posts";
     }
 

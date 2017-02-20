@@ -48,12 +48,17 @@ public class Lectures {
         //This is a list
         model.addAttribute("ListNames", names);
 
-        return "/demos/default";
+        return "demos/default";
     }
 
     @GetMapping("/calendar")
     public String showCAl(){
-        return "calendar-example";
+        return "demos/calendar-example";
+    }
+
+    @GetMapping("/filestack")
+    public String showFileS(){
+        return "demos/filestack";
     }
 
 
