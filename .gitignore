@@ -1,7 +1,5 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
-*.properties
-
 
 ### STS ###
 .apt_generated
@@ -25,3 +23,4 @@ dist/
 nbdist/
 .nb-gradle/
 /src/main/resources/static/js/googleCalendar.js
+/src/main/resources/application.properties

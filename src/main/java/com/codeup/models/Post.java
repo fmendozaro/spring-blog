@@ -48,13 +48,13 @@ public class Post {
     @JsonManagedReference
     private User user;
 
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(
-//            name="post_tags",
-//            joinColumns={@JoinColumn(name="post_id")},
-//            inverseJoinColumns={@JoinColumn(name="tag_id")}
-//    )
-//    private List<Tag> tags;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="post_tags",
+            joinColumns={@JoinColumn(name="post_id")},
+            inverseJoinColumns={@JoinColumn(name="tag_id")}
+    )
+    private List<Tag> tags;
 
     public Post(Long id, String title, String body) {
         this.id = id;
