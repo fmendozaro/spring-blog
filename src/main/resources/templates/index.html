@@ -6,13 +6,13 @@
 <div th:replace="fragments/navbar :: navbar"></div>
 
 <div class="parallax-container">
-    <div class="parallax"><img src="../../imgs/intro.jpg" /></div>
+    <div class="parallax"><img src="../../imgs/index.jpg" /></div>
 </div>
 
 <div class="section white">
     <div class="row container">
-        <h2 class="header">Howdy, this is the index</h2>
-        <a th:href="@{/posts}">Posts page</a>
+        <h2 class="header">Howdy, this is the index page for the blog app</h2>
+        <a th:href="@{/posts}">Click here to go to the Posts page</a>
 
         <div th:if="${true}">
             This is true
@@ -23,13 +23,13 @@
         </div>
 
         <div th:text="${msg}"></div>
-        <p>Get your greeting <a target="_self" href="/greeting?name=Fer">here</a></p>
+        <p>Get your greeting test <a target="_self" href="/greeting?name=Fer">here</a></p>
 
     </div>
 </div>
 
 <div class="parallax-container">
-    <div class="parallax"><img src="../../imgs/bg-nav.jpg" /></div>
+    <div class="parallax"><img src="../../imgs/index2.jpg" /></div>
 </div>
 
 <div class="test" th:replace="fragments/footer :: footer"></div>

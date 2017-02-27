@@ -1,10 +1,6 @@
 package com.codeup.services;
 
-import com.codeup.models.Ad;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service("adSvc")
 public class AdSvc {

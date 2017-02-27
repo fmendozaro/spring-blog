@@ -2,7 +2,9 @@ package com.codeup.controllers;
 
 import com.codeup.Daos.DaoFactory;
 import com.codeup.models.Post;
+import com.codeup.models.Tag;
 import com.codeup.repositories.Posts;
+import com.codeup.repositories.Tags;
 import com.codeup.services.UserSvc;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ import javax.validation.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,6 +41,9 @@ public class PostsController {
 
     @Autowired
     UserSvc usersSvc;
+
+    @Autowired
+    Tags tagsRepo;
 
 //    @Autowired
 //    PostSvc postSvc;
@@ -69,11 +75,17 @@ public class PostsController {
     @GetMapping("posts/create")
     public String showCreate(Model m){
         m.addAttribute("post", new Post());
+        m.addAttribute("tags", tagsRepo.findAll());
         return "posts/create";
     }
 
     @PostMapping("posts/create")
     public String createPost(@Valid Post postCreated, Errors validation, Model m, @RequestParam(name = "file") MultipartFile uploadedFile){
+
+//        List<Tag> alltags = (List<Tag>) tagsRepo.findAll();
+//        for (Tag tag : alltags) {
+//            System.out.println("tags: "+tag);
+//        }
 
         if (validation.hasErrors()) {
             m.addAttribute("errors", validation);
@@ -101,9 +113,11 @@ public class PostsController {
             //Save it in the DB
             postCreated.setImageUrl(filename);
         }
-
+        postCreated.setTags((List<Tag>) tagsRepo.findAll());
         postCreated.setUser(usersSvc.loggedInUser());
         postsDao.save(postCreated);
+
+
 
         return "redirect:/posts";
     }

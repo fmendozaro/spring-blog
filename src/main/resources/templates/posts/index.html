@@ -36,7 +36,7 @@
         <div class="col l12">
             <!--if there is results-->
             <!-- Build the pagination component -->
-            <nav th:if="${page}" class="teal darken-3">
+            <nav th:if="${page.getTotalPages() != 0}" class="teal darken-3">
                 <ul>
                     <li th:class="${page.isFirst()}? 'disabled' : ''">
                         <span th:if='${page.isFirst()}'>← First</span>
