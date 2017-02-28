@@ -8,6 +8,7 @@ $(document).ready(function(){
     $('.materialboxed').materialbox();
     $(".side-navBtn").sideNav();
     $('.parallax').parallax();
+    $('select').material_select();
 
     //toasts
     // var toastError = $("<span class='error'>I am toast content</span>");

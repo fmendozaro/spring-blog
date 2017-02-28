@@ -80,7 +80,7 @@ public class PostsController {
     }
 
     @PostMapping("posts/create")
-    public String createPost(@Valid Post postCreated, Errors validation, Model m, @RequestParam(name = "file") MultipartFile uploadedFile){
+    public String createPost(@Valid Post postCreated, Errors validation, Model m, @RequestParam(name = "file") MultipartFile uploadedFile, @RequestParam(name = "tags") List<Tag> tags){
 
 //        List<Tag> alltags = (List<Tag>) tagsRepo.findAll();
 //        for (Tag tag : alltags) {
@@ -113,11 +113,10 @@ public class PostsController {
             //Save it in the DB
             postCreated.setImageUrl(filename);
         }
-        postCreated.setTags((List<Tag>) tagsRepo.findAll());
+
+        postCreated.setTags(tags);
         postCreated.setUser(usersSvc.loggedInUser());
         postsDao.save(postCreated);
-
-
 
         return "redirect:/posts";
     }

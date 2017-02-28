@@ -21,9 +21,9 @@ body {
 }
 
 .logo{
-    padding: 5px;
-    width: 70px;
-    height:70px;
+    padding: 3px;
+    width: 60px;
+    height:60px;
     vertical-align: middle;
 }
 
@@ -37,4 +37,11 @@ main {
 
 .brand-logo{
     display: inline-flex;
+}
+
+.form-wrap{
+    background-color: rgba(36,137,236,0.18);
+    border-radius: 5%;
+    border: black 1px solid;
+    padding: 100px 0;
 }

@@ -1,5 +1,7 @@
 package com.codeup.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,7 +19,8 @@ public class Tag {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "tags", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Post> posts;
 
     public Tag(String name) {
@@ -41,5 +44,13 @@ public class Tag {
 
     public void setPosts(List<Post> posts) {
         this.posts = posts;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

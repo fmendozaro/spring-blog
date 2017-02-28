@@ -9,26 +9,26 @@
 <div th:replace="fragments/navbar :: navbar"></div>
 
 <div class="container">
-    <div class="row">
+    <div class="row form-wrap">
         <div class="col l8 offset-l2">
             <form class="form-group" th:action="@{/posts/create}" th:method="POST" th:object="${post}" enctype="multipart/form-data">
 
                 <div class="input-field">
-                    <input id="title" class="form-control" th:field="*{title}" />
+                    <input type="text" id="title" th:field="*{title}" />
                     <label for="title">Title</label>
                     <p class="alert alert-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
                 </div>
 
                 <div class="input-field">
                     <label for="body">Blog post</label>
-                    <textarea id="body" class="materialize-textarea form-control" th:field="*{body}"></textarea>
+                    <textarea id="body" class="materialize-textarea" th:field="*{body}"></textarea>
                     <p class="alert alert-danger" th:if="${#fields.hasErrors('body')}" th:errors="*{body}"></p>
                 </div>
 
                 <div class="input-field">
                     <select multiple="multiple" name="tags" id="tags">
                         <option value="" disabled="disabled" selected="selected">Choose your option</option>
-                        <option th:each="tag : ${tags}" th:text="${tag.name}" th:value="${tag}"/>
+                        <option th:each="tag : ${tags}" th:text="${tag.name}" th:value="${tag.id}"/>
                     </select>
                     <label for="tags">Tags</label>
                 </div>
@@ -43,7 +43,10 @@
                     </div>
                 </div>
 
-                <input class="btn submit waves-effect waves-light" type="submit" />
+                <div class="input-field">
+                    <input class="btn submit waves-effect waves-light" type="submit" />
+                </div>
+
             </form>
         </div>
     </div>
