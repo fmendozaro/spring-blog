@@ -11,43 +11,7 @@
 <div class="container">
     <div class="row form-wrap">
         <div class="col l8 offset-l2">
-            <form class="form-group" th:action="@{/posts/create}" th:method="POST" th:object="${post}" enctype="multipart/form-data">
-
-                <div class="input-field">
-                    <input type="text" id="title" th:field="*{title}" />
-                    <label for="title">Title</label>
-                    <p class="alert alert-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
-                </div>
-
-                <div class="input-field">
-                    <label for="body">Blog post</label>
-                    <textarea id="body" class="materialize-textarea" th:field="*{body}"></textarea>
-                    <p class="alert alert-danger" th:if="${#fields.hasErrors('body')}" th:errors="*{body}"></p>
-                </div>
-
-                <div class="input-field">
-                    <select multiple="multiple" name="tags" id="tags">
-                        <option value="" disabled="disabled" selected="selected">Choose your option</option>
-                        <option th:each="tag : ${tags}" th:text="${tag.name}" th:value="${tag.id}"/>
-                    </select>
-                    <label for="tags">Tags</label>
-                </div>
-
-                <div class="file-field input-field">
-                    <div class="btn">
-                        <span>File</span>
-                        <input type="file" name="file" id="file" />
-                    </div>
-                    <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text" />
-                    </div>
-                </div>
-
-                <div class="input-field">
-                    <input class="btn submit waves-effect waves-light" type="submit" />
-                </div>
-
-            </form>
+            <div th:replace="fragments/forms :: postsForm('/posts/create', false)"></div>
         </div>
     </div>
 </div>

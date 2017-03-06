@@ -41,7 +41,14 @@ main {
 
 .form-wrap{
     background-color: rgba(36,137,236,0.18);
-    border-radius: 5%;
-    border: black 1px solid;
-    padding: 100px 0;
+    border-radius: 1%;
+    padding: 50px 0;
+}
+
+.tags{
+    margin:5px;
+}
+
+#logout{
+    margin: 0 5px;
 }

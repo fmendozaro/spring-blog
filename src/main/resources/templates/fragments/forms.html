@@ -16,8 +16,48 @@
     </div>
 </div>
 
-<div th:fragment="postsForm">
+<div th:fragment="postsForm(actionUrl, showEdit)">
+    <form class="form-group" th:action="${actionUrl}" th:method="POST" th:object="${post}" enctype="multipart/form-data">
 
+        <div class="input-field">
+            <input type="text" id="title" th:field="*{title}" />
+            <label for="title">Title</label>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
+        </div>
+
+        <div class="input-field">
+            <label for="body">Blog post</label>
+            <textarea id="body" class="materialize-textarea" th:field="*{body}"></textarea>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('body')}" th:errors="*{body}"></p>
+        </div>
+
+        <div class="input-field">
+            <select multiple="multiple" name="tags" id="tags">
+                <option value="" disabled="disabled" selected="selected">Choose your option</option>
+                <option th:if="${!showEdit}" th:each="tag : ${tags}" th:text="${tag.name}" th:value="${tag.id}"/>
+                <!--<option th:if="${showEdit}" th:each="tag : ${post.tags}" th:text="${tag.name}" th:value="${tag.id}"/>-->
+            </select>
+            <label for="tags">Tags</label>
+        </div>
+
+        <div class="file-field input-field">
+            <div class="btn">
+                <span>File</span>
+                <input type="file" name="file" id="file" />
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text" />
+            </div>
+        </div>
+
+        <div class="input-field">
+            <input th:if="${!showEdit}" class="btn submit waves-effect waves-light" type="submit" />
+
+            <input th:if="${showEdit}" class="btn" type="submit" th:value="Save" />
+            <input th:if="${showEdit}" class="btn red" type="submit" th:value="Delete" />
+        </div>
+
+    </form>
 </div>
 
 <div th:fragment="usersForm">

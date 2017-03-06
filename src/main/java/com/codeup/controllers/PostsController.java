@@ -23,7 +23,6 @@ import javax.validation.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -37,7 +36,7 @@ public class PostsController {
     private String uploadPath;
 
     @Autowired
-    Posts postsDao;
+    Posts postsRepo;
 
     @Autowired
     UserSvc usersSvc;
@@ -50,7 +49,7 @@ public class PostsController {
 
      @GetMapping("/posts")
     public String getPosts(Model m, @PageableDefault(value=3, direction = Sort.Direction.DESC, sort = "createDate") Pageable pageable){
-        m.addAttribute("page", postsDao.findAll(pageable) );
+        m.addAttribute("page", postsRepo.findAll(pageable) );
         return "posts/index";
     }
 
@@ -61,14 +60,14 @@ public class PostsController {
             post.setUser(usersSvc.loggedInUser());
             post.setCreateDate(today);
             post.setModifyDate(today);
-            postsDao.save(post);
+            postsRepo.save(post);
         }
         return "redirect:/posts";
     }
 
     @GetMapping("posts/{id}")
     public String show(@PathVariable Long id, Model m){
-        m.addAttribute("post", postsDao.findById(id));
+        m.addAttribute("post", postsRepo.findById(id));
         return "posts/show";
     }
 
@@ -81,11 +80,6 @@ public class PostsController {
 
     @PostMapping("posts/create")
     public String createPost(@Valid Post postCreated, Errors validation, Model m, @RequestParam(name = "file") MultipartFile uploadedFile, @RequestParam(name = "tags") List<Tag> tags){
-
-//        List<Tag> alltags = (List<Tag>) tagsRepo.findAll();
-//        for (Tag tag : alltags) {
-//            System.out.println("tags: "+tag);
-//        }
 
         if (validation.hasErrors()) {
             m.addAttribute("errors", validation);
@@ -116,20 +110,20 @@ public class PostsController {
 
         postCreated.setTags(tags);
         postCreated.setUser(usersSvc.loggedInUser());
-        postsDao.save(postCreated);
+        postsRepo.save(postCreated);
 
         return "redirect:/posts";
     }
 
     @GetMapping("posts/{id}/edit")
     public String showEdit(@PathVariable Long id, Model m){
-        Post post = postsDao.findById(id);
+        Post post = postsRepo.findById(id);
         m.addAttribute("post", post);
         return "posts/edit";
     }
 
-    @PostMapping("posts/{id}/edit")
-    public String edit(@Valid Post postEdited, Errors val, Model m){
+    @PostMapping("posts/edit")
+    public String edit(@Valid Post postEdited, Errors val, Model m, @RequestParam(name = "tags") List<Tag> tags, @RequestParam(name = "file") MultipartFile uploadedFile){
 
         if(val.hasErrors()){
             m.addAttribute("errors", val);
@@ -137,10 +131,32 @@ public class PostsController {
             return "posts/edit";
         }
 
-        Post newPost = postsDao.findById(postEdited.getId());
-        newPost.setTitle(postEdited.getTitle());
-        newPost.setBody(postEdited.getBody());
-        postsDao.save(newPost);
+        Post postToBeUpdated = postsRepo.findById(postEdited.getId());
+
+        // Files handle
+        if(!uploadedFile.getOriginalFilename().isEmpty()){
+
+            String filename = uploadedFile.getOriginalFilename().replace(" ", "_").toLowerCase();
+            String filepath = Paths.get(uploadPath, filename).toString();
+            File destinationFile = new File(filepath);
+
+            // Try to save it in the server
+            try {
+                uploadedFile.transferTo(destinationFile);
+                m.addAttribute("message", "File successfully uploaded!");
+            } catch (IOException e) {
+                e.printStackTrace();
+                m.addAttribute("message", "Oops! Something went wrong! " + e);
+            }
+
+            //Save it in the DB
+            postToBeUpdated.setImageUrl(filename);
+        }
+
+        postToBeUpdated.setTags(tags);
+        postToBeUpdated.setTitle(postEdited.getTitle());
+        postToBeUpdated.setBody(postEdited.getBody());
+        postsRepo.save(postToBeUpdated);
 
         return "redirect:/posts/"+postEdited.getId();
     }
@@ -152,7 +168,7 @@ public class PostsController {
         //Filtered Dates
         LocalDate today = new LocalDate().now();
         LocalDate toDate = today.plusDays(3);
-        List<Post> filteredPosts = postsDao.findByCreateDateBetween(today.toDate(), toDate.toDate());
+        List<Post> filteredPosts = postsRepo.findByCreateDateBetween(today.toDate(), toDate.toDate());
 
         System.out.println("Today " + today.toDate().toString());
 
@@ -166,21 +182,20 @@ public class PostsController {
 
     @GetMapping(value = "/posts.json")
     public @ResponseBody Page<Post> viewAllPostsInJSONFormat( @PageableDefault(value=3, direction = Sort.Direction.DESC, sort = "createDate") Pageable pageable ) {
-        return postsDao.findAll(pageable);
+        return postsRepo.findAll(pageable);
     }
 
     @PostMapping("/posts/delete")
     public String deletePost(@ModelAttribute Post post){
-        postsDao.delete(postsDao.findOne(post.getId()));
+        postsRepo.delete(postsRepo.findOne(post.getId()));
         return "redirect:/posts";
     }
 
     @PostMapping("/posts/search")
     public String search(@RequestParam(name = "term") String term, Model vModel){
         term = "%"+term+"%";
-        vModel.addAttribute("posts", postsDao.findByBodyIsLikeOrTitleIsLike(term, term));
+        vModel.addAttribute("posts", postsRepo.findByBodyIsLikeOrTitleIsLike(term, term));
         return "posts/results";
     }
-
 
 }

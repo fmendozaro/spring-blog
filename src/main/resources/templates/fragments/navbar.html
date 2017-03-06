@@ -18,13 +18,13 @@
              <li><a th:href="@{/posts}">Posts</a></li>
              <span sec:authorize="isAuthenticated()">
                  <li>
-
-                     <span class="navbar-text">Welcome!, <span sec:authentication="name" /></span>
+                     <span class="navbar-text">Welcome <a th:href="@{/users/{id}/edit(id=1)}"><span sec:authentication="name"/></a>!
+                     </span>
                      &nbsp;
                  </li>
                  <li>
                      <form th:action="@{/logout}" th:method="POST">
-                        <button class="btn">Logout</button>
+                        <button id="logout" class="btn red">Logout</button>
                      </form>
                      &nbsp;
                  </li>

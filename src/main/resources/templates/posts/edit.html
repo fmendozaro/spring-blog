@@ -13,17 +13,7 @@
     <div class="row">
         <div class="col l8 offset-l2">
             <h3>Edit Post</h3>
-            <form class="form-group" th:action="@{'/posts/'+ *{id} +'/edit'}" th:method="POST" th:object="${post}">
-                <label for="title">Title</label>
-                <input class="form-control" th:field="*{title}" required="required" />
-                <p class="alert alert-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
-                <label for="body">Blog post</label>
-                <textarea rows="20" cols="20" class="form-control" th:field="*{body}"></textarea>
-                <p class="alert alert-danger" th:if="${#fields.hasErrors('body')}" th:errors="*{body}"></p>
-                <br/>
-                <input class="btn btn-primary" type="submit" th:value="Edit" />
-                <!--<input class="btn btn-danger" type="submit" th:value="Delete" />-->
-            </form>
+            <div th:replace="fragments/forms :: postsForm(@{'/posts/edit'}, true)"></div>
         </div>
     </div>
 

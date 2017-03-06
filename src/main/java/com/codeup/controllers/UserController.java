@@ -60,11 +60,29 @@ public class UserController {
     }
 
     @GetMapping("users/{id}")
-    public String showUser(@PathVariable Long id, Model m){
+    public String showUser(@PathVariable Long id, Model viewModel){
         User user = usersDao.findById(id);
-        m.addAttribute("user", user);
-        m.addAttribute("showEditControls", userSvc.isLoggedIn() && user.getUsername() == userSvc.loggedInUser().getUsername());
+        viewModel.addAttribute("user", user);
+        viewModel.addAttribute("showEditControls", checkEditAuth(user));
         return "users/show";
     }
+
+    @GetMapping("users/{id}/edit")
+    public String editUser(@PathVariable Long id, Model viewModel){
+        User user = usersDao.findOne(id);
+        viewModel.addAttribute("user", user);
+        viewModel.addAttribute("showEditControls", checkEditAuth(user));
+        return "users/edit";
+    }
+
+    // Edit controls are being showed up if the user is logged in and it's the same user viewing the file
+    public Boolean checkEditAuth(User user){
+        System.out.println(userSvc.isLoggedIn());
+        System.out.println(user.getUsername());
+        System.out.println(userSvc.loggedInUser().getUsername());
+        System.out.println( userSvc.isLoggedIn() && (user.getUsername() == userSvc.loggedInUser().getUsername() ));
+        return userSvc.isLoggedIn() && (user.getUsername() == userSvc.loggedInUser().getUsername());
+    }
+
 
 }

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header(${'Edit User'})">
+</head>
+
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col l8 offset-l2">
+            <h3>Edit User</h3>
+            <div class="col l8 offset-l2">
+                <form th:action="@{/users/create}" th:method="POST" th:object="${user}">
+                    <label for="username">Username</label>
+                    <input class="form-control" th:field="*{username}" />
+                    <p class="alert alert-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+
+                    <label for="email">Email</label>
+                    <input class="form-control" th:field="*{email}" />
+                    <p class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" th:field="*{password}" />
+                    <p class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+
+                    <input th:if="${showEditControls}" class="btn" type="submit" />
+                </form>
+            </div>
+            <!--<div th:replace="fragments/forms :: postsForm(@{'/posts/edit'}, true)"></div>-->
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

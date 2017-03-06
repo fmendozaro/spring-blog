@@ -15,11 +15,7 @@
             <div th:object="${user}">
                 <h3 th:text="*{username}"></h3>
                 <p th:text="*{email}"></p>
-                <!--<a class="btn btn-primary" th:href="@{'/users/'+ ${user.id} +'/edit' }">Edit User</a>-->
-            </div>
-
-            <div th:if="${showEditControls}">
-                edit and delete buttons go here
+                <a th:if="${showEditControls}" class="btn red" th:href="@{/users/{id}/edit(id=${user.id}) }">Edit user</a>
             </div>
 
             <div sec:authorize="isAuthenticated()">
