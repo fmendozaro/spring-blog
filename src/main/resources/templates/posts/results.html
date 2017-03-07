@@ -18,7 +18,7 @@
                 <!--<img class="responsive-img" th:src="${post.imageUrl}" width="300px" height="300px;" />-->
                 <img class="responsive-img" src="http://placehold.it/350x350" alt="placeholder" />
                 <p class="content" th:text="${post.body}"></p>
-                <a class="waves-effect waves-light btn-large" th:href="@{'/posts/'+ ${post.id} }">Show Post</a>
+                <a class="waves-effect waves-light btn-large" th:href="@{ /posts/{id}(id=${post.id}) }">Show Post</a>
             </div>
 
         </div>

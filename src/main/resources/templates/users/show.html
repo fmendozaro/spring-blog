@@ -12,9 +12,10 @@
 <div class="container">
     <div class="row">
         <div class="col l10 offset-2">
+            <h2>User Profile</h2>
             <div th:object="${user}">
-                <h3 th:text="*{username}"></h3>
-                <p th:text="*{email}"></p>
+                Username: <p th:text="*{username}"></p>
+                Email: <p th:text="*{email}"></p>
                 <a th:if="${showEditControls}" class="btn red" th:href="@{/users/{id}/edit(id=${user.id}) }">Edit user</a>
             </div>
 

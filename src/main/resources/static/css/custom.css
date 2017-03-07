@@ -1,6 +1,13 @@
 body{
     color:black;
     margin-bottom: 25px;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+body > .container {
+    padding: 60px 0 0 0;
 }
 
 .error{
@@ -8,16 +15,6 @@ body{
     background-color: black;
     width: 100%;
     height: 100vh;
-}
-
-body > .container {
-    padding: 60px 0 0 0;
-}
-
-body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
 }
 
 .logo{
@@ -36,7 +33,7 @@ main {
 }
 
 .brand-logo{
-    display: inline-flex;
+    /*display: inline-flex;*/
 }
 
 .form-wrap{

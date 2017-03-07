@@ -80,8 +80,8 @@ public class UserController {
         System.out.println(userSvc.isLoggedIn());
         System.out.println(user.getUsername());
         System.out.println(userSvc.loggedInUser().getUsername());
-        System.out.println( userSvc.isLoggedIn() && (user.getUsername() == userSvc.loggedInUser().getUsername() ));
-        return userSvc.isLoggedIn() && (user.getUsername() == userSvc.loggedInUser().getUsername());
+        System.out.println( userSvc.isLoggedIn() && (user.getId() == userSvc.loggedInUser().getId() ));
+        return userSvc.isLoggedIn() && (user.getId() == userSvc.loggedInUser().getId());
     }
 
 

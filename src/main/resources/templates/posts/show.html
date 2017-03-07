@@ -24,13 +24,13 @@
             </p>
             <hr/>
             <b>
-                <p>Posted by <a th:href="@{'/users/'+ ${post.user.id} }" th:text="${post.user.email}">some user</a> on <span th:text="${#dates.format(post.createDate,'MMM dd YYYY')}"></span>
+                <p>Posted by <a th:href="@{ /users/{id} (id=${post.user.id}) }" th:text="${post.user.email}">some user</a> on <span th:text="${#dates.format(post.createDate,'MMM dd YYYY')}"></span>
                 </p>
             </b>
 
             <form th:method="POST" th:action="@{/posts/delete}">
                 <input type="hidden" name="id" th:value="${post.id}" />
-                <a class="btn btn-primary" th:href="@{'/posts/'+ ${post.id} +'/edit' }">Edit</a>
+                <a class="btn btn-primary" th:href="@{ /posts/{id}/edit(id=${post.id}) }">Edit</a>
                 <button class="btn deep-orange darken-4">Delete</button>
             </form>
 

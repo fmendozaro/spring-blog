@@ -14,6 +14,10 @@
         <div class="col l8 offset-l2">
             <h1>Blog posts</h1>
 
+            <div th:if="${page == null}">
+                <h3>There's no posts, you will have to login in order to create some.</h3>
+            </div>
+
             <div sec:authorize="isAuthenticated()">
                 <a class="btn-large waves-light" th:href="@{/posts/create}">Create a post</a>
             </div>
@@ -26,7 +30,7 @@
                 <img class="responsive-img" th:if="${post.imageUrl != ''}" th:src="${'/uploads/' +post.imageUrl}" width="500px" height="500px;" />
 
                 <p class="content" th:text="${post.body}"></p>
-                <a class="waves-effect waves-light btn-large" th:href="@{'/posts/'+ ${post.id} }">Show Post</a>
+                <a class="waves-effect waves-light btn-large" th:href="@{ /posts/{id}(id=${post.id}) }">Show Post</a>
             </div>
         </div>
     </div>

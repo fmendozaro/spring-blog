@@ -1,9 +1,6 @@
 package com.codeup.services;
 
 import com.codeup.UserWithRoles;
-import com.codeup.models.Role;
-import com.codeup.models.UserRole;
-import com.codeup.repositories.Roles;
 import com.codeup.repositories.UserRoles;
 import com.codeup.models.User;
 import com.codeup.repositories.Users;
@@ -17,7 +14,6 @@ import java.util.List;
 
 @Service("customUserDetailsService")
 public class UserDetailsLoader implements UserDetailsService {
-
     private final Users users;
     private final UserRoles roles;
 
