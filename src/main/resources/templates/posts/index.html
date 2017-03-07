@@ -14,7 +14,7 @@
         <div class="col l8 offset-l2">
             <h1>Blog posts</h1>
 
-            <div th:if="${page == null}">
+            <div th:if="${#lists.isEmpty(page)}">
                 <h3>There's no posts, you will have to login in order to create some.</h3>
             </div>
 

@@ -1,4 +1,4 @@
-package com.codeup;
+package com.codeup.services;
 
 import com.codeup.models.User;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,7 +13,6 @@ import java.util.List;
  * Created by Fer on 1/10/17.
  */
 
-//User roles Service
 public class UserWithRoles extends User implements UserDetails {
     private List<String> userRoles;
 

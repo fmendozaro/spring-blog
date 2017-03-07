@@ -1,5 +1,5 @@
 spring.datasource.driver-class-name=com.mysql.jdbc.Driver
-spring.datasource.url=jdbc:mysql://localhost/blog_db_hibernate
+spring.datasource.url=jdbc:mysql://localhost/blog_db
 spring.datasource.username=root
 spring.datasource.password=pass
 spring.jpa.hibernate.ddl-auto=update
@@ -7,4 +7,4 @@ spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
 spring.jpa.show-sql=true
 file-upload-path=/Users/Fer/tmp/uploads
 #file-upload-path=/Users/Fer/IdeaProjects/Spring-Blog/src/main/resources/static/uploads/
-spring.http.multipart.max-file-size=5MB
+spring.http.multipart.max-file-size=10MB

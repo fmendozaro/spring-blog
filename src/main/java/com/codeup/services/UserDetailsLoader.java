@@ -1,6 +1,5 @@
 package com.codeup.services;
 
-import com.codeup.UserWithRoles;
 import com.codeup.repositories.UserRoles;
 import com.codeup.models.User;
 import com.codeup.repositories.Users;

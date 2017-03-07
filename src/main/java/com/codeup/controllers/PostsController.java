@@ -1,6 +1,5 @@
 package com.codeup.controllers;
 
-import com.codeup.Daos.DaoFactory;
 import com.codeup.models.Post;
 import com.codeup.models.Tag;
 import com.codeup.repositories.Posts;
@@ -44,25 +43,10 @@ public class PostsController {
     @Autowired
     Tags tagsRepo;
 
-//    @Autowired
-//    PostSvc postSvc;
-
      @GetMapping("/posts")
     public String getPosts(Model m, @PageableDefault(value=3, direction = Sort.Direction.DESC, sort = "createDate") Pageable pageable){
         m.addAttribute("page", postsRepo.findAll(pageable) );
         return "posts/index";
-    }
-
-    @GetMapping("/posts/sample")
-    public String sampleData(){
-        Date today = new Date();
-        for (Post post: DaoFactory.getPostsListDao().generatePosts()) {
-            post.setUser(usersSvc.loggedInUser());
-            post.setCreateDate(today);
-            post.setModifyDate(today);
-            postsRepo.save(post);
-        }
-        return "redirect:/posts";
     }
 
     @GetMapping("posts/{id}")
