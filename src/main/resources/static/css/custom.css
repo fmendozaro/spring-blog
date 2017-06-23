@@ -1,6 +1,5 @@
 body{
     color:black;
-    margin-bottom: 25px;
     display: flex;
     min-height: 100vh;
     flex-direction: column;
