@@ -3,10 +3,9 @@
  */
 $(document).ready(function(){
 
-    console.log("Js loaded");
     $(".dropdown-button").dropdown();
     $('.materialboxed').materialbox();
-    $(".side-navBtn").sideNav();
+    $(".sideNav-btn").sideNav();
     $('.parallax').parallax();
     $('select').material_select();
 
