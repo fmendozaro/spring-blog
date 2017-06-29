@@ -11,15 +11,6 @@
     <div class="row">
         <div class="col l8 offset-l2">
             <h1>Blog posts</h1>
-
-            <div th:if="${#lists.isEmpty(page)}">
-                <h3>There's no posts, you will have to login in order to create some.</h3>
-            </div>
-
-            <div sec:authorize="isAuthenticated()">
-                <a class="btn-large waves-light" th:href="@{/posts/create}">Create a post</a>
-            </div>
-
             <div th:if="${page}" th:each="post : ${page}">
                 <h3 th:text="${post.title}"></h3>
 
