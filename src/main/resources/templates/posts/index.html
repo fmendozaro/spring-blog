@@ -25,9 +25,9 @@
             <div th:if="${page}" th:each="post : ${page}">
                 <h3 th:text="${post.title}"></h3>
 
-                <img th:if="${post.imageUrl == ''}" class="responsive-img" src="http://placehold.it/500x500" alt="placeholder" />
+                <img th:if="${post.imageUrl == null}" class="responsive-img" src="http://placehold.it/500x500" alt="placeholder" />
 
-                <img class="responsive-img" th:if="${post.imageUrl != ''}" th:src="${'/uploads/' + post.imageUrl }" width="500px" height="500px;" />
+                <img class="responsive-img" th:if="${post.imageUrl != null}" th:src="${'/uploads/' + post.imageUrl }" width="500px" height="500px;" />
 
                 <p class="content" th:text="${post.body}"></p>
                 <a class="waves-effect waves-light btn-large" th:href="@{ /posts/{id}(id=${post.id}) }">Show Post</a>
