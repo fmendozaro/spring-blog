@@ -20,7 +20,7 @@ public class User {
     private long id;
 
     @Column(nullable = false, length = 20, unique = true)
-    @NotBlank(message = "Username can' be empty")
+    @NotBlank(message = "Username can't be empty")
     private String username;
 
     @Column(nullable = false, unique = true)
@@ -29,7 +29,7 @@ public class User {
     private String email;
 
     @Column(nullable = false)
-    @NotBlank(message = "Password can' be empty")
+    @NotBlank(message = "Password can't be empty")
     @JsonIgnore
     private String password;
 

@@ -1,8 +1,4 @@
-# Roles
-insert into roles (role) VALUES("ROLE_ADMIN");
-insert into roles (role) VALUES("ROLE_USER");
-insert into roles (role) VALUES("ROLE_GUEST");
-
+USE blog_db;
 # Tags
 insert into tags (name) VALUES ("general");
 insert into tags (name) VALUES ("tech");

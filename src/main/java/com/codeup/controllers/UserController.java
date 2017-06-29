@@ -6,7 +6,6 @@ package com.codeup.controllers;
 
 import com.codeup.models.User;
 import com.codeup.models.UserRole;
-import com.codeup.repositories.Roles;
 import com.codeup.repositories.UserRoles;
 import com.codeup.repositories.Users;
 import com.codeup.services.UserSvc;
@@ -27,9 +26,6 @@ public class UserController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    Roles roles;
 
     @Autowired
     UserRoles userRoles;
@@ -67,6 +63,11 @@ public class UserController {
         return "users/show";
     }
 
+    @GetMapping("users/profile")
+    public String showProfile(){
+        return "users/" + userSvc.loggedInUser().getId();
+    }
+
     @GetMapping("users/{id}/edit")
     public String editUser(@PathVariable Long id, Model viewModel){
         User user = usersDao.findOne(id);
@@ -77,10 +78,6 @@ public class UserController {
 
     // Edit controls are being showed up if the user is logged in and it's the same user viewing the file
     public Boolean checkEditAuth(User user){
-        System.out.println(userSvc.isLoggedIn());
-        System.out.println(user.getUsername());
-        System.out.println(userSvc.loggedInUser().getUsername());
-        System.out.println( userSvc.isLoggedIn() && (user.getId() == userSvc.loggedInUser().getId() ));
         return userSvc.isLoggedIn() && (user.getId() == userSvc.loggedInUser().getId());
     }
 

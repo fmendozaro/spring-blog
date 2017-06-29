@@ -12,17 +12,19 @@
              <img class="logo" src="/imgs/blog.png" />Fer's Blog
          </a>
          <ul id="nav-mobile" class="right hide-on-med-and-down">
+             <li sec:authorize="isAuthenticated()">
+                 <a th:href="@{/users/profile}" class="btn-link">
+                     <span class="navbar-text">Welcome, <span sec:authentication="name" /> &nbsp;</span>
+                 </a>
+             </li>
              <li>
                  <a href="#" data-activates="slide-out" class="sideNav-btn">Search Posts</a>
              </li>
              <li><a th:href="@{/posts}">Posts</a></li>
              <span sec:authorize="isAuthenticated()">
                  <li>
-                     <span class="navbar-text">Welcome, <span sec:authentication="name" /> &nbsp;</span>
-                 </li>
-                 <li>
                      <form th:action="@{/logout}" th:method="POST">
-                        <button id="logout" class="btn red">Logout</button>
+                        <button id="logout" class="btn btn-link">Logout</button>
                      </form>
                      &nbsp;
                  </li>
