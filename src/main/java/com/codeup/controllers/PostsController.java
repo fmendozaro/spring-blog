@@ -44,8 +44,8 @@ public class PostsController {
     Tags tagsRepo;
 
      @GetMapping("/posts")
-    public String getPosts(Model m, @PageableDefault(value=3, direction = Sort.Direction.DESC, sort = "createDate") Pageable pageable){
-        m.addAttribute("page", postsRepo.findAll(pageable) );
+    public String getPosts(Model m){
+        m.addAttribute("page", postsRepo.findAll() );
         return "posts/index";
     }
 
@@ -165,8 +165,8 @@ public class PostsController {
     }
 
     @GetMapping(value = "/posts.json")
-    public @ResponseBody Page<Post> viewAllPostsInJSONFormat( @PageableDefault(value=3, direction = Sort.Direction.DESC, sort = "createDate") Pageable pageable ) {
-        return postsRepo.findAll(pageable);
+    public @ResponseBody Iterable<Post> viewAllPostsInJSONFormat() {
+        return postsRepo.findAll();
     }
 
     @PostMapping("/posts/delete")

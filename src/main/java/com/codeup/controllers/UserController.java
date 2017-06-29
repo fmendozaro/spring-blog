@@ -65,7 +65,7 @@ public class UserController {
 
     @GetMapping("users/profile")
     public String showProfile(){
-        return "users/" + userSvc.loggedInUser().getId();
+        return "redirect:/users/" + userSvc.loggedInUser().getId();
     }
 
     @GetMapping("users/{id}/edit")
