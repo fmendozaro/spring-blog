@@ -19,10 +19,10 @@
             <hr/>
             <p>
                 <b>Tags: </b>
+
                 <br/>
-                <span class="btn blue-grey darken-3 tags" th:each="tag : ${post.tags}" th:text="${tag.name}"></span>
+                <span class="btn blue-grey darken-2 tags chip white-text" th:each="tag : ${post.tags}" th:text="${tag.name}"></span>
             </p>
-            <hr/>
             <b>
                 <p>Posted by <a th:href="@{ /users/{id} (id=${post.user.id}) }" th:text="${post.user.email}">some user</a> on <span th:text="${#dates.format(post.createDate,'MMM dd YYYY')}"></span>
                 </p>

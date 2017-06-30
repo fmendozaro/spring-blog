@@ -17,6 +17,26 @@ $(document).ready(function(){
     // });
 
 
+    //Tags
+
+    var tags = getTagsJSON();
+
+    $('.chips').material_chip();
+    // $('.chips-initial').material_chip({
+    //     data: [{
+    //         tag: 'Apple',
+    //     }, {
+    //         tag: 'Microsoft',
+    //     }, {
+    //         tag: 'Google',
+    //     }],
+    // });
+    // $('.chips-placeholder').material_chip({
+    //     placeholder: 'Enter a tag',
+    //     secondaryPlaceholder: '+Tag',
+    // });
+
+
     function testJson(){
         $.ajax({
             url: "/posts.json",
@@ -32,6 +52,30 @@ $(document).ready(function(){
 
             // console.log(html);
 
+        });
+    }
+
+    function getTagsJSON(){
+        $.ajax({
+            url: "/tags.json",
+            method: "GET"
+        }).done(function(data){
+
+            var chipsData = {};
+
+            data.forEach(function(el){
+                chipsData[el.name] = null;
+            });
+
+            // $('.chips-autocomplete').material_chip({
+            //     autocompleteOptions: {
+            //         data: chipsData,
+            //         limit: Infinity,
+            //         minLength: 1
+            //     }
+            // });
+
+            return data;
         });
     }
 
