@@ -9,8 +9,16 @@
     <div class="row">
         <div class="col l8 offset-l2">
         <div>
-            <h2 th:text="${post.title}"></h2>
-
+            <form class="right" th:method="POST" th:action="@{/posts/delete}">
+                <input type="hidden" name="id" th:value="${post.id}" />
+                <a class="btn btn-floating" th:href="@{ /posts/{id}/edit(id=${post.id}) }">
+                    <i class="material-icons">edit</i>
+                </a>
+                <button class="btn btn-floating deep-orange darken-4">      <i class="material-icons">delete</i>
+                </button>
+            </form>
+            <h3 th:text="${post.title}"></h3>
+            <br/>
             <img th:if="${post.imageUrl == ''}" class="responsive-img" src="http://placehold.it/500x500" alt="placeholder" />
 
             <img class="responsive-img" th:if="${post.imageUrl != ''}" th:src="${'/uploads/' +post.imageUrl}" width="500px" height="500px;" />
@@ -19,7 +27,7 @@
             <hr/>
             <p>
                 <b>Tags: </b>
-
+                <br/>
                 <br/>
                 <span class="btn blue-grey darken-2 tags chip white-text" th:each="tag : ${post.tags}" th:text="${tag.name}"></span>
             </p>
@@ -27,13 +35,6 @@
                 <p>Posted by <a th:href="@{ /users/{id} (id=${post.user.id}) }" th:text="${post.user.email}">some user</a> on <span th:text="${#dates.format(post.createDate,'MMM dd YYYY')}"></span>
                 </p>
             </b>
-
-            <form th:method="POST" th:action="@{/posts/delete}">
-                <input type="hidden" name="id" th:value="${post.id}" />
-                <a class="btn btn-primary" th:href="@{ /posts/{id}/edit(id=${post.id}) }">Edit</a>
-                <button class="btn deep-orange darken-4">Delete</button>
-            </form>
-
         </div>
     </div>
    </div>
