@@ -30,11 +30,9 @@ $(document).ready(function(){
                 html += "<div><h1>" + posts[i].title + "</h1><p>" + posts[i].body + "</p></div>";
             }
 
-            console.log(html);
+            // console.log(html);
 
         });
     }
-
-    testJson();
 
 });

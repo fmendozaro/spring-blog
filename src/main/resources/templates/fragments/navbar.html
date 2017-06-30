@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
-</head>
+<head></head>
 <body>
 
  <nav th:fragment="navbar" class="blue-grey darken-3">
+
      <div class="nav-wrapper">
          <a href="/" class="brand-logo">
              <img class="logo" src="/imgs/blog.png" />Fer's Blog
@@ -14,31 +12,29 @@
          <ul id="nav-mobile" class="right hide-on-med-and-down">
              <span sec:authorize="isAuthenticated()">
                  <li>
-                     <a th:href="@{/users/profile}" class="btn-link">
-                         <span class="navbar-text">Welcome, <span sec:authentication="name" /> &nbsp;</span>
+                     <a th:href="@{/users/profile}" class="waves-effect waves-light btn-link">
+                         <span class="navbar-text"><span sec:authentication="name" />'s Profile</span>
                      </a>
                  </li>
                  <li>
                      <a class="waves-effect waves-light" th:href="@{/posts/create}">Create a post</a>
                  </li>
              </span>
-
+             <li><a class="waves-effect waves-light" th:href="@{/posts}">Posts</a></li>
              <li>
-                 <a href="#" data-activates="slide-out" class="sideNav-btn">Search Posts</a>
+                 <a href="#" data-activates="slide-out" class="waves-effect waves-light sideNav-btn">Search Posts</a>
              </li>
-             <li><a th:href="@{/posts}">Posts</a></li>
              <span sec:authorize="isAuthenticated()">
                  <li>
                      <form th:action="@{/logout}" th:method="POST">
-                        <button id="logout" class="btn btn-link">Logout</button>
+                        <button id="logout" class="waves-effect waves-light navbar-text btn-flat white-text">Logout</button>
                      </form>
-                     &nbsp;
                  </li>
              </span>
 
              <span sec:authorize="!isAuthenticated()">
-                 <li><a th:href="@{/register}">Register</a></li>
-                 <li><a th:href="@{/login}">Login</a></li>
+                 <li><a class="waves-effect waves-light" th:href="@{/register}">Register</a></li>
+                 <li><a class="waves-effect waves-light" th:href="@{/login}">Login</a></li>
              </span>
 
          </ul>
@@ -51,7 +47,7 @@
      <li>
          <div class="user-view">
              <div class="background">
-                 <img src="../../imgs/bg-nav.jpg" />
+                 <img src="/imgs/bg-nav.jpg" />
              </div>
              <a href="#!user"><img class="circle" src="https://media.licdn.com/mpr/mpr/shrinknp_100_100/AAEAAQAAAAAAAAhIAAAAJDdmZDRlYzMxLTVhYzEtNGU5Ni04MDQ3LTBjMTE1MmZhMmNiZQ.jpg" /></a>
              <a href="#!name"><span class="white-text name">Fernando Mendoza</span></a>
