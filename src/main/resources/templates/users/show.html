@@ -11,32 +11,35 @@
 
 <div class="container">
     <div class="row">
-        <div class="col l10 offset-2">
+        <div class="col l10 offset-2" th:object="${user}">
             <h2>User Profile</h2>
-            <div th:object="${user}">
-                Username: <p th:text="*{username}"></p>
-                Email: <p th:text="*{email}"></p>
-                <a th:if="${showEditControls}" class="btn red" th:href="@{/users/{id}/edit(id=${user.id}) }">Edit user</a>
-            </div>
+                <h5>Users info:</h5>
+                <div class="card">
+                    <div class="card-content">
+                        Username: <p th:text="*{username}"></p>
+                    Email: <p th:text="*{email}"></p>
+                    <a th:if="${showEditControls}" class="btn red" th:href="@{/users/{id}/edit(id=${user.id}) }">Edit user</a>
 
-            <div sec:authorize="isAuthenticated()">
-                This content is only shown to authenticated users. <br/>
+                    <div sec:authorize="isAuthenticated()">
+                        This content is only shown to authenticated users. <br/>
 
-                Logged user: <span sec:authentication="name"></span> <br/>
-                Existing Roles: <span sec:authentication="principal.authorities"></span> <br/>
+                        Logged user: <span sec:authentication="name"></span> <br/>
+                        Existing Roles: <span sec:authentication="principal.authorities"></span> <br/>
 
-                <div sec:authorize="hasRole('ROLE_ADMIN')">
-                    <div> show these for only for admins </div>
+                        <div sec:authorize="hasRole('ROLE_ADMIN')">
+                            <div> show these for only for admins </div>
+                        </div>
+
+                        <div sec:authorize="hasRole('ROLE_USER')">
+                            <div> show these for only for users </div>
+                        </div>
+
+                        <div sec:authorize="hasRole('ROLE_GUEST')">
+                            <div> show these for only for Guest </div>
+                        </div>
+
+                    </div><!--Auth-->
                 </div>
-
-                <div sec:authorize="hasRole('ROLE_USER')">
-                    <div> show these for only for users </div>
-                </div>
-
-                <div sec:authorize="hasRole('ROLE_GUEST')">
-                    <div> show these for only for Guest </div>
-                </div>
-
             </div>
         </div>
     </div>

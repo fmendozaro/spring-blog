@@ -20,9 +20,11 @@
                      <a class="waves-effect waves-light" th:href="@{/posts/create}">Create a post</a>
                  </li>
              </span>
-             <li><a class="waves-effect waves-light" th:href="@{/posts}">Posts</a></li>
+             <li><a class="waves-effect waves-light" th:href="@{/posts}">All Posts</a></li>
              <li>
-                 <a href="#" data-activates="slide-out" class="waves-effect waves-light sideNav-btn">Search Posts</a>
+                 <a href="#" data-activates="slide-out" class="waves-effect waves-light sideNav-btn">
+                     <i class="material-icons">search</i>
+                 </a>
              </li>
              <span sec:authorize="isAuthenticated()">
                  <li>
@@ -38,6 +40,7 @@
              </span>
 
          </ul>
+         <a href="#" data-activates="slide-out" class="sideNav-btn"><i class="material-icons">menu</i></a>
      </div>
  </nav>
 

@@ -31,10 +31,6 @@ main {
     height: 400px;
 }
 
-.brand-logo{
-    /*display: inline-flex;*/
-}
-
 .form-wrap{
     background-color: rgba(36,137,236,0.18);
     border-radius: 1%;
