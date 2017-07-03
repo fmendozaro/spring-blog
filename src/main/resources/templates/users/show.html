@@ -12,35 +12,20 @@
 <div class="container">
     <div class="row">
         <div class="col l10 offset-2" th:object="${user}">
-            <h2>User Profile</h2>
-                <h5>Users info:</h5>
-                <div class="card">
-                    <div class="card-content">
-                        Username: <p th:text="*{username}"></p>
-                    Email: <p th:text="*{email}"></p>
-                    <a th:if="${showEditControls}" class="btn red" th:href="@{/users/{id}/edit(id=${user.id}) }">Edit user</a>
+            <h4>User Profile</h4>
+            <ul class="collection">
+                <li class="collection-item avatar">
+                    <img src="https://avatars1.githubusercontent.com/u/13546596" alt="" class="circle" />
+                    <a th:if="${showEditControls}" class="btn btn-floating right" th:href="@{/users/{id}/edit(id=${user.id}) }"><i class="material-icons ">edit</i></a>
+                    <p>
+                        Username: <span class="title" th:text="${user.username}"></span>
+                        <br/>
+                        Email: <span th:text="${user.email}"></span>
+                    </p>
+                </li>
+            </ul>
 
-                    <div sec:authorize="isAuthenticated()">
-                        This content is only shown to authenticated users. <br/>
 
-                        Logged user: <span sec:authentication="name"></span> <br/>
-                        Existing Roles: <span sec:authentication="principal.authorities"></span> <br/>
-
-                        <div sec:authorize="hasRole('ROLE_ADMIN')">
-                            <div> show these for only for admins </div>
-                        </div>
-
-                        <div sec:authorize="hasRole('ROLE_USER')">
-                            <div> show these for only for users </div>
-                        </div>
-
-                        <div sec:authorize="hasRole('ROLE_GUEST')">
-                            <div> show these for only for Guest </div>
-                        </div>
-
-                    </div><!--Auth-->
-                </div>
-            </div>
         </div>
     </div>
 </div>
