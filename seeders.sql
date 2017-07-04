@@ -1,7 +1,8 @@
 USE blog_db;
+
 # Tags
-insert into tags (name) VALUES ("general");
-insert into tags (name) VALUES ("tech");
-insert into tags (name) VALUES ("music");
-insert into tags (name) VALUES ("art");
-insert into tags (name) VALUES ("programming");
+insert into tags (name) VALUES ("General");
+insert into tags (name) VALUES ("Tech");
+insert into tags (name) VALUES ("Music");
+insert into tags (name) VALUES ("Art");
+insert into tags (name) VALUES ("Programming");
