@@ -2,7 +2,9 @@ package com.codeup.repositories;
 
 import com.codeup.models.Post;
 import com.codeup.models.User;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -20,5 +22,12 @@ public interface Posts extends CrudRepository<Post, Long> {
 
     //Find posts between today and 3 days ahead
     public List<Post> findByCreateDateBetween(Date from, Date to);
+
+    // Store procedures test
+    @Procedure(name = "in_only_test")
+    void inOnlyTest(@Param("inParam1") String inParam1);
+
+//    @Procedure(name = "in_and_out_test")
+//    String inAndOutTest(@Param("inParam1") String inParam1);
 
 }

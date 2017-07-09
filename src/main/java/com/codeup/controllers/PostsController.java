@@ -182,4 +182,12 @@ public class PostsController {
         return "posts/results";
     }
 
+    @GetMapping("/storedp")
+    public String storedPTest(){
+//        String res1 = postsRepo.inAndOutTest("Fer");
+        postsRepo.inOnlyTest("Fer");
+        System.out.println(res1);
+        return null;
+    }
+
 }
