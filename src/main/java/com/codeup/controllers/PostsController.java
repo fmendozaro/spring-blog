@@ -183,11 +183,11 @@ public class PostsController {
     }
 
     @GetMapping("/storedp")
+    @ResponseBody
     public String storedPTest(){
-//        String res1 = postsRepo.inAndOutTest("Fer");
-        postsRepo.inOnlyTest("Fer");
-        System.out.println(res1);
-        return null;
+        String res1 = postsRepo.inOnlyTest("Fer");
+//        System.out.println(postsRepo.inOnlyTest("Fer"));
+        return "Executed " + res1;
     }
 
 }

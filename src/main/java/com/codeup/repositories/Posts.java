@@ -16,16 +16,16 @@ import java.util.List;
 @Repository
 public interface Posts extends CrudRepository<Post, Long> {
 
-    public Post findByUser(User user);
-    public Post findById(Long id);
-    public List<Post> findByBodyIsLikeOrTitleIsLike(String term, String term2);
+    Post findByUser(User user);
+    Post findById(Long id);
+    List<Post> findByBodyIsLikeOrTitleIsLike(String term, String term2);
 
     //Find posts between today and 3 days ahead
-    public List<Post> findByCreateDateBetween(Date from, Date to);
+    List<Post> findByCreateDateBetween(Date from, Date to);
 
     // Store procedures test
     @Procedure(name = "in_only_test")
-    void inOnlyTest(@Param("inParam1") String inParam1);
+    String inOnlyTest(@Param("inParam1") String inParam1);
 
 //    @Procedure(name = "in_and_out_test")
 //    String inAndOutTest(@Param("inParam1") String inParam1);
