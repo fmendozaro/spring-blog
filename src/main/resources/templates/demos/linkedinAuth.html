@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header('LinkedIn test')" />
+<body>
+
+<button>
+    LinkedIn
+</button>
+
+<div class="test" th:replace="fragments/footer :: footer"></div>
+
+<script>
+    "use strict";
+    $(document).ready(function(){
+        console.log("done");
+
+        var c = 1;
+        function cuniq() {
+            var d = new Date(),
+                m = d.getMilliseconds() + "",
+                u = ++d + m + (++c === 10000 ? (c = 1) : c);
+
+            return u;
+        }
+
+        $.ajax({
+            url: "https://www.linkedin.com/oauth/v2/authorization",
+            method: "GET",
+            data: {
+                "response_type":"code",
+                "client_id": "780lzoqjpghkvg",
+                "redirect_uri": "https://fer-mendoza.space/posts",
+                "state": cuniq(),
+                "scope": "r_basicprofile"
+
+            }
+        }).done(function(data){
+            console.log(data);
+        });
+
+    });
+</script>
+
+</body>
+</html>

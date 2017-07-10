@@ -70,6 +70,8 @@ public class Post {
     )
     private List<Tag> tags;
 
+    private String inOnlyTest;
+
     public Post(Long id, String title, String body) {
         this.id = id;
         this.title = title;

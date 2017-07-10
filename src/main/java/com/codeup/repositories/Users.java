@@ -11,14 +11,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface Users extends CrudRepository<User, Long> {
 
-    public User findByUsername(String username);
-    public User findById(Long id);
-
-    public User findByEmail(String email);
+    User findByUsername(String username);
+    User findById(Long id);
+    User findByEmail(String email);
 
     //Same function of above but with HQL
     @Query("select u from User u where u.email = ?1")
-    public User findByEmailQuery(String email);
+    User findByEmailQuery(String email);
 
 
 

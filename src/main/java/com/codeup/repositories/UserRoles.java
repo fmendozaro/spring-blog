@@ -16,5 +16,5 @@ public interface UserRoles extends CrudRepository<UserRole, Long> {
 //    public List<String> ofUserWith(String username);
 
     @Query("select ur.role from UserRole ur, User u where u.username=?1 and ur.userId = u.id")
-    public List<String> ofUserWith(String username);
+    List<String> ofUserWith(String username);
 }
