@@ -51,7 +51,7 @@ public class PostsController {
 
     @GetMapping("posts/{id}")
     public String show(@PathVariable Long id, Model m){
-        m.addAttribute("post", postsRepo.findById(id));
+        m.addAttribute("post", postsRepo.findOne(id));
         return "posts/show";
     }
 
@@ -101,7 +101,7 @@ public class PostsController {
 
     @GetMapping("posts/{id}/edit")
     public String showEdit(@PathVariable Long id, Model m){
-        Post post = postsRepo.findById(id);
+        Post post = postsRepo.findOne(id);
         m.addAttribute("post", post);
         return "posts/edit";
     }
@@ -115,7 +115,7 @@ public class PostsController {
             return "posts/edit";
         }
 
-        Post postToBeUpdated = postsRepo.findById(postEdited.getId());
+        Post postToBeUpdated = postsRepo.findOne(postEdited.getId());
 
         // Files handle
         if(!uploadedFile.getOriginalFilename().isEmpty()){

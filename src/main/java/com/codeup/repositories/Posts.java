@@ -17,7 +17,6 @@ import java.util.List;
 public interface Posts extends CrudRepository<Post, Long> {
 
     Post findByUser(User user);
-    Post findById(Long id);
     List<Post> findByBodyIsLikeOrTitleIsLike(String term, String term2);
 
     //Find posts between today and 3 days ahead
