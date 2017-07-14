@@ -72,6 +72,8 @@ public class Post {
 
     private String inOnlyTest;
 
+    public String mix;
+
     public Post(Long id, String title, String body) {
         this.id = id;
         this.title = title;
@@ -151,5 +153,11 @@ public class Post {
         this.tags = tags;
     }
 
+    public String getMix() {
+        return this.mix;
+    }
 
+    public void setMix() {
+        this.mix = getTitle() + " made by: " + getUser().getUsername();
+    }
 }
