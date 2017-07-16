@@ -10,6 +10,18 @@ $(document).ready(function(){
     $('.parallax').parallax();
     $('select').material_select();
 
+    $('#calendar').fullCalendar({
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,basicWeek,basicDay'
+        },
+        defaultDate: '2017-05-12',
+        navLinks: true, // can click day/week names to navigate views
+        editable: true,
+        eventLimit: true
+    })
+
     //toasts
     // var toastError = $("<span class='error'>I am toast content</span>");
     //

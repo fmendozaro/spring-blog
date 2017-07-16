@@ -21,4 +21,9 @@ public class TestsController {
         return "demos/linkedinAuth";
     }
 
+    @GetMapping("/postsCalendar")
+    public String showCalendar(){
+        return "demos/fullCalendar";
+    }
+
 }
