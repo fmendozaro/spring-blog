@@ -2,6 +2,8 @@ package com.codeup.repositories;
 
 import com.codeup.models.Post;
 import com.codeup.models.User;
+import com.codeup.projections.PostCreateDateProjection;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -25,6 +27,9 @@ public interface Posts extends CrudRepository<Post, Long> {
     // Store procedures test
     @Procedure(name = "in_only_test")
     String inOnlyTest(@Param("inParam1") String inParam1);
+
+    @Query("select p.createDate from Post p")
+    List<Date> createDates();
 
 //    @Procedure(name = "in_and_out_test")
 //    String inAndOutTest(@Param("inParam1") String inParam1);

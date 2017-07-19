@@ -12,7 +12,6 @@
         <div class="col l8 offset-l2">
             <h1>Blog posts</h1>
             <div th:if="${page}" th:each="post : ${page}">
-                <p th:text="${posts.mix}"></p>
                 <h3 th:text="${post.title}"></h3>
 
                 <img th:if="${post.imageUrl == null}" class="responsive-img" src="http://placehold.it/500x500" alt="placeholder" />

@@ -14,12 +14,20 @@ $(document).ready(function(){
         header: {
             left: 'prev,next today',
             center: 'title',
-            right: 'month,basicWeek,basicDay'
+            right: 'month,basicWeek,basicDay',
         },
-        defaultDate: '2017-05-12',
         navLinks: true, // can click day/week names to navigate views
         editable: true,
-        eventLimit: true
+        eventLimit: true,
+        events: {
+            url: '/getPostsDates.json',
+            type: 'GET',
+            error: function(){
+                alert("There was an error getting the event dates");
+            },
+            color: '#37474f',
+            textColor: 'white'
+        }
     })
 
     //toasts

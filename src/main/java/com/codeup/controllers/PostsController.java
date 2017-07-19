@@ -1,7 +1,9 @@
 package com.codeup.controllers;
 
+import com.codeup.models.Event;
 import com.codeup.models.Post;
 import com.codeup.models.Tag;
+import com.codeup.projections.PostCreateDateProjection;
 import com.codeup.repositories.Posts;
 import com.codeup.repositories.Tags;
 import com.codeup.services.UserSvc;
@@ -22,6 +24,8 @@ import javax.validation.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -188,6 +192,26 @@ public class PostsController {
         String res1 = postsRepo.inOnlyTest("Fer");
 //        System.out.println(postsRepo.inOnlyTest("Fer"));
         return "Executed " + res1;
+    }
+
+
+    @GetMapping("/getPostsDates.json")
+    @ResponseBody
+    public List<Event> getPostsDates(){
+        List<Event> events = new ArrayList<>();
+        ArrayList<String> dateStringList = new ArrayList<String>();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        Iterable<Post> posts = postsRepo.findAll();
+
+        for (Post post : posts) {
+            Event obj = new Event();
+            obj.setStart(simpleDateFormat.format(post.getCreateDate()));
+            obj.setTitle(post.getTitle());
+            events.add(obj);
+        }
+
+        return events;
     }
 
 }

@@ -72,7 +72,7 @@ public class Post {
 
     private String inOnlyTest;
 
-    public String mix;
+    public String mix = null;
 
     public Post(Long id, String title, String body) {
         this.id = id;
