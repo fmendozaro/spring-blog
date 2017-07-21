@@ -7,3 +7,5 @@ spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
 spring.jpa.show-sql=true
 file-upload-path=/Users/Fer/IdeaProjects/Spring-Blog/src/main/resources/static/uploads/
 spring.http.multipart.max-file-size=20MB
+linkedin-id=0
+linkeding-secret=0
