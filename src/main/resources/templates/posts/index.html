@@ -7,24 +7,24 @@
 <body>
 <div th:replace="fragments/navbar :: navbar"></div>
 <div class="container">
-
+    <h3 class="title center">Blog posts</h3>
     <div class="row">
-        <div class="col l8 offset-l2">
-            <h1>Blog posts</h1>
-            <div th:if="${page}" th:each="post : ${page}">
-                <h3 th:text="${post.title}"></h3>
-
-                <img th:if="${post.imageUrl == null}" class="responsive-img" src="http://placehold.it/500x500" alt="placeholder" />
-
-                <img class="responsive-img" th:if="${post.imageUrl != null}" th:src="${'/uploads/' + post.imageUrl }" width="500px" height="500px;" />
-
-                <p class="content" th:text="${post.body}"></p>
-                <a class="waves-effect waves-light btn-large" th:href="@{ /posts/{id}(id=${post.id}) }">Show Post</a>
+        <div class="col s12 m12 l12 offset-l0">
+            <div class="card" th:if="${page}" th:each="post : ${page}">
+                <div class="card-image">
+                    <img th:if="${post.imageUrl == null}" class="responsive-img" src="http://placehold.it/500x500" alt="placeholder" />
+                    <img class="responsive-img" th:if="${post.imageUrl != null}" th:src="${'/uploads/' + post.imageUrl }" width="500px" height="500px;" />
+                    <span class="card-title blue-grey darken-3" th:text="${post.title}"></span>
+                    <a class="waves-effect waves-light btn-floating halfway-fab pulse" th:href="@{/posts/{id}(id=${post.id})}"><i class="material-icons">insert_drive_file</i></a>
+                </div>
+                <div class="card-content">
+                    <p class="content" th:text="${post.body}"></p>
+                </div>
             </div>
         </div>
+        <br/>
     </div>
     <!--Content-->
-
 </div>
 <!--container-->
 

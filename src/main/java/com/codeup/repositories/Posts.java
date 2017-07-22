@@ -31,6 +31,10 @@ public interface Posts extends CrudRepository<Post, Long> {
     @Query("select p.createDate from Post p")
     List<Date> createDates();
 
+    // Get the list of posts in reverse order.
+    @Query("select p from Post p order by p.id desc")
+    List<Post> postsInReverse();
+
 //    @Procedure(name = "in_and_out_test")
 //    String inAndOutTest(@Param("inParam1") String inParam1);
 

@@ -34,8 +34,9 @@
         <div class="input-field">
             <select multiple="multiple" name="tags" id="tags">
                 <option value="" disabled="disabled" selected="selected">Choose your option</option>
-                <option th:if="${showEdit}" th:each="tag : ${post.tags}" th:text="${tag.name}" th:value="${tag.id}" th:selected="${tag.id != 0}" />
-                <!--<option th:if="${showEdit}" th:each="tag : ${post.tags}" th:text="${tag.name}" th:value="${tag.id}"/>-->
+                <option th:if="${showEdit == true}" th:each="tag : ${post.tags}" th:text="${tag.name}" th:value="${tag.id}" th:selected="${tag.id != 0}" />
+
+                <option th:if="${showEdit == false}" th:each="tag : ${tags}" th:text="${tag.name}" th:value="${tag.id}"/>
             </select>
             <label for="tags">Tags</label>
         </div>

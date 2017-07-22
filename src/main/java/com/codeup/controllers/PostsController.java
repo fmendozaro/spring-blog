@@ -3,30 +3,24 @@ package com.codeup.controllers;
 import com.codeup.models.Event;
 import com.codeup.models.Post;
 import com.codeup.models.Tag;
-import com.codeup.projections.PostCreateDateProjection;
 import com.codeup.repositories.Posts;
 import com.codeup.repositories.Tags;
 import com.codeup.services.UserSvc;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.*;
+import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -47,9 +41,9 @@ public class PostsController {
     @Autowired
     Tags tagsRepo;
 
-     @GetMapping("/posts")
+    @GetMapping("/posts")
     public String getPosts(Model m){
-        m.addAttribute("page", postsRepo.findAll() );
+        m.addAttribute("page", postsRepo.postsInReverse() );
         return "posts/index";
     }
 
@@ -199,7 +193,6 @@ public class PostsController {
     @ResponseBody
     public List<Event> getPostsDates(){
         List<Event> events = new ArrayList<>();
-        ArrayList<String> dateStringList = new ArrayList<String>();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         Iterable<Post> posts = postsRepo.findAll();
