@@ -2,7 +2,6 @@ package com.codeup.repositories;
 
 import com.codeup.models.Post;
 import com.codeup.models.User;
-import com.codeup.projections.PostCreateDateProjection;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.CrudRepository;
@@ -34,8 +33,5 @@ public interface Posts extends CrudRepository<Post, Long> {
     // Get the list of posts in reverse order.
     @Query("select p from Post p order by p.id desc")
     List<Post> postsInReverse();
-
-//    @Procedure(name = "in_and_out_test")
-//    String inAndOutTest(@Param("inParam1") String inParam1);
 
 }

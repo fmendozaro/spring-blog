@@ -16,20 +16,6 @@ import java.util.List;
 
 @Entity
 @Table(name="posts")
-@NamedStoredProcedureQueries({
-        @NamedStoredProcedureQuery(name = "in_only_test",
-                procedureName = "in_only_test",
-                parameters = {
-                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "inParam1", type = String.class)
-                })
-//        @NamedStoredProcedureQuery(name = "in_and_out_test",
-//                procedureName = "test_pkg.in_and_out_test",
-//                parameters = {
-//                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "inParam1", type = String.class),
-//                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "outParam1", type = String.class)
-//
-//                })
-}) // Store procedure test
 public class Post {
 
     @Id
