@@ -24,4 +24,8 @@ public class UserSvc {
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
+    public boolean isOwner(User postUser){
+        return (postUser.getUsername().equals(loggedInUser().getUsername()));
+    }
+
 }
