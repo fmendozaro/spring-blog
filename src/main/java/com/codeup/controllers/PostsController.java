@@ -49,7 +49,9 @@ public class PostsController {
 
     @GetMapping("posts/{id}")
     public String show(@PathVariable Long id, Model m){
-        m.addAttribute("post", postsRepo.findOne(id));
+        Post post = postsRepo.findOne(id);
+        m.addAttribute("isOwner", usersSvc.isOwner(post.getUser()));
+        m.addAttribute("post", post);
         return "posts/show";
     }
 
@@ -100,6 +102,9 @@ public class PostsController {
     @GetMapping("posts/{id}/edit")
     public String showEdit(@PathVariable Long id, Model m){
         Post post = postsRepo.findOne(id);
+        if(!usersSvc.isOwner(post.getUser())){
+            return "redirect:/posts/" + id;
+        }
         m.addAttribute("post", post);
         return "posts/edit";
     }

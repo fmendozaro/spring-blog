@@ -11,12 +11,14 @@
         <div>
             <form class="right" th:method="POST" th:action="@{/posts/delete}">
                 <input type="hidden" name="id" th:value="${post.id}" />
-                <a class="btn btn-floating" th:href="@{ /posts/{id}/edit(id=${post.id}) }">
-                    <i class="material-icons">edit</i>
-                </a>
-                <button class="btn btn-floating deep-orange darken-4">
-                    <i class="material-icons">delete</i>
-                </button>
+                <span th:if="${isOwner}">
+                    <a class="btn btn-floating" th:href="@{ /posts/{id}/edit(id=${post.id}) }">
+                        <i class="material-icons">edit</i>
+                    </a>
+                    <button class="btn btn-floating deep-orange darken-4">
+                        <i class="material-icons">delete</i>
+                    </button>
+                </span>
             </form>
             <h3 th:text="${post.title}"></h3>
             <br/>
