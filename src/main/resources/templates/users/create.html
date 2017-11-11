@@ -12,15 +12,15 @@
             <form th:action="@{/users/create}" th:method="POST" th:object="${user}">
                 <label for="username">Username</label>
                 <input class="form-control" th:field="*{username}" />
-                <p class="alert alert-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+                <p class="card-panel  red darken-1" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
 
                 <label for="email">Email</label>
                 <input class="form-control" th:field="*{email}" />
-                <p class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+                <p class="card-panel  red darken-1" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
 
                 <label for="password">Password</label>
                 <input type="password" class="form-control" th:field="*{password}" />
-                <p class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+                <p class="card-panel  red darken-1" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
 
                 <input class="btn" type="submit" />
             </form>
