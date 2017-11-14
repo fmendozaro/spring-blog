@@ -59,7 +59,7 @@ public class UserController {
     public String showUser(@PathVariable Long id, Model viewModel){
         User user = usersDao.findById(id);
         viewModel.addAttribute("user", user);
-        viewModel.addAttribute("showEditControls", checkEditAuth(user));
+        viewModel.addAttribute("showEditControls", userSvc.canEditProfile(user));
         return "users/show";
     }
 
@@ -72,14 +72,8 @@ public class UserController {
     public String editUser(@PathVariable Long id, Model viewModel){
         User user = usersDao.findOne(id);
         viewModel.addAttribute("user", user);
-        viewModel.addAttribute("showEditControls", checkEditAuth(user));
+        viewModel.addAttribute("showEditControls", userSvc.canEditProfile(user));
         return "users/edit";
     }
-
-    // Edit controls are being showed up if the user is logged in and it's the same user viewing the file
-    public Boolean checkEditAuth(User user){
-        return userSvc.isLoggedIn() && (user.getId() == userSvc.loggedInUser().getId());
-    }
-
 
 }
