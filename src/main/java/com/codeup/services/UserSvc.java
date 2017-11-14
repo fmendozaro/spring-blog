@@ -24,8 +24,15 @@ public class UserSvc {
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
+    // Checks if the user is the owner of the post
     public boolean isOwner(User postUser){
         return (postUser.getUsername().equals(loggedInUser().getUsername()));
+    }
+
+
+    // Edit controls are being showed up if the user is logged in and it's the same user viewing the file
+    public boolean canEditProfile(User profileUser){
+        return isLoggedIn() && (profileUser.getId() == loggedInUser().getId());
     }
 
 }
