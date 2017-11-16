@@ -16,7 +16,7 @@
                   <span sec:authorize="isAuthenticated()">
                  <li>
                      <a th:href="@{/users/profile}" class="waves-effect waves-light btn-link">
-                         <span class="navbar-text"><span sec:authentication="name" />'s Profile</span>
+                         Welcome <span class="navbar-text" sec:authentication="name" />!
                      </a>
                  </li>
                  <li>
