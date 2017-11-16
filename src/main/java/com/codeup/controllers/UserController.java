@@ -7,8 +7,8 @@ package com.codeup.controllers;
 import com.codeup.models.User;
 import com.codeup.models.UserRole;
 import com.codeup.repositories.UserRoles;
-import com.codeup.repositories.Users;
-import com.codeup.services.UserSvc;
+import com.codeup.repositories.UsersRepository;
+import com.codeup.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -22,7 +22,7 @@ import javax.validation.Valid;
 public class UserController {
 
     @Autowired
-    Users usersDao;
+    UsersRepository usersRepositoryDao;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -31,7 +31,7 @@ public class UserController {
     UserRoles userRoles;
 
     @Autowired
-    UserSvc userSvc;
+    UserService usersService;
 
     @PostMapping("users/create")
     public String saveUser(@Valid User user, Errors validation, Model m){
@@ -44,36 +44,61 @@ public class UserController {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        User newUser = usersDao.save(user);
+        User newUser = usersRepositoryDao.save(user);
 
         UserRole ur = new UserRole();
         ur.setRole("ROLE_USER");
         ur.setUserId(newUser.getId());
         userRoles.save(ur);
 
+        // Programmatic login after registering a user
+        usersService.authenticate(user);
+
         m.addAttribute("user", user);
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @GetMapping("users/{id}")
     public String showUser(@PathVariable Long id, Model viewModel){
-        User user = usersDao.findById(id);
+        User user = usersRepositoryDao.findById(id);
         viewModel.addAttribute("user", user);
-        viewModel.addAttribute("showEditControls", userSvc.canEditProfile(user));
+        viewModel.addAttribute("showEditControls", usersService.canEditProfile(user));
         return "users/show";
     }
 
     @GetMapping("users/profile")
     public String showProfile(){
-        return "redirect:/users/" + userSvc.loggedInUser().getId();
+        return "redirect:/users/" + usersService.loggedInUser().getId();
     }
 
     @GetMapping("users/{id}/edit")
-    public String editUser(@PathVariable Long id, Model viewModel){
-        User user = usersDao.findOne(id);
+    public String showEditForm(@PathVariable Long id, Model viewModel){
+        User user = usersRepositoryDao.findOne(id);
         viewModel.addAttribute("user", user);
-        viewModel.addAttribute("showEditControls", userSvc.canEditProfile(user));
+        viewModel.addAttribute("showEditControls", usersService.canEditProfile(user));
         return "users/edit";
     }
+
+    @PostMapping("users/{id}/edit")
+    public String editUser(@PathVariable Long id, @Valid User editedUser, Errors validation, Model m){
+
+        editedUser.setId(id);
+
+        if (validation.hasErrors()) {
+            m.addAttribute("errors", validation);
+            m.addAttribute("user", editedUser);
+            m.addAttribute("showEditControls", checkEditAuth(editedUser));
+            return "users/edit";
+        }
+        editedUser.setPassword(passwordEncoder.encode(editedUser.getPassword()));
+        usersRepositoryDao.save(editedUser);
+        return "redirect:/users/"+id;
+    }
+
+    // Edit controls are being showed up if the user is logged in and it's the same user viewing the file
+    public Boolean checkEditAuth(User user){
+        return usersService.isLoggedIn() && (user.getId() == usersService.loggedInUser().getId());
+    }
+
 
 }

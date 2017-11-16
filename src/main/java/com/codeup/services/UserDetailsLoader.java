@@ -2,7 +2,7 @@ package com.codeup.services;
 
 import com.codeup.repositories.UserRoles;
 import com.codeup.models.User;
-import com.codeup.repositories.Users;
+import com.codeup.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,18 +13,18 @@ import java.util.List;
 
 @Service("customUserDetailsService")
 public class UserDetailsLoader implements UserDetailsService {
-    private final Users users;
+    private final UsersRepository usersRepository;
     private final UserRoles roles;
 
     @Autowired
-    public UserDetailsLoader(Users users, UserRoles roles) {
-        this.users = users;
+    public UserDetailsLoader(UsersRepository usersRepository, UserRoles roles) {
+        this.usersRepository = usersRepository;
         this.roles = roles;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = users.findByUsername(username);
+        User user = usersRepository.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("No user found for " + username);
         }

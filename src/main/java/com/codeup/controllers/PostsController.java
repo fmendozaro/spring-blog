@@ -5,7 +5,7 @@ import com.codeup.models.Post;
 import com.codeup.models.Tag;
 import com.codeup.repositories.Posts;
 import com.codeup.repositories.Tags;
-import com.codeup.services.UserSvc;
+import com.codeup.services.UserService;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,7 +36,7 @@ public class PostsController {
     Posts postsRepo;
 
     @Autowired
-    UserSvc usersSvc;
+    UserService usersSvc;
 
     @Autowired
     Tags tagsRepo;
