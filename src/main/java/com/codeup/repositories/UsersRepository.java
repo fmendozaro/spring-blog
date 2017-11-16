@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  * Created by Fer on 1/10/17.
  */
 @Repository
-public interface Users extends CrudRepository<User, Long> {
+public interface UsersRepository extends CrudRepository<User, Long> {
 
     User findByUsername(String username);
     User findById(Long id);
