@@ -22,7 +22,7 @@ import javax.validation.Valid;
 public class UserController {
 
     @Autowired
-    UsersRepository usersRepositoryDao;
+    UsersRepository usersDao;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -36,6 +36,23 @@ public class UserController {
     @PostMapping("users/create")
     public String saveUser(@Valid User user, Errors validation, Model m){
 
+        String username = user.getUsername();
+        User existingUsername = usersDao.findByUsername(username);
+        User existingEmail = usersDao.findByEmail(user.getEmail());
+
+
+        if(existingUsername != null){
+
+            validation.rejectValue("username", "user.username", "Duplicated username " + username);
+
+        }
+
+        if(existingEmail != null){
+
+            validation.rejectValue("email", "user.email", "Duplicated email " + user.getEmail());
+
+        }
+
         if (validation.hasErrors()) {
             m.addAttribute("errors", validation);
             m.addAttribute("user", user);
@@ -44,7 +61,9 @@ public class UserController {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        User newUser = usersRepositoryDao.save(user);
+        // Custom validation if the username is taken
+
+        User newUser = usersDao.save(user);
 
         UserRole ur = new UserRole();
         ur.setRole("ROLE_USER");
@@ -56,11 +75,12 @@ public class UserController {
 
         m.addAttribute("user", user);
         return "redirect:/";
+
     }
 
     @GetMapping("users/{id}")
     public String showUser(@PathVariable Long id, Model viewModel){
-        User user = usersRepositoryDao.findById(id);
+        User user = usersDao.findById(id);
         viewModel.addAttribute("user", user);
         viewModel.addAttribute("showEditControls", usersService.canEditProfile(user));
         return "users/show";
@@ -73,7 +93,7 @@ public class UserController {
 
     @GetMapping("users/{id}/edit")
     public String showEditForm(@PathVariable Long id, Model viewModel){
-        User user = usersRepositoryDao.findOne(id);
+        User user = usersDao.findOne(id);
         viewModel.addAttribute("user", user);
         viewModel.addAttribute("showEditControls", usersService.canEditProfile(user));
         return "users/edit";
@@ -91,7 +111,7 @@ public class UserController {
             return "users/edit";
         }
         editedUser.setPassword(passwordEncoder.encode(editedUser.getPassword()));
-        usersRepositoryDao.save(editedUser);
+        usersDao.save(editedUser);
         return "redirect:/users/"+id;
     }
 
