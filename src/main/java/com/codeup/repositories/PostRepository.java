@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Fer on 1/10/17.
  */
 @Repository
-public interface Posts extends CrudRepository<Post, Long> {
+public interface PostRepository extends CrudRepository<Post, Long> {
 
     Post findByUser(User user);
     List<Post> findByBodyIsLikeOrTitleIsLike(String term, String term2);
