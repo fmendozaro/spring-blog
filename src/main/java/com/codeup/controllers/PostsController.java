@@ -3,7 +3,7 @@ package com.codeup.controllers;
 import com.codeup.models.Event;
 import com.codeup.models.Post;
 import com.codeup.models.Tag;
-import com.codeup.repositories.Posts;
+import com.codeup.repositories.PostRepository;
 import com.codeup.repositories.Tags;
 import com.codeup.services.UserService;
 import org.joda.time.LocalDate;
@@ -33,7 +33,7 @@ public class PostsController {
     private String uploadPath;
 
     @Autowired
-    Posts postsRepo;
+    PostRepository postRepositoryRepo;
 
     @Autowired
     UserService usersSvc;
@@ -43,13 +43,13 @@ public class PostsController {
 
     @GetMapping("/posts")
     public String getPosts(Model m){
-        m.addAttribute("page", postsRepo.postsInReverse() );
+        m.addAttribute("page", postRepositoryRepo.postsInReverse() );
         return "posts/index";
     }
 
     @GetMapping("posts/{id}")
     public String show(@PathVariable Long id, Model m){
-        Post post = postsRepo.findOne(id);
+        Post post = postRepositoryRepo.findOne(id);
         m.addAttribute("isOwner", usersSvc.isOwner(post.getUser()));
         m.addAttribute("post", post);
         return "posts/show";
@@ -94,14 +94,14 @@ public class PostsController {
 
         postCreated.setTags(tags);
         postCreated.setUser(usersSvc.loggedInUser());
-        postsRepo.save(postCreated);
+        postRepositoryRepo.save(postCreated);
 
         return "redirect:/posts";
     }
 
     @GetMapping("posts/{id}/edit")
     public String showEdit(@PathVariable Long id, Model m){
-        Post post = postsRepo.findOne(id);
+        Post post = postRepositoryRepo.findOne(id);
         if(!usersSvc.isOwner(post.getUser())){
             return "redirect:/posts/" + id;
         }
@@ -118,7 +118,7 @@ public class PostsController {
             return "posts/edit";
         }
 
-        Post postToBeUpdated = postsRepo.findOne(postEdited.getId());
+        Post postToBeUpdated = postRepositoryRepo.findOne(postEdited.getId());
 
         // Files handle
         if(!uploadedFile.getOriginalFilename().isEmpty()){
@@ -143,7 +143,7 @@ public class PostsController {
         postToBeUpdated.setTags(tags);
         postToBeUpdated.setTitle(postEdited.getTitle());
         postToBeUpdated.setBody(postEdited.getBody());
-        postsRepo.save(postToBeUpdated);
+        postRepositoryRepo.save(postToBeUpdated);
 
         return "redirect:/posts/"+postEdited.getId();
     }
@@ -155,7 +155,7 @@ public class PostsController {
         //Filtered Dates
         LocalDate today = new LocalDate().now();
         LocalDate toDate = today.plusDays(3);
-        List<Post> filteredPosts = postsRepo.findByCreateDateBetween(today.toDate(), toDate.toDate());
+        List<Post> filteredPosts = postRepositoryRepo.findByCreateDateBetween(today.toDate(), toDate.toDate());
 
         System.out.println("Today " + today.toDate().toString());
 
@@ -169,26 +169,26 @@ public class PostsController {
 
     @GetMapping(value = "/posts.json")
     public @ResponseBody Iterable<Post> viewAllPostsInJSONFormat() {
-        return postsRepo.findAll();
+        return postRepositoryRepo.findAll();
     }
 
     @PostMapping("/posts/delete")
     public String deletePost(@ModelAttribute Post post){
-        postsRepo.delete(postsRepo.findOne(post.getId()));
+        postRepositoryRepo.delete(postRepositoryRepo.findOne(post.getId()));
         return "redirect:/posts";
     }
 
     @PostMapping("/posts/search")
     public String search(@RequestParam(name = "term") String term, Model vModel){
         term = "%"+term+"%";
-        vModel.addAttribute("posts", postsRepo.findByBodyIsLikeOrTitleIsLike(term, term));
+        vModel.addAttribute("posts", postRepositoryRepo.findByBodyIsLikeOrTitleIsLike(term, term));
         return "posts/results";
     }
 
     @GetMapping("/storedp")
     @ResponseBody
     public String storedPTest(){
-        String res1 = postsRepo.inOnlyTest("Fer");
+        String res1 = postRepositoryRepo.inOnlyTest("Fer");
 //        System.out.println(postsRepo.inOnlyTest("Fer"));
         return "Executed " + res1;
     }
@@ -200,7 +200,7 @@ public class PostsController {
         List<Event> events = new ArrayList<>();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        Iterable<Post> posts = postsRepo.findAll();
+        Iterable<Post> posts = postRepositoryRepo.findAll();
 
         for (Post post : posts) {
             Event obj = new Event();
