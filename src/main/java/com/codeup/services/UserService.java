@@ -32,7 +32,12 @@ public class UserService {
 
     // Checks if the user is the owner of the post
     public boolean isOwner(User postUser){
-        return (postUser.getUsername().equals(loggedInUser().getUsername()));
+        if(isLoggedIn()){
+            return (postUser.getUsername().equals(loggedInUser().getUsername()));
+        }
+
+        return false;
+
     }
 
 
