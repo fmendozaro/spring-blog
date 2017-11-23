@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
  * Created by Fer on 2/27/17.
  */
 @Repository
-public interface Tags extends CrudRepository<Tag, Long>{
+public interface TagRepository extends CrudRepository<Tag, Long>{
 
 }

@@ -1,6 +1,8 @@
 package com.codeup.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.github.javafaker.ChuckNorris;
+import com.github.javafaker.Lorem;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.NotBlank;
@@ -48,7 +50,7 @@ public class Post {
     @JsonManagedReference
     private User user;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
             name="post_tags",
             joinColumns={@JoinColumn(name="post_id")},
@@ -56,18 +58,20 @@ public class Post {
     )
     private List<Tag> tags;
 
-    private String inOnlyTest;
-
-    public String mix = null;
-
     public Post(Long id, String title, String body) {
         this.id = id;
         this.title = title;
         this.body = body;
     }
 
-    public Post() {
+    public Post(String title, String body, List<Tag> tags, User user) {
+        this.title = title;
+        this.body = body;
+        this.tags = tags;
+        this.user = user;
+    }
 
+    public Post() {
     }
 
     public Long getId() {
@@ -139,11 +143,4 @@ public class Post {
         this.tags = tags;
     }
 
-    public String getMix() {
-        return this.mix;
-    }
-
-    public void setMix() {
-        this.mix = getTitle() + " made by: " + getUser().getUsername();
-    }
 }
