@@ -4,7 +4,7 @@ import com.codeup.models.Event;
 import com.codeup.models.Post;
 import com.codeup.models.Tag;
 import com.codeup.repositories.PostRepository;
-import com.codeup.repositories.Tags;
+import com.codeup.repositories.TagRepository;
 import com.codeup.services.UserService;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class PostsController {
     UserService usersSvc;
 
     @Autowired
-    Tags tagsRepo;
+    TagRepository tagRepositoryRepo;
 
     @GetMapping("/posts")
     public String getPosts(Model m){
@@ -58,17 +58,17 @@ public class PostsController {
     @GetMapping("posts/create")
     public String showCreate(Model m){
         m.addAttribute("post", new Post());
-        m.addAttribute("tags", tagsRepo.findAll());
+        m.addAttribute("tags", tagRepositoryRepo.findAll());
         return "posts/create";
     }
 
     @PostMapping("posts/create")
-    public String createPost(@Valid Post postCreated, Errors validation, Model m, @RequestParam(name = "file") MultipartFile uploadedFile, @RequestParam(name = "tags") List<Tag> tags){
+    public String createPost(@Valid Post postSubmitted, Errors validation, Model m, @RequestParam(name = "file") MultipartFile uploadedFile, @RequestParam(name = "tags") List<Tag> tags){
 
         if (validation.hasErrors()) {
             m.addAttribute("errors", validation);
             System.out.println(validation.getAllErrors());
-            m.addAttribute("post", postCreated);
+            m.addAttribute("post", postSubmitted);
             return "posts/create";
         }
 
@@ -89,12 +89,12 @@ public class PostsController {
             }
 
             //Save it in the DB
-            postCreated.setImageUrl(filename);
+            postSubmitted.setImageUrl(filename);
         }
 
-        postCreated.setTags(tags);
-        postCreated.setUser(usersSvc.loggedInUser());
-        postRepositoryRepo.save(postCreated);
+        postSubmitted.setTags(tags);
+        postSubmitted.setUser(usersSvc.loggedInUser());
+        postRepositoryRepo.save(postSubmitted);
 
         return "redirect:/posts";
     }

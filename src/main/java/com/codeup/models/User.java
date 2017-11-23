@@ -40,6 +40,12 @@ public class User {
     public User() {
     }
 
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
     // Copy constructor an alternative for clone
     public User(User user) {
         this.id = user.id;
