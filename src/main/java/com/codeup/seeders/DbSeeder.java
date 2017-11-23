@@ -3,8 +3,10 @@ package com.codeup.seeders;
 import com.codeup.models.Post;
 import com.codeup.models.Tag;
 import com.codeup.models.User;
+import com.codeup.models.UserRole;
 import com.codeup.repositories.PostRepository;
 import com.codeup.repositories.TagRepository;
+import com.codeup.repositories.UserRoles;
 import com.codeup.repositories.UsersRepository;
 import com.github.javafaker.Faker;
 import org.slf4j.Logger;
@@ -25,17 +27,19 @@ public class DbSeeder implements CommandLineRunner{
     private final PostRepository postDao;
     private final UsersRepository userDao;
     private final TagRepository tagDao;
+    private final UserRoles userRoles;
     private final Faker faker;
     private final PasswordEncoder passwordEncoder;
 
     @Value("${app.env}")
     private String environment;
 
-    public DbSeeder(PostRepository postDao, UsersRepository userDao, TagRepository tagDao, PasswordEncoder passwordEncoder){
+    public DbSeeder(PostRepository postDao, UsersRepository userDao, TagRepository tagDao, PasswordEncoder passwordEncoder, UserRoles userRoles){
         this.postDao = postDao;
         this.userDao = userDao;
         this.tagDao = tagDao;
         this.passwordEncoder = passwordEncoder;
+        this.userRoles = userRoles;
         this.faker = new Faker();
     }
 
@@ -64,6 +68,16 @@ public class DbSeeder implements CommandLineRunner{
         );
 
         userDao.save(users);
+
+
+
+        for (User user: users) {
+            UserRole ur = new UserRole();
+            ur.setRole("ROLE_USER");
+            ur.setUserId(user.getId());
+            userRoles.save(ur);
+        }
+
     }
 
     private void seedPosts(){
