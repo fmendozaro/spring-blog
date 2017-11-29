@@ -185,15 +185,6 @@ public class PostsController {
         return "posts/results";
     }
 
-    @GetMapping("/storedp")
-    @ResponseBody
-    public String storedPTest(){
-        String res1 = postRepositoryRepo.inOnlyTest("Fer");
-//        System.out.println(postsRepo.inOnlyTest("Fer"));
-        return "Executed " + res1;
-    }
-
-
     @GetMapping("/getPostsDates.json")
     @ResponseBody
     public List<Event> getPostsDates(){
