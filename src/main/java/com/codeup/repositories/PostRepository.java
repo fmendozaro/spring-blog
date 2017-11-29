@@ -23,10 +23,6 @@ public interface PostRepository extends CrudRepository<Post, Long> {
     //Find posts between today and 3 days ahead
     List<Post> findByCreateDateBetween(Date from, Date to);
 
-    // Store procedures test
-    @Procedure(name = "in_only_test")
-    String inOnlyTest(@Param("inParam1") String inParam1);
-
     @Query("select p.createDate from Post p")
     List<Date> createDates();
 
