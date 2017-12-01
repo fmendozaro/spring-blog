@@ -1,7 +1,7 @@
 /**
  * Created by Fer on 1/9/17.
  */
-$(document).ready(function(){
+// $(document).ready(function(){
 
     $(".dropdown-button").dropdown();
     $('.materialboxed').materialbox();
@@ -58,21 +58,12 @@ $(document).ready(function(){
     // });
 
 
-    function testJson(){
+    function getPostsJSON(){
         $.ajax({
             url: "/posts.json",
             method: "GET"
         }).done(function(posts){
-
-            console.log(posts);
-            html = "";
-
-            for (i = 0; i < posts.length; i++) {
-                html += "<div><h1>" + posts[i].title + "</h1><p>" + posts[i].body + "</p></div>";
-            }
-
-            // console.log(html);
-
+            return posts;
         });
     }
 
@@ -100,4 +91,17 @@ $(document).ready(function(){
         });
     }
 
-});
+
+    function recreatePosts(){
+        var posts = getPostsJSON();
+
+        html = "";
+
+        for (i = 0; i < posts.length; i++) {
+            html += "<div><h1>" + posts[i].title + "</h1><p>" + posts[i].body + "</p></div>";
+        }
+
+        console.log(html);
+    }
+
+// });
