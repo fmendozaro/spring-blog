@@ -1,0 +1,23 @@
+{
+  "name": "spring-blog",
+  "version": "1.0.0",
+  "description": "A simple blog Java example project made with Spring boot / Hibernate for Codeup's students.",
+  "main": "index.js",
+  "dependencies": {
+    "fullcalendar": "^3.7.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fmendozaro/spring-blog.git"
+  },
+  "author": "Fernando Mendoza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fmendozaro/spring-blog/issues"
+  },
+  "homepage": "https://github.com/fmendozaro/spring-blog#readme"
+}
