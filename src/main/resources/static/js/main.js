@@ -3,12 +3,20 @@
  */
 // $(document).ready(function(){
 
+
+
     $(".dropdown-button").dropdown();
     $('.materialboxed').materialbox();
     $(".sideNav-btn").sideNav();
     $(".button-collapse").sideNav();
     $('.parallax').parallax();
     $('select').material_select();
+
+    // Event listeners
+    $("#create-btn").click(function(e){
+        console.log("create-btn clicked");
+        sendMsg("post created");
+    });
 
     $('#calendar').fullCalendar({
         header: {
@@ -57,14 +65,18 @@
     //     secondaryPlaceholder: '+Tag',
     // });
 
-
     function getPostsJSON(){
+        var posts = null;
+
         $.ajax({
             url: "/posts.json",
-            method: "GET"
-        }).done(function(posts){
-            return posts;
+            method: "GET",
+            async: false
+        }).done(function(data){
+            posts = data;
         });
+
+        return posts;
     }
 
     function getTagsJSON(){
@@ -91,17 +103,10 @@
         });
     }
 
-
     function recreatePosts(){
-        var posts = getPostsJSON();
-
-        html = "";
-
-        for (i = 0; i < posts.length; i++) {
-            html += "<div><h1>" + posts[i].title + "</h1><p>" + posts[i].body + "</p></div>";
-        }
-
-        console.log(html);
+        $pContainer = $("#postsContainer");
+        $pContainer.empty();
+        $pContainer.load("/posts/feed")
     }
 
 // });
