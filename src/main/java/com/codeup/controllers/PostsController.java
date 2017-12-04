@@ -47,6 +47,12 @@ public class PostsController {
         return "posts/index";
     }
 
+    @GetMapping("/posts/feed")
+    public String getPostsFeed(Model m){
+        m.addAttribute("page", postRepositoryRepo.postsInReverse() );
+        return "fragments/posts-feed :: feed";
+    }
+
     @GetMapping("posts/{id}")
     public String show(@PathVariable Long id, Model m){
         Post post = postRepositoryRepo.findOne(id);
