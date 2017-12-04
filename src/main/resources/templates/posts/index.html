@@ -6,18 +6,8 @@
 <div class="container">
     <h3 class="title center">Blog posts</h3>
     <div class="row">
-        <div class="col s10 offset-s1">
-            <div class="card" th:if="${page}" th:each="post : ${page}">
-                <div class="card-image">
-                    <img th:if="${post.imageUrl == null}" class="responsive-img" src="http://placehold.it/300x300" alt="placeholder" />
-                    <img class="responsive-img" th:if="${post.imageUrl != null}" th:src="${'file://' +@environment.getProperty('file-upload-path') + post.imageUrl }" width="300px" height="300px;" />
-                    <span class="card-title blue-grey darken-3" th:text="${post.title}"></span>
-                    <a class="waves-effect waves-light btn-floating halfway-fab pulse" th:href="@{/posts/{id}(id=${post.id})}"><i class="material-icons">insert_drive_file</i></a>
-                </div>
-                <div class="card-content">
-                    <p class="content" th:text="${post.body}"></p>
-                </div>
-            </div>
+        <div id="postsContainer" class="col s10 offset-s1">
+            <div th:replace="fragments/posts-feed :: feed"></div>
         </div>
         <br/>
     </div>

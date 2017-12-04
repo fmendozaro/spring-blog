@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:fragment="feed">
+    <div class="card" th:if="${page}" th:each="post : ${page}">
+        <div class="card-image">
+            <img th:if="${post.imageUrl == null}" class="responsive-img" src="http://placehold.it/300x300" alt="placeholder" />
+            <img class="responsive-img" th:if="${post.imageUrl != null}" th:src="${'/uploads/' + post.imageUrl }" width="300px" height="300px;" />
+            <span class="card-title blue-grey darken-3" th:text="${post.title}"></span>
+            <a class="waves-effect waves-light btn-floating halfway-fab pulse" th:href="@{/posts/{id}(id=${post.id})}"><i class="material-icons">insert_drive_file</i></a>
+        </div>
+        <div class="card-content">
+            <p class="content" th:text="${post.body}"></p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
