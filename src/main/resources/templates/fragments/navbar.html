@@ -13,7 +13,7 @@
              <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 
              <ul id="nav-mobile" class="right hide-on-med-and-down">
-                  <span sec:authorize="isAuthenticated()">
+                 <span sec:authorize="isAuthenticated()">
                  <li>
                      <a th:href="@{/users/profile}" class="waves-effect waves-light btn-link">
                          Welcome <span class="navbar-text" sec:authentication="name" />!
@@ -36,17 +36,39 @@
                         <button id="logout" class="waves-effect waves-light navbar-text btn-flat white-text">Logout</button>
                      </form>
                  </li>
-             </span>
+                 </span>
 
                  <span sec:authorize="!isAuthenticated()">
                  <li><a class="waves-effect waves-light" th:href="@{/register}">Register</a></li>
                  <li><a class="waves-effect waves-light" th:href="@{/login}">Login</a></li>
-             </span>
+                </span>
              </ul>
              <ul class="side-nav" id="mobile-demo">
-                 <li><a href="sass.html">Sass</a></li>
-                 <li><a href="badges.html">Components</a></li>
-                 <li><a href="collapsible.html">JavaScript</a></li>
+                 <span sec:authorize="isAuthenticated()">
+                 <li>
+                     <a th:href="@{/users/profile}" class="waves-effect waves-light btn-link">
+                         Welcome <span class="navbar-text" sec:authentication="name" />!
+                     </a>
+                 </li>
+                 <li>
+                     <a class="waves-effect waves-light" th:href="@{/posts/create}">Create a post</a>
+                 </li>
+                 </span>
+                 <li><a class="waves-effect waves-light" th:href="@{/posts}">All Posts</a></li>
+                 <li><a class="waves-effect waves-light" th:href="@{/postsCalendar}">Calendar</a></li>
+                 <span sec:authorize="isAuthenticated()">
+                 <li>
+                     <form th:action="@{/logout}" th:method="POST">
+                        <button id="logout" class="waves-effect waves-light navbar-text btn-flat white-text">Logout</button>
+                     </form>
+                 </li>
+                 </span>
+
+                 <span sec:authorize="!isAuthenticated()">
+                 <li><a class="waves-effect waves-light" th:href="@{/register}">Register</a></li>
+                 <li><a class="waves-effect waves-light" th:href="@{/login}">Login</a></li>
+                </span>
+
              </ul>
          </div>
  </nav>
