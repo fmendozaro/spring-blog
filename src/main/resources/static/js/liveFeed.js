@@ -16,8 +16,8 @@
         });
     }
 
-    function sendMsg(name) {
-        console.log("sendMsg received " + name);
+    function refreshFeed(name) {
+        console.log("refreshFeed received " + name);
         stompClient.send("/app/hello", {}, JSON.stringify({'name': name}));
     }
 
