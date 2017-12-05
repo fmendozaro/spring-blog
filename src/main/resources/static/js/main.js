@@ -14,8 +14,9 @@
 
     // Event listeners
     $("#create-btn").click(function(e){
-        console.log("create-btn clicked");
-        sendMsg("post created");
+        e.preventDefault();
+        refreshFeed("New post created");
+        $(this).parent().parent("form").submit();
     });
 
     $('#calendar').fullCalendar({
@@ -36,7 +37,7 @@
             color: '#37474f',
             textColor: 'white'
         }
-    })
+    });
 
     //toasts
     // var toastError = $("<span class='error'>I am toast content</span>");
