@@ -12,3 +12,4 @@ A simple blog Java example project made with Spring boot / Hibernate for Codeup'
 - FullCalendar.js
 - Moments.js
 - jQuery
+- WebSockets

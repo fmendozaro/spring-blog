@@ -5,9 +5,9 @@
 
 <div th:replace="fragments/navbar :: navbar"></div>
 
-<div class="container error">
+<div class="container-fluid error">
     <div class="row">
-        <div class="col l8 offset-l2 center">
+        <div class="col l12 center">
             <th:block th:switch="${error}">
                 <h1 th:text="${error}"></h1>
                 <div th:case="'Not Found'">
