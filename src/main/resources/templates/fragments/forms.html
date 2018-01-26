@@ -52,7 +52,7 @@
         </div>
 
         <div class="input-field">
-            <input th:if="${!showEdit}" id="create-btn" class="btn submit waves-effect waves-light" type="submit" />
+            <button th:if="${!showEdit}" id="create-btn" class="btn submit waves-effect waves-light" >Create</button>
 
             <input th:if="${showEdit}" class="btn" type="submit" th:value="Save" />
             <input th:if="${showEdit}" class="btn red" type="submit" th:value="Delete" />

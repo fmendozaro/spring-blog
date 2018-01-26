@@ -24,3 +24,7 @@ nbdist/
 .nb-gradle/
 /src/main/resources/static/js/googleCalendar.js
 /src/main/resources/application.properties
+
+### node ###
+package-lock.json
+node_modules
