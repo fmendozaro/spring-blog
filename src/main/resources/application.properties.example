@@ -10,3 +10,4 @@ spring.http.multipart.max-file-size=20MB
 linkedin-id=0
 linkeding-secret=0
 app.env=dev
+server.port = 8091
