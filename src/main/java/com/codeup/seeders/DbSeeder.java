@@ -94,7 +94,7 @@ public class DbSeeder implements CommandLineRunner{
             rnd = (long) 1 + (int)(Math.random() * ((users.size() - 1) + 1));
 
             // Generates a random user
-            User randomUser = userDao.findById(rnd);
+            User randomUser = userDao.findOne(rnd);
 
             rnd = (long) 1 + (int)(Math.random() * ((allTags.size() - 1) + 1));
 

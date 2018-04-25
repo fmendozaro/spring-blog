@@ -80,7 +80,7 @@ public class UserController {
 
     @GetMapping("users/{id}")
     public String showUser(@PathVariable Long id, Model viewModel){
-        User user = usersDao.findById(id);
+        User user = usersDao.findOne(id);
         viewModel.addAttribute("user", user);
         viewModel.addAttribute("showEditControls", usersService.canEditProfile(user));
         return "users/show";

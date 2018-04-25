@@ -79,6 +79,16 @@ public class PostsController {
         }
 
         // Files handle
+        uploadFileHandler(postSubmitted, m, uploadedFile);
+
+        postSubmitted.setTags(tags);
+        postSubmitted.setUser(usersSvc.loggedInUser());
+        postRepositoryRepo.save(postSubmitted);
+
+        return "redirect:/posts";
+    }
+
+    private void uploadFileHandler(@Valid Post postSubmitted, Model m, @RequestParam(name = "file") MultipartFile uploadedFile) {
         if(!uploadedFile.getOriginalFilename().isEmpty()){
 
             String filename = uploadedFile.getOriginalFilename().replace(" ", "_").toLowerCase();
@@ -97,12 +107,6 @@ public class PostsController {
             //Save it in the DB
             postSubmitted.setImageUrl(filename);
         }
-
-        postSubmitted.setTags(tags);
-        postSubmitted.setUser(usersSvc.loggedInUser());
-        postRepositoryRepo.save(postSubmitted);
-
-        return "redirect:/posts";
     }
 
     @GetMapping("posts/{id}/edit")
@@ -127,24 +131,7 @@ public class PostsController {
         Post postToBeUpdated = postRepositoryRepo.findOne(postEdited.getId());
 
         // Files handle
-        if(!uploadedFile.getOriginalFilename().isEmpty()){
-
-            String filename = uploadedFile.getOriginalFilename().replace(" ", "_").toLowerCase();
-            String filepath = Paths.get(uploadPath, filename).toString();
-            File destinationFile = new File(filepath);
-
-            // Try to save it in the server
-            try {
-                uploadedFile.transferTo(destinationFile);
-                m.addAttribute("message", "File successfully uploaded!");
-            } catch (IOException e) {
-                e.printStackTrace();
-                m.addAttribute("message", "Oops! Something went wrong! " + e);
-            }
-
-            //Save it in the DB
-            postToBeUpdated.setImageUrl(filename);
-        }
+        uploadFileHandler(postToBeUpdated, m, uploadedFile);
 
         postToBeUpdated.setTags(tags);
         postToBeUpdated.setTitle(postEdited.getTitle());

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 public interface UsersRepository extends CrudRepository<User, Long> {
 
     User findByUsername(String username);
-    User findById(Long id);
     User findByEmail(String email);
 
     //Same function of above but with HQL
