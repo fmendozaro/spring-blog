@@ -1,6 +1,7 @@
 package com.codeup.services;
 
 import com.codeup.models.User;
+import com.codeup.repositories.UsersRepository;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,17 +18,28 @@ import java.util.Collections;
 @Service("usersSvc")
 public class UserService {
 
+    UsersRepository usersRepository;
+
+    public UserService(UsersRepository usersRepository) {
+        this.usersRepository = usersRepository;
+    }
+
     public boolean isLoggedIn() {
         boolean isAnonymousUser =
                 SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken;
         return ! isAnonymousUser;
     }
 
+    // Returns a user obj directly from the DB
     public User loggedInUser() {
+
         if (! isLoggedIn()) {
             return null;
         }
-        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User sessionUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        return usersRepository.findOne(sessionUser.getId());
     }
 
     // Checks if the user is the owner of the post
