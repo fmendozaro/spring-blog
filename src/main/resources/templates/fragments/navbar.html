@@ -1,97 +1,110 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head></head>
 <body>
 
- <nav th:fragment="navbar" class="nav-extended blue-grey darken-3">
+<th:block th:fragment="navbar">
 
-         <div class="nav-wrapper">
+        <nav class="nav-extended blue-grey darken-3">
 
-             <a href="/" class="brand-logo">
-                 <img class="logo" src="/imgs/blog.png" />Fer's Blog
-             </a>
-             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+             <div class="nav-wrapper">
 
-             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                 <span sec:authorize="isAuthenticated()">
-                 <li>
-                     <a th:href="@{/users/profile}" class="waves-effect waves-light btn-link">
-                         Welcome <span class="navbar-text" sec:authentication="name" />!
-                     </a>
-                 </li>
-                 <li>
-                     <a class="waves-effect waves-light" th:href="@{/posts/create}">Create a post</a>
-                 </li>
-             </span>
-                 <li><a class="waves-effect waves-light" th:href="@{/posts}">All Posts</a></li>
-                 <li><a class="waves-effect waves-light" th:href="@{/postsCalendar}">Calendar</a></li>
-                 <li>
-                     <a href="#" data-activates="slide-out" class="waves-effect waves-light sideNav-btn">
-                         <i class="material-icons">search</i>
-                     </a>
-                 </li>
-                 <span sec:authorize="isAuthenticated()">
-                 <li>
-                     <form th:action="@{/logout}" th:method="POST">
-                        <button id="logout" class="waves-effect waves-light navbar-text btn-flat white-text">Logout</button>
-                     </form>
-                 </li>
+                 <a href="/" class="brand-logo">
+                     <img class="logo" src="/imgs/blog.png" />Fer's Blog
+                 </a>
+                 <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+
+                 <ul id="nav-mobile" class="right hide-on-med-and-down">
+                     <span sec:authorize="isAuthenticated()">
+                     <li>
+                         <a th:href="@{/users/profile}" class="waves-effect waves-light btn-link">
+                             Welcome <span class="navbar-text" sec:authentication="name" />!
+                         </a>
+                     </li>
+                     <li>
+                         <a class="waves-effect waves-light" th:href="@{/posts/create}">Create a post</a>
+                     </li>
                  </span>
+                     <li><a class="waves-effect waves-light" th:href="@{/posts}">All Posts</a></li>
+                     <li><a class="waves-effect waves-light" th:href="@{/postsCalendar}">Calendar</a></li>
+                     <li>
+                         <a href="#" data-activates="slide-out" class="waves-effect waves-light sideNav-btn">
+                             <i class="material-icons">search</i>
+                         </a>
+                     </li>
+                     <span sec:authorize="isAuthenticated()">
+                     <li>
+                         <form th:action="@{/logout}" th:method="POST">
+                            <button id="logout-mobile" class="waves-effect waves-light navbar-text btn-flat white-text">Logout</button>
+                         </form>
+                     </li>
+                     </span>
 
-                 <span sec:authorize="!isAuthenticated()">
-                 <li><a class="waves-effect waves-light" th:href="@{/register}">Register</a></li>
-                 <li><a class="waves-effect waves-light" th:href="@{/login}">Login</a></li>
-                </span>
-             </ul>
-             <ul class="side-nav" id="mobile-demo">
-                 <span sec:authorize="isAuthenticated()">
-                 <li>
-                     <a th:href="@{/users/profile}" class="waves-effect waves-light btn-link">
-                         Welcome <span class="navbar-text" sec:authentication="name" />!
-                     </a>
-                 </li>
-                 <li>
-                     <a class="waves-effect waves-light" th:href="@{/posts/create}">Create a post</a>
-                 </li>
-                 </span>
-                 <li><a class="waves-effect waves-light" th:href="@{/posts}">All Posts</a></li>
-                 <li><a class="waves-effect waves-light" th:href="@{/postsCalendar}">Calendar</a></li>
-                 <span sec:authorize="isAuthenticated()">
-                 <li>
-                     <form th:action="@{/logout}" th:method="POST">
-                        <button id="logout" class="waves-effect waves-light navbar-text btn-flat white-text">Logout</button>
-                     </form>
-                 </li>
-                 </span>
+                     <span sec:authorize="!isAuthenticated()">
+                     <li><a class="waves-effect waves-light" th:href="@{/register}">Register</a></li>
+                     <li><a class="waves-effect waves-light" th:href="@{/login}">Login</a></li>
+                    </span>
+                 </ul>
+                 <ul class="side-nav" id="mobile-demo">
+                     <span sec:authorize="isAuthenticated()">
+                     <li>
+                         <a th:href="@{/users/profile}" class="waves-effect waves-light btn-link">
+                             Welcome <span class="navbar-text" sec:authentication="name" />!
+                         </a>
+                     </li>
+                     <li>
+                         <a class="waves-effect waves-light" th:href="@{/posts/create}">Create a post</a>
+                     </li>
+                     </span>
+                     <li><a class="waves-effect waves-light" th:href="@{/posts}">All Posts</a></li>
+                     <li><a class="waves-effect waves-light" th:href="@{/postsCalendar}">Calendar</a></li>
+                     <span sec:authorize="isAuthenticated()">
+                     <li>
+                         <form th:action="@{/logout}" th:method="POST">
+                            <button id="logout" class="waves-effect waves-light navbar-text btn-flat white-text">Logout</button>
+                         </form>
+                     </li>
+                     </span>
 
-                 <span sec:authorize="!isAuthenticated()">
-                 <li><a class="waves-effect waves-light" th:href="@{/register}">Register</a></li>
-                 <li><a class="waves-effect waves-light" th:href="@{/login}">Login</a></li>
-                </span>
+                     <span sec:authorize="!isAuthenticated()">
+                     <li><a class="waves-effect waves-light" th:href="@{/register}">Register</a></li>
+                     <li><a class="waves-effect waves-light" th:href="@{/login}">Login</a></li>
+                    </span>
 
-             </ul>
-         </div>
- </nav>
-
-<!--Side nav-->
-
- <ul id="slide-out" class="side-nav">
-     <li>
-         <div class="user-view">
-             <div class="background">
-                 <img src="images/office.jpg" />
+                 </ul>
              </div>
-             <a href="#!user"><img class="circle" src="images/yuna.jpg" /></a>
-             <a href="#!name"><span class="white-text name">John Doe</span></a>
-             <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
-         </div>
-     </li>
-     <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-     <li><a href="#!">Second Link</a></li>
-     <li><div class="divider"></div></li>
-     <li><a class="subheader">Subheader</a></li>
-     <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
- </ul>
+     </nav>
+
+    <!--Side nav-->
+
+     <ul id="slide-out" class="side-nav">
+         <li>
+             <div class="user-view" sec:authorize="isAuthenticated()">
+                 <div class="background">
+                     <img src="/imgs/bg-nav.jpg" />
+                 </div>
+                 <a href="#!user"><img class="circle" src="https://avatars1.githubusercontent.com/u/13546596" /></a>
+                 <a href="#!name">
+                     <span class="white-text name" th:if="${#authentication.getPrincipal().username}" th:text="${#authentication.getPrincipal().username}"></span>
+                 </a>
+                 <a href="#!email">
+                     <span class="white-text email" th:text="${#authentication.getPrincipal().email}"></span>
+                 </a>
+             </div>
+             <div class="user-view" sec:authorize="!isAuthenticated()">
+                <p>You have to login to see this</p>
+             </div>
+         </li>
+         <li>
+             <div class="divider"></div>
+         </li>
+         <li>
+             <div th:include="fragments/forms :: searchForm"></div>
+         </li>
+     </ul>
+
+</th:block>
 
 </body>
 </html>

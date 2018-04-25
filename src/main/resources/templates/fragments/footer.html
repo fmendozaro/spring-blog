@@ -3,7 +3,7 @@
 <head></head>
 <body>
 
-    <div th:fragment="footer">
+    <th:block th:fragment="footer">
         <footer class="page-footer blue-grey darken-3">
             <div class="container">
                 <div class="row">
@@ -39,12 +39,12 @@
                 crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
         <script src="/lib/moment/min/moment.min.js"></script>
-        <script src="/lib/fullcalendar/dist/fullcalendar.js"></script>
+        <script src="/lib/fullcalendar/fullcalendar.js"></script>
         <script src="/webjars/sockjs-client/sockjs.min.js"></script>
         <script src="/webjars/stomp-websocket/stomp.min.js"></script>
         <script src="/js/liveFeed.js"></script>
         <script src="/js/main.js"></script>
 
-    </div>
+    </th:block>
 </body>
 </html>
