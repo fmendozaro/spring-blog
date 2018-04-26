@@ -14,8 +14,8 @@
         <div class="col l10 offset-l1">
             <div th:if="${posts}" th:each="post : ${posts}">
                 <h5 th:text="${post.title}"></h5>
-                <img class="responsive-img post-img" th:src="${post.imageUrl}" width="300px" height="300px;" />
-                <img class="responsive-img post-img" src="http://placehold.it/350x350" alt="placeholder" />
+                <img th:if="${post.imageUrl == null}" class="responsive-im post-img" src="http://placehold.it/300x300" alt="placeholder" />
+                <img class="responsive-img post-img" th:if="${post.imageUrl != null}" th:src="${'/uploads/' + post.imageUrl }" />
                 <p class="content" th:text="${post.body}"></p>
                 <a class="waves-effect waves-light btn-large" th:href="@{ /posts/{id}(id=${post.id}) }">Show Post</a>
             </div>
