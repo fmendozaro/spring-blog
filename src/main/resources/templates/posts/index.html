@@ -4,8 +4,8 @@
 <body>
 <div th:replace="fragments/navbar :: navbar"></div>
 <div class="container">
+    <h4 class="page-title">Blog posts</h4>
     <div class="row">
-        <h3 class="title center">Blog posts</h3>
         <div id="postsContainer" class="col s8 offset-s2">
             <div th:replace="fragments/posts-feed :: feed"></div>
         </div>
