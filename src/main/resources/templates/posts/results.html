@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
-<head th:replace="fragments/header :: header('Blog posts')">
+<head th:replace="fragments/header :: header('Search Results')">
 </head>
 
 <body>
@@ -9,14 +9,13 @@
 <div th:replace="fragments/navbar :: navbar"></div>
 
 <div class="container">
+    <h4 class="page-title">Search results</h4>
     <div class="row">
-        <div class="col l8 offset-l2">
-            <h1>Search results</h1>
-
+        <div class="col l10 offset-l1">
             <div th:if="${posts}" th:each="post : ${posts}">
-                <h3 th:text="${post.title}"></h3>
-                <!--<img class="responsive-img" th:src="${post.imageUrl}" width="300px" height="300px;" />-->
-                <img class="responsive-img" src="http://placehold.it/350x350" alt="placeholder" />
+                <h5 th:text="${post.title}"></h5>
+                <img class="responsive-img post-img" th:src="${post.imageUrl}" width="300px" height="300px;" />
+                <img class="responsive-img post-img" src="http://placehold.it/350x350" alt="placeholder" />
                 <p class="content" th:text="${post.body}"></p>
                 <a class="waves-effect waves-light btn-large" th:href="@{ /posts/{id}(id=${post.id}) }">Show Post</a>
             </div>

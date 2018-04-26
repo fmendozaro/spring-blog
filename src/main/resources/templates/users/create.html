@@ -7,20 +7,26 @@
 
 <div class="container">
     <div class="row">
-        <h1>Register</h1>
+        <h4 class="page-title">Register</h4>
         <div class="col l8 offset-l2">
-            <form th:action="@{/users/create}" th:method="POST" th:object="${user}">
-                <label for="username">Username</label>
-                <input class="form-control" th:field="*{username}" />
-                <p class="card-panel  red darken-1" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+            <form class="col s12" th:action="@{/users/create}" th:method="POST" th:object="${user}">
+                <div class="input-field col s12">
+                    <input type="text" class="validate" th:field="*{username}" />
+                    <label for="username">Username</label>
+                    <p class="card-panel  red darken-1" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+                </div>
 
-                <label for="email">Email</label>
-                <input class="form-control" th:field="*{email}" />
-                <p class="card-panel  red darken-1" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+                <div class="input-field col s12">
+                    <label for="email">Email</label>
+                    <input class="validate" type="text" th:field="*{email}" />
+                    <p class="card-panel  red darken-1" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+                </div>
 
-                <label for="password">Password</label>
-                <input type="password" class="form-control" th:field="*{password}" />
-                <p class="card-panel  red darken-1" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+                <div class="input-field col s12">
+                    <label for="password">Password</label>
+                    <input type="password" class="validate" th:field="*{password}" />
+                    <p class="card-panel  red darken-1" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+                </div>
 
                 <input class="btn" type="submit" />
             </form>

@@ -6,7 +6,7 @@ body{
 }
 
 body > .container {
-    padding: 60px 0 0 0;
+    padding: 10px 0 0 0;
 }
 
 .error{
@@ -46,6 +46,17 @@ main {
 }
 
 .post-img {
-    width: 200px;
-    height: auto;
+    display: block;
+    width: 50%;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.page-title {
+    background: #3a87ad;
+    width: 100%;
+    border-radius: 20px;
+    text-align: center;
+    color: #fff;
+    padding: 5px 0;
 }
