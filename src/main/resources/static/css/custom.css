@@ -44,3 +44,8 @@ main {
 #logout{
     margin: 0 5px;
 }
+
+.post-img {
+    width: 200px;
+    height: auto;
+}

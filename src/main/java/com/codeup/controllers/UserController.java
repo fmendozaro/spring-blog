@@ -87,7 +87,14 @@ public class UserController {
     }
 
     @GetMapping("users/profile")
-    public String showProfile(){
+    public String showProfile(Model viewModel){
+        User logUser = usersService.loggedInUser();
+
+        if(logUser == null){
+            viewModel.addAttribute("msg", "You need to be logged in to be able to see");
+            return "error/custom";
+        }
+
         return "redirect:/users/" + usersService.loggedInUser().getId();
     }
 
