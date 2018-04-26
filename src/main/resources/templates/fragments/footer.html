@@ -11,7 +11,7 @@
                         <h5 class="white-text">Contact Me</h5>
                         <p class="grey-text text-lighten-4">Cel: <a href="tel:210-123-1234">210-123-1234</a></p>
                         <p class="grey-text text-lighten-4">Email: <a href="mailto:Fernando@codeup.com">Fernando@codeup.com</a></p>
-                        <p class="grey-text text-lighten-4">Website: <a href="http://fer-mendoza.com" target="_blank">fer-mendoza.com</a></p>
+                        <div th:replace="fragments/copyright :: copyrights"></div>
                     </div>
                     <div class="col l4 offset-l2 s12">
                         <h5 class="white-text">Links</h5>
@@ -42,8 +42,9 @@
         <script src="/lib/fullcalendar/fullcalendar.js"></script>
         <script src="/webjars/sockjs-client/sockjs.min.js"></script>
         <script src="/webjars/stomp-websocket/stomp.min.js"></script>
-        <script src="/js/liveFeed.js"></script>
+        <script src="/js/live-feed.js"></script>
         <script src="/js/main.js"></script>
+        <script src="/js/type-author.js"></script>
 
     </th:block>
 </body>
