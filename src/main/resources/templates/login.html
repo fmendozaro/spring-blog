@@ -12,7 +12,7 @@
     <h4 class="page-title">Log In</h4>
     <div class="row">
         <div class="form-group col l8 offset-l2">
-            <div class="alert" th:if="${param.error}">
+            <div class="card-panel red accent-1" th:if="${param.error}">
                 Invalid Username and Password.
             </div>
             <div class="alert" th:if="${param.logout}">
@@ -20,10 +20,14 @@
             </div>
 
             <form class="form" th:action="@{/login}" th:method="POST">
-                <label for="username">Username</label>
-                <input class="form-control" id="username" name="username" type="text" />
-                <label for="password">Password</label>
-                <input class="form-control" id="password" name="password" type="password" />
+                <div class="input-field col s12">
+                    <label for="username">Username</label>
+                    <input class="form-control" id="username" name="username" type="text" />
+                </div>
+                <div class="input-field col s12">
+                    <label for="password">Password</label>
+                    <input class="form-control" id="password" name="password" type="password" />
+                </div>
                 <input class="btn btn-primary" type="submit" value="Log In" />
             </form>
         </div>
