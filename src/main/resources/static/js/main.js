@@ -8,7 +8,6 @@
     $(".dropdown-button").dropdown();
     $('.materialboxed').materialbox();
     $(".sideNav-btn").sideNav();
-    $(".button-collapse").sideNav();
     $('.parallax').parallax();
     $('select').material_select();
 
