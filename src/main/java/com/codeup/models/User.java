@@ -25,7 +25,7 @@ public class User {
 
     @Column(nullable = false, unique = true)
     @Email(message = "Invalid email")
-    @NotBlank
+    @NotBlank(message = "Email can't be empty")
     private String email;
 
     @Column(nullable = false)
