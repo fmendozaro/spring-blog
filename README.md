@@ -6,6 +6,9 @@ A simple blog Java example project made with Spring boot / Hibernate for Codeup'
 - Hibernate ORM
 - Thymeleaf
 - MySQL
+
+### Live site
+ http://blog.taco-radar.online/
  
 ### Libraries
 
