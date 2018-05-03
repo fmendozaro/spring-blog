@@ -21,7 +21,9 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Fer on 1/5/17.
@@ -180,17 +182,18 @@ public class PostsController {
 
     @GetMapping("/getPostsDates.json")
     @ResponseBody
-    public List<Event> getPostsDates(){
-        List<Event> events = new ArrayList<>();
+    public List<Map<String, String>>  getPostsDates(){
+
+        List<Map<String, String>> events = new ArrayList<>();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         Iterable<Post> posts = postRepositoryRepo.findAll();
 
         for (Post post : posts) {
-            Event obj = new Event();
-            obj.setStart(simpleDateFormat.format(post.getCreateDate()));
-            obj.setTitle(post.getTitle());
-            events.add(obj);
+            HashMap<String, String> map = new HashMap<>();
+            map.put("title", post.getTitle());
+            map.put("date", simpleDateFormat.format(post.getCreateDate()));
+            events.add(map);
         }
 
         return events;
