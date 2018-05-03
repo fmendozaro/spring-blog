@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header('Full Calendar demo')">
+</head>
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container">
+    <h4 class="page-title">Save event</h4>
+    <div class="row">
+        <div class="col-12">
+            <form th:action="@{/save-event}" th:method="post" th:object="${event}">
+                <label for="title">Title</label>
+                <input class="form-control" type="text" th:field="*{title}" />
+                <label for="startDate">Start Date</label>
+                <input class="form-control" type="datetime-local" th:field="*{startDate}" />
+                <label for="endDate">End date</label>
+                <input class="form-control" type="datetime-local" th:field="*{endDate}" />
+                <label for="testDate">Test date</label>
+                <input class="form-control" type="date" th:field="*{testDate}" />
+                <button class="btn">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="test" th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>
