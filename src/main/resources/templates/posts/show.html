@@ -32,7 +32,7 @@
                 <b>Tags: </b>
                 <br/>
                 <br/>
-                <span class="btn blue-grey darken-2 tags chip white-text" th:each="tag : ${post.tags}" th:text="${tag.name}"></span>
+                <a th:href="@{/tag/{id}(id=${tag.id})}" class="btn blue-grey darken-2 tags chip white-text" th:each="tag : ${post.tags}" th:text="${tag.name}"></a>
             </p>
             <b>
                 <p>Posted by <a th:href="@{ /users/{id} (id=${post.user.id}) }" th:text="${post.user.email}">some user</a> on <span th:text="${#dates.format(post.createDate,'MMM dd YYYY')}"></span>

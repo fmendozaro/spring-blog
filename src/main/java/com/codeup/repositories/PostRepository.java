@@ -1,6 +1,7 @@
 package com.codeup.repositories;
 
 import com.codeup.models.Post;
+import com.codeup.models.Tag;
 import com.codeup.models.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
@@ -31,5 +32,7 @@ public interface PostRepository extends CrudRepository<Post, Long> {
     // Get the list of posts in reverse order.
     @Query("select p from Post p order by p.id desc")
     List<Post> postsInReverse();
+
+    List<Post> findAllByTags(List<Tag> tags);
 
 }
