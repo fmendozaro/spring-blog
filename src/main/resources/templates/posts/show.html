@@ -22,7 +22,7 @@
             </form>
             <h3 th:text="${post.title}"></h3>
             <br/>
-            <img th:if="${post.imageUrl == ''}" class="responsive-img" src="http://placehold.it/500x500" alt="placeholder" />
+            <img th:if="${post.imageUrl == ''}" class="responsive-img" src="https://placehold.it/500x500" alt="placeholder" />
 
             <img class="responsive-img" th:if="${post.imageUrl != ''}" th:src="${'/uploads/' +post.imageUrl}" width="500px" height="500px;" />
 
