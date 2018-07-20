@@ -6,6 +6,7 @@ spring.jpa.hibernate.ddl-auto=update
 spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
 spring.jpa.show-sql=true
 file-upload-path=/Users/fer/IdeaProjects/spring-blog/target/classes/static/uploads/
+#/srv/blog.tacos4.us/public/uploads
 spring.http.multipart.max-file-size=20MB
 linkedin-id=0
 linkeding-secret=0
