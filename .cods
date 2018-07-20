@@ -1,2 +1,2 @@
 BUILD_COMMAND='./mvnw package'
-WAR_FILE=target/blog-0.0.1-SNAPSHOT.war
+JAR_FILE=target/blog-0.0.1-SNAPSHOT.jar
