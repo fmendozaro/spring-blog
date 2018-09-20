@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header('Show Friends')"></head>
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col l10 offset-2">
+            <h4>Friend List</h4>
+            <ul class="collection">
+                <li class="collection-item avatar" th:each="friendObj : ${friendsList}">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="" class="circle" />
+                    <p>
+                        Username: <span class="title" th:text="${friendObj.friend.username}"></span>
+                        <br/>
+                        Email: <span th:text="${friendObj.friend.email}"></span>
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

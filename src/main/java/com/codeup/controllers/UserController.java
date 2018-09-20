@@ -126,6 +126,12 @@ public class UserController {
     public Boolean checkEditAuth(User user){
         return usersService.isLoggedIn() && (user.getId() == usersService.loggedInUser().getId());
     }
+    @GetMapping("user/friends")
+    public String showFriends(Model vModel){
+        User user = usersService.loggedInUser();
+        vModel.addAttribute("friendsList", user.getFriends());
+        return "users/friends";
+    }
 
 
 }
