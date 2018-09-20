@@ -60,11 +60,11 @@ public class DbSeeder implements CommandLineRunner{
     private void seedUsers(){
 
         List<User> users = Arrays.asList(
-                new User("fer", "fer@mail.com", passwordEncoder.encode("pass")),
-                new User("luis", "luis@mail.com", passwordEncoder.encode("pass")),
-                new User("zach", "zach@mail.com", passwordEncoder.encode("pass")),
-                new User("justin", "justin@mail.com", passwordEncoder.encode("pass")),
-                new User("ryan", "ryan@mail.com", passwordEncoder.encode("pass"))
+                new User("fer", "fer@mail.com", passwordEncoder.encode("pass"), null),
+                new User("luis", "luis@mail.com", passwordEncoder.encode("pass"),null),
+                new User("zach", "zach@mail.com", passwordEncoder.encode("pass"), null),
+                new User("justin", "justin@mail.com", passwordEncoder.encode("pass"), null),
+                new User("ryan", "ryan@mail.com", passwordEncoder.encode("pass"), null)
         );
 
         userDao.save(users);

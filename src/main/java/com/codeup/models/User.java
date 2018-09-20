@@ -37,13 +37,18 @@ public class User {
     @JsonBackReference
     private List<Post> posts;
 
+    @OneToMany(mappedBy = "user")
+    @JsonBackReference
+    private List<FriendList> friends;
+
     public User() {
     }
 
-    public User(String username, String email, String password) {
+    public User(String username, String email, String password, List<FriendList> friends) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.friends = friends;
     }
 
     // Copy constructor an alternative for clone
@@ -84,6 +89,22 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    public List<FriendList> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<FriendList> friends) {
+        this.friends = friends;
     }
 
     @Override
