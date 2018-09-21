@@ -1,7 +1,7 @@
 package com.codeup.models;
 
 public enum FriendStatus {
-    SENT,
+    PENDING,
     ACCEPTED,
     REJECTED
 }

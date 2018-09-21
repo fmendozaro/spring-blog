@@ -143,7 +143,7 @@ public class UserController {
 
     @GetMapping("/users/{id}/friend-request")
     public void sendFriendRequest(@PathVariable long id ) {
-        friendListRepository.save(new FriendList(usersService.loggedInUser(), usersRepository.findOne(id), FriendStatus.SENT));
+        friendListRepository.save(new FriendList(usersService.loggedInUser(), usersRepository.findOne(id), FriendStatus.PENDING));
     }
 
 }
