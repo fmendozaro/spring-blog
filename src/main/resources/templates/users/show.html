@@ -17,15 +17,15 @@
                 <li class="collection-item avatar">
                     <img src="https://avatars1.githubusercontent.com/u/13546596" alt="" class="circle" />
                     <a th:if="${showEditControls}" class="btn btn-floating right" th:href="@{/users/{id}/edit(id=${user.id}) }"><i class="material-icons ">edit</i></a>
+                    <a th:if="${user.id != sessionUser.id}" class="btn btn-floating right" th:href="@{/users/{id}/friend-request(id=${user.id}) }"><i class="material-icons ">add</i> Friend Request</a>
                     <p>
                         Username: <span class="title" th:text="${user.username}"></span>
-                        <br/>
+                    </p>
+                    <p>
                         Email: <span th:text="${user.email}"></span>
                     </p>
                 </li>
             </ul>
-
-
         </div>
     </div>
 </div>
