@@ -25,7 +25,7 @@ import javax.validation.Valid;
 public class UserController {
 
     @Autowired
-    private UsersRepository usersDao;
+    private UsersRepository usersRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -43,8 +43,8 @@ public class UserController {
     public String saveUser(@Valid User user, Errors validation, Model m){
 
         String username = user.getUsername();
-        User existingUsername = usersDao.findByUsername(username);
-        User existingEmail = usersDao.findByEmail(user.getEmail());
+        User existingUsername = usersRepository.findByUsername(username);
+        User existingEmail = usersRepository.findByEmail(user.getEmail());
 
 
         if(existingUsername != null){
@@ -69,7 +69,7 @@ public class UserController {
 
         // Custom validation if the username is taken
 
-        User newUser = usersDao.save(user);
+        User newUser = usersRepository.save(user);
 
         UserRole ur = new UserRole();
         ur.setRole("ROLE_USER");
@@ -86,7 +86,7 @@ public class UserController {
 
     @GetMapping("/users/{id}")
     public String showUser(@PathVariable Long id, Model viewModel){
-        User user = usersDao.findOne(id);
+        User user = usersRepository.findOne(id);
         viewModel.addAttribute("user", user);
         viewModel.addAttribute("sessionUser", usersService.loggedInUser());
         viewModel.addAttribute("showEditControls", usersService.canEditProfile(user));
@@ -107,7 +107,7 @@ public class UserController {
 
     @GetMapping("/users/{id}/edit")
     public String showEditForm(@PathVariable Long id, Model viewModel){
-        User user = usersDao.findOne(id);
+        User user = usersRepository.findOne(id);
         viewModel.addAttribute("user", user);
         viewModel.addAttribute("showEditControls", usersService.canEditProfile(user));
         return "users/edit";
@@ -125,7 +125,7 @@ public class UserController {
             return "users/edit";
         }
         editedUser.setPassword(passwordEncoder.encode(editedUser.getPassword()));
-        usersDao.save(editedUser);
+        usersRepository.save(editedUser);
         return "redirect:/users/"+id;
     }
 
@@ -143,7 +143,7 @@ public class UserController {
 
     @GetMapping("/users/{id}/friend-request")
     public void sendFriendRequest(@PathVariable long id ) {
-        friendListRepository.save(new FriendList(usersService.loggedInUser(), usersDao.findOne(id), FriendStatus.SENT));
+        friendListRepository.save(new FriendList(usersService.loggedInUser(), usersRepository.findOne(id), FriendStatus.SENT));
     }
 
 }
