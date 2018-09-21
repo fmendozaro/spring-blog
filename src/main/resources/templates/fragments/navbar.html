@@ -16,16 +16,16 @@
                  <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 
                  <ul id="nav-mobile" class="right hide-on-med-and-down">
-                     <span sec:authorize="isAuthenticated()">
-                     <li>
-                         <a th:href="@{/users/profile}" class="waves-effect waves-light btn-link">
-                             Welcome <span class="navbar-text" sec:authentication="name" />!
-                         </a>
-                     </li>
-                     <li>
-                         <a class="waves-effect waves-light" th:href="@{/posts/create}">Create a post</a>
-                     </li>
-                 </span>
+                     <th:block sec:authorize="isAuthenticated()">
+                         <li>
+                             <a th:href="@{/users/profile}" class="waves-effect waves-light btn-link">
+                                 Welcome <span class="navbar-text" sec:authentication="name" />!
+                             </a>
+                         </li>
+                         <li>
+                             <a class="waves-effect waves-light" th:href="@{/posts/create}">Create a post</a>
+                         </li>
+                     </th:block>
                      <li><a class="waves-effect waves-light" th:href="@{/posts}">All Posts</a></li>
                      <li><a class="waves-effect waves-light" th:href="@{/postsCalendar}">Calendar</a></li>
                      <li>
@@ -33,44 +33,43 @@
                              <i class="material-icons">search</i>
                          </a>
                      </li>
-                     <span sec:authorize="isAuthenticated()">
-                     <li>
-                         <form th:action="@{/logout}" th:method="POST">
-                            <button id="logout-mobile" class="waves-effect waves-light navbar-text btn-flat white-text">Logout</button>
-                         </form>
-                     </li>
-                     </span>
+                     <th:block sec:authorize="isAuthenticated()">
+                         <li>
+                             <form th:action="@{/logout}" th:method="POST">
+                                <button id="logout-mobile" class="waves-effect waves-light navbar-text btn-flat white-text">Logout</button>
+                             </form>
+                         </li>
+                     </th:block>
 
-                     <span sec:authorize="!isAuthenticated()">
-                     <li><a class="waves-effect waves-light" th:href="@{/register}">Register</a></li>
-                     <li><a class="waves-effect waves-light" th:href="@{/login}">Login</a></li>
-                    </span>
+                     <th:block sec:authorize="!isAuthenticated()">
+                         <li><a class="waves-effect waves-light" th:href="@{/register}">Register</a></li>
+                         <li><a class="waves-effect waves-light" th:href="@{/login}">Login</a></li>
+                    </th:block>
                  </ul>
                  <ul class="side-nav" id="mobile-demo">
-                     <span sec:authorize="isAuthenticated()">
-                     <li>
-                         <a th:href="@{/users/profile}" class="waves-effect waves-light btn-link">
-                             Welcome <span class="navbar-text" sec:authentication="name" />!
-                         </a>
-                     </li>
-                     <li>
-                         <a class="waves-effect waves-light" th:href="@{/posts/create}">Create a post</a>
-                     </li>
-                     </span>
+                     <th:block sec:authorize="isAuthenticated()">
+                         <li>
+                             <a th:href="@{/users/profile}" class="waves-effect waves-light btn-link">
+                                 Welcome <span class="navbar-text" sec:authentication="name" />!
+                             </a>
+                         </li>
+                         <li>
+                             <a class="waves-effect waves-light" th:href="@{/posts/create}">Create a post</a>
+                         </li>
+                     </th:block>
                      <li><a class="waves-effect waves-light" th:href="@{/posts}">All Posts</a></li>
                      <li><a class="waves-effect waves-light" th:href="@{/postsCalendar}">Calendar</a></li>
-                     <span sec:authorize="isAuthenticated()">
-                     <li>
-                         <form th:action="@{/logout}" th:method="POST">
-                            <button id="logout" class="waves-effect waves-light navbar-text btn-flat white-text">Logout</button>
-                         </form>
-                     </li>
-                     </span>
-
-                     <span sec:authorize="!isAuthenticated()">
-                     <li><a class="waves-effect waves-light" th:href="@{/register}">Register</a></li>
-                     <li><a class="waves-effect waves-light" th:href="@{/login}">Login</a></li>
-                    </span>
+                     <th:block sec:authorize="isAuthenticated()">
+                         <li>
+                             <form th:action="@{/logout}" th:method="POST">
+                                <button id="logout" class="waves-effect waves-light btn-flat white-text">Logout</button>
+                             </form>
+                         </li>
+                     </th:block>
+                     <th:block sec:authorize="!isAuthenticated()">
+                         <li><a class="waves-effect waves-light" th:href="@{/register}">Register</a></li>
+                         <li><a class="waves-effect waves-light" th:href="@{/login}">Login</a></li>
+                    </th:block>
 
                  </ul>
              </div>
