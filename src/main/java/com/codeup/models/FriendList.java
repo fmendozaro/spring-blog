@@ -22,12 +22,13 @@ public class FriendList {
     @JsonManagedReference
     private User friend;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private byte status;
+    private FriendStatus status;
 
     public FriendList() {}
 
-    public FriendList(User user, User friend, byte status) {
+    public FriendList(User user, User friend, FriendStatus status) {
         this.user = user;
         this.friend = friend;
         this.status = status;
@@ -57,11 +58,11 @@ public class FriendList {
         this.friend = friend;
     }
 
-    public byte getStatus() {
+    public FriendStatus getStatus() {
         return status;
     }
 
-    public void setStatus(byte status) {
+    public void setStatus(FriendStatus status) {
         this.status = status;
     }
 }

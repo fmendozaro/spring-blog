@@ -1,4 +1,4 @@
-package com.codeup.services;
+package com.codeup;
 
 import com.codeup.services.UserDetailsLoader;
 import com.codeup.services.UserWithRoles;
@@ -42,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .logoutSuccessUrl("/login?logout") // append a query string value
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/posts/create", "/posts/?/edit") // only authenticated users can create ads
+                    .antMatchers("/posts/create", "/posts/?/edit", "/users/?/friend-request", "/users/friends") // only authenticated users can visit this urls
                     .authenticated()
         ;
     }

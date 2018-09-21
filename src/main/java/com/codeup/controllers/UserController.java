@@ -4,8 +4,11 @@ package com.codeup.controllers;
  * Created by Fer on 1/5/17.
  */
 
+import com.codeup.models.FriendList;
+import com.codeup.models.FriendStatus;
 import com.codeup.models.User;
 import com.codeup.models.UserRole;
+import com.codeup.repositories.FriendListRepository;
 import com.codeup.repositories.UserRoles;
 import com.codeup.repositories.UsersRepository;
 import com.codeup.services.UserService;
@@ -22,18 +25,21 @@ import javax.validation.Valid;
 public class UserController {
 
     @Autowired
-    UsersRepository usersDao;
+    private UsersRepository usersDao;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    UserRoles userRoles;
+    private UserRoles userRoles;
 
     @Autowired
-    UserService usersService;
+    private UserService usersService;
 
-    @PostMapping("users/create")
+    @Autowired
+    private FriendListRepository friendListRepository;
+
+    @PostMapping("/users/create")
     public String saveUser(@Valid User user, Errors validation, Model m){
 
         String username = user.getUsername();
@@ -78,15 +84,16 @@ public class UserController {
 
     }
 
-    @GetMapping("users/{id}")
+    @GetMapping("/users/{id}")
     public String showUser(@PathVariable Long id, Model viewModel){
         User user = usersDao.findOne(id);
         viewModel.addAttribute("user", user);
+        viewModel.addAttribute("sessionUser", usersService.loggedInUser());
         viewModel.addAttribute("showEditControls", usersService.canEditProfile(user));
         return "users/show";
     }
 
-    @GetMapping("users/profile")
+    @GetMapping("/users/profile")
     public String showProfile(Model viewModel){
         User logUser = usersService.loggedInUser();
 
@@ -98,7 +105,7 @@ public class UserController {
         return "redirect:/users/" + usersService.loggedInUser().getId();
     }
 
-    @GetMapping("users/{id}/edit")
+    @GetMapping("/users/{id}/edit")
     public String showEditForm(@PathVariable Long id, Model viewModel){
         User user = usersDao.findOne(id);
         viewModel.addAttribute("user", user);
@@ -106,7 +113,7 @@ public class UserController {
         return "users/edit";
     }
 
-    @PostMapping("users/{id}/edit")
+    @PostMapping("/users/{id}/edit")
     public String editUser(@PathVariable Long id, @Valid User editedUser, Errors validation, Model m){
 
         editedUser.setId(id);
@@ -126,12 +133,17 @@ public class UserController {
     public Boolean checkEditAuth(User user){
         return usersService.isLoggedIn() && (user.getId() == usersService.loggedInUser().getId());
     }
-    @GetMapping("user/friends")
+
+    @GetMapping("/users/friends")
     public String showFriends(Model vModel){
         User user = usersService.loggedInUser();
         vModel.addAttribute("friendsList", user.getFriends());
         return "users/friends";
     }
 
+    @GetMapping("/users/{id}/friend-request")
+    public void sendFriendRequest(@PathVariable long id ) {
+        friendListRepository.save(new FriendList(usersService.loggedInUser(), usersDao.findOne(id), FriendStatus.SENT));
+    }
 
 }
