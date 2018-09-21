@@ -11,12 +11,16 @@
             <h4>Friend List</h4>
             <ul class="collection">
                 <li class="collection-item avatar" th:each="friendObj : ${friendsList}">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="" class="circle" />
-                    <p>
-                        Username: <span class="title" th:text="${friendObj.friend.username}"></span>
-                        <br/>
-                        Email: <span th:text="${friendObj.friend.email}"></span>
-                    </p>
+                    <img src="https://picsum.photos/50/50" alt="" class="circle" />
+                    <h5 th:text="${friendObj.friend.username}"></h5>
+                    <span th:text="${friendObj.status}"></span>
+                    <div>
+                        <th:block th:if="${friendObj.status != T(com.codeup.models.FriendStatus).ACCEPTED}">
+                            <button id="accept" class="btn btn-floating"><i class="material-icons" th:alt="accept">check</i> Accept</button>
+                            <button id="reject" class="btn btn-floating amber darken-3"><i class="material-icons" th:alt="reject">cancel</i> Reject</button>
+                        </th:block>
+                        <button th:if="${friendObj.status == T(com.codeup.models.FriendStatus).ACCEPTED}" id="remove" class="btn btn-floating red darken-1"><i class="material-icons" th:alt="remove">delete</i> Remove</button>
+                    </div>
                 </li>
             </ul>
         </div>
