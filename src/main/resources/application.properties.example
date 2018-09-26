@@ -12,3 +12,4 @@ linkedin-id=0
 linkeding-secret=0
 app.env=dev
 server.port = 8091
+google-maps-key=key

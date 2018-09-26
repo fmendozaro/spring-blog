@@ -2,12 +2,12 @@ package com.codeup.controllers;
 
 import com.codeup.models.Event;
 import com.codeup.repositories.EventRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,6 +18,9 @@ import java.util.List;
  */
 @Controller
 public class TestsController {
+
+    @Value("${google-maps-key}")
+    private String mapsKey;
 
     EventRepository eventRepo;
 
@@ -69,6 +72,12 @@ public class TestsController {
         }
 
         return restaurants;
+    }
+
+    @GetMapping("/show-maps")
+    public String showMap(Model vModel){
+        vModel.addAttribute("mapkey", mapsKey);
+        return "demos/map";
     }
 
 }
