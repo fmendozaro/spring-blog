@@ -15,11 +15,11 @@
                     <h5 th:text="${friendObj.friend.username}"></h5>
                     <span th:text="${friendObj.status}"></span>
                     <div>
-                        <th:block th:if="${friendObj.status != T(com.codeup.models.FriendStatus).ACCEPTED}">
+                        <th:block th:if="${friendObj.status != T(us.tacos4.blog.models.FriendStatus).ACCEPTED}">
                             <button id="accept" class="btn btn-floating"><i class="material-icons" th:alt="accept">check</i> Accept</button>
                             <button id="reject" class="btn btn-floating amber darken-3"><i class="material-icons" th:alt="reject">cancel</i> Reject</button>
                         </th:block>
-                        <button th:if="${friendObj.status == T(com.codeup.models.FriendStatus).ACCEPTED}" id="remove" class="btn btn-floating red darken-1"><i class="material-icons" th:alt="remove">delete</i> Remove</button>
+                        <button th:if="${friendObj.status == T(us.tacos4.blog.models.FriendStatus).ACCEPTED}" id="remove" class="btn btn-floating red darken-1"><i class="material-icons" th:alt="remove">delete</i> Remove</button>
                     </div>
                 </li>
             </ul>
