@@ -3,8 +3,6 @@
  */
 // $(document).ready(function(){
 
-
-
     $(".dropdown-button").dropdown();
     $('.materialboxed').materialbox();
     $(".sideNav-btn").sideNav();
@@ -14,7 +12,7 @@
     // Event listeners
     $("#create-btn").click(function(e){
         e.preventDefault();
-        refreshFeed("New post created");
+        // refreshFeed("New post created");
         $(this).parent().parent("form").submit();
     });
 
