@@ -4,6 +4,7 @@ import us.tacos4.blog.models.Post;
 import us.tacos4.blog.models.Tag;
 import us.tacos4.blog.repositories.PostRepository;
 import us.tacos4.blog.repositories.TagRepository;
+import us.tacos4.blog.services.EmailService;
 import us.tacos4.blog.services.UserService;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,9 @@ public class PostsController {
 
     @Autowired
     TagRepository tagRepositoryRepo;
+
+    @Autowired
+    EmailService emailService;
 
     @GetMapping("/posts")
     public String getPosts(Model m){
@@ -84,7 +88,11 @@ public class PostsController {
 
         postSubmitted.setTags(tags);
         postSubmitted.setUser(usersSvc.loggedInUser());
-        postRepositoryRepo.save(postSubmitted);
+        Post savedPost = postRepositoryRepo.save(postSubmitted);
+        emailService.prepareAndSend(savedPost, "New post created confirmation",
+                "Dear " + savedPost.getUser().getUsername()
+                        + ", thank you for creating a post. Your blog post id is "
+                        + savedPost.getId());
 
         return "redirect:/posts";
     }
