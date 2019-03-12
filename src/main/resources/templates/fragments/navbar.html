@@ -84,11 +84,11 @@
                      <img src="/imgs/bg-nav.jpg" />
                  </div>
                  <a href="#!user"><img class="circle" src="https://avatars1.githubusercontent.com/u/13546596" /></a>
-                 <a href="#!name">
-                     <span class="white-text name" th:if="${#authentication.getPrincipal().username}" th:text="${#authentication.getPrincipal().username}"></span>
-                 </a>
-                 <a href="#!email">
-                     <span class="white-text email" th:text="${#authentication.getPrincipal().email}"></span>
+                 <!--<a href="#!name">-->
+                     <!--<span class="white-text name" th:text="${#authentication.getPrincipal().username}"></span>-->
+                 <!--</a>-->
+                 <!--<a href="#!email">-->
+                     <!--<span class="white-text email" th:text="${#authentication.getPrincipal().email}"></span>-->
                  </a>
              </div>
              <div class="user-view" sec:authorize="!isAuthenticated()">
