@@ -30,7 +30,6 @@ public class DbSeeder implements CommandLineRunner{
     private final UserRoles userRoles;
     private final Faker faker;
     private final PasswordEncoder passwordEncoder;
-
     @Value("${app.env}")
     private String environment;
 
@@ -51,7 +50,8 @@ public class DbSeeder implements CommandLineRunner{
                 new Tag("Music"),
                 new Tag("Art"),
                 new Tag("Programming"),
-                new Tag("Festival")
+                new Tag("Food"),
+                new Tag("Films")
         );
 
         tagDao.saveAll(tags);
@@ -69,8 +69,6 @@ public class DbSeeder implements CommandLineRunner{
 
         userDao.saveAll(users);
 
-
-
         for (User user: users) {
             UserRole ur = new UserRole();
             ur.setRole("ROLE_USER");
@@ -84,9 +82,13 @@ public class DbSeeder implements CommandLineRunner{
 
         long rnd = 0;
         List<Post> posts = new ArrayList<>();
-        List<User> users = (List<User>) userDao.findAll();
-        List<Tag> allTags = (List<Tag>) tagDao.findAll();
+        List<User> users =  userDao.findAll();
+        List<Tag> allTags = tagDao.findAll();
         List<Tag> randomTags;
+
+        for (User user: users) {
+            System.out.println("user = " + user);
+        }
 
         for(int i = 0;i <= 50;i++){
             randomTags = new ArrayList<>();
@@ -103,10 +105,11 @@ public class DbSeeder implements CommandLineRunner{
             rnd = (long) 1 + (int)(Math.random() * ((allTags.size() - 1) + 1));
             randomTags.add(tagDao.getOne(rnd));
 
-            System.out.println("randomUser" + randomUser.getUsername());
-            System.out.println("randomTags" + randomTags.toString());
+            posts.add(new Post(this.faker.chuckNorris().fact(), this.faker.lorem().paragraph(6), randomTags, randomUser, null));
+        }
 
-            posts.add(new Post(this.faker.chuckNorris().fact(), this.faker.lorem().paragraph(6), randomTags, randomUser));
+        for (Post post: posts) {
+            System.out.println("post = " + post);
         }
 
         postDao.saveAll(posts);
@@ -118,11 +121,6 @@ public class DbSeeder implements CommandLineRunner{
 
         if(!environment.equals("dev")){
             log.info("app.env is not in dev mode, skip the seeders");
-            return;
-        }
-
-        if(userDao.findAll().iterator().hasNext()){
-            log.info("Users table is not empty, skip the seeders");
             return;
         }
 

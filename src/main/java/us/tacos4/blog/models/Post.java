@@ -62,11 +62,12 @@ public class Post {
         this.body = body;
     }
 
-    public Post(String title, String body, List<Tag> tags, User user) {
+    public Post(String title, String body, List<Tag> tags, User user, String imgUrl) {
         this.title = title;
         this.body = body;
         this.tags = tags;
         this.user = user;
+        this.imageUrl = imgUrl;
     }
 
     public Post() {
