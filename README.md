@@ -15,7 +15,7 @@ A simple blog Java example project made with Spring boot / Hibernate for Codeup'
 - WebSockets
 - Joda Time
 
-### Running the project for the first time
+### First steps
 
 1. Create an `application.properties` file with valid credentials for a MySQL connection, use the `application.properties.example` as a template.
 1. If you want to use the seeder file leave the `app.env=dev` property, change it to: `app.env=prod` when you don't want to use it anymore.
