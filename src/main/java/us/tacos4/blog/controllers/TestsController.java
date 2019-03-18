@@ -80,4 +80,10 @@ public class TestsController {
         return "demos/map";
     }
 
+    @GetMapping("/test-sessions")
+    public String testSessions(Model vModel){
+
+        vModel.addAttribute("mapkey", mapsKey);
+        return "demos/map";
+    }
 }

@@ -3,7 +3,7 @@
 
 <head th:fragment="header(title)">
     <meta charset="UTF-8" />
-    <title th:text="${'FB | ' +title}"></title>
+    <title th:text="${'FB | ' + title}"></title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" />
     <link rel="stylesheet" href="/lib/fullcalendar/fullcalendar.css" />
@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="/css/custom.css" />
     <link rel="shortcut icon" href="/imgs/favicon.ico" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>
 <body>
 </body>
