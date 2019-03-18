@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header(${'Login Page'})">
+</head>
+
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container">
+    <h4 class="page-title">Log In</h4>
+    <div class="row">
+        <div class="form-group col l8 offset-l2">
+            <form class="form" id="async-form">
+                <div class="input-field col s12">
+                    <label for="username">Username</label>
+                    <input class="form-control" id="username" name="username" type="text" />
+                </div>
+                <div class="input-field col s12">
+                    <label for="password">Password</label>
+                    <input class="form-control" id="password" name="password" type="password" />
+                </div>
+                <input class="btn btn-primary" id="async-submit" type="submit" value="Log In" />
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+        "use strict";
+        document.getElementById("async-submit").addEventListener("click", (e) => {
+            let formParams = new FormData(document.getElementById("async-form"));
+            e.preventDefault();
+            fetch('/async-login', {
+                body: formParams,
+                method: "POST",
+                headers: {'X-CSRF-TOKEN': $('meta[name="_csrf"]').attr('content')},
+            })
+                .then(response => {
+                    return response.json();
+                })
+                .then( data => {
+                    console.log(data);
+                    if(data.status === 'ok'){
+                        location.href = "/posts";
+                    }else{
+                        location.href = "/login?error";
+                    }
+                })
+                .catch(error => console.error(error));
+        });
+    /*]]>*/
+</script>
+</body>
+</html>
