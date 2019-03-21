@@ -56,18 +56,23 @@ public class Post {
     )
     private List<Tag> tags;
 
-    public Post(Long id, String title, String body) {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    private List<Comment> comments;
+
+    public Post(Long id, String title, String body, List<Comment> comments) {
         this.id = id;
         this.title = title;
         this.body = body;
+        this.comments = comments;
     }
 
-    public Post(String title, String body, List<Tag> tags, User user, String imgUrl) {
+    public Post(String title, String body, List<Tag> tags, User user, String imgUrl, List<Comment> comments) {
         this.title = title;
         this.body = body;
         this.tags = tags;
         this.user = user;
         this.imageUrl = imgUrl;
+        this.comments = comments;
     }
 
     public Post() {
@@ -140,6 +145,14 @@ public class Post {
 
     public void setTags(List<Tag> tags) {
         this.tags = tags;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
 }
