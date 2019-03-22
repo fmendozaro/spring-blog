@@ -1,6 +1,10 @@
 package us.tacos4.blog.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.beans.factory.annotation.Autowired;
+import us.tacos4.blog.repositories.CommentRepository;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,6 +13,10 @@ import java.util.List;
 @Entity
 @Table(name = "comments")
 public class Comment {
+
+    @Autowired
+    @Transient
+    private CommentRepository commentRepository;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,11 +39,20 @@ public class Comment {
     @Column()
     private Date createdAt;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parent")
     @Transient
     private List<Comment> children;
 
     public Comment(){}
+
+    public Comment(long id, String body, User user, Comment parent, Post post, Date createdAt) {
+        this.id = id;
+        this.body = body;
+        this.user = user;
+        this.parent = parent;
+        this.post = post;
+        this.createdAt = createdAt;
+        setChildren();
+    }
 
     public long getId() {
         return id;
@@ -89,7 +106,8 @@ public class Comment {
         return children;
     }
 
-    public void setChildren(List<Comment> children) {
-        this.children = children;
+    public void setChildren() {
+        System.out.println("setChildren ran");
+        this.children = commentRepository.findByParent(this);
     }
 }

@@ -1,5 +1,6 @@
 package us.tacos4.blog.controllers;
 
+import us.tacos4.blog.models.Comment;
 import us.tacos4.blog.models.Post;
 import us.tacos4.blog.models.Tag;
 import us.tacos4.blog.repositories.PostRepository;
@@ -63,6 +64,9 @@ public class PostsController {
         Post post = postRepositoryRepo.getOne(id);
         m.addAttribute("isOwner", usersSvc.isOwner(post.getUser()));
         m.addAttribute("post", post);
+        for (Comment child : post.getComments().get(0).getChildren()){
+            System.out.println("child = " + child.getId());
+        }
         return "posts/show";
     }
 
