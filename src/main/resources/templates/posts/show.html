@@ -43,7 +43,8 @@
                 <ul class="collection">
                     <li th:each="comment : ${post.comments}" class="collection-item avatar">
                         <img th:src="${'https://fer-uig.glitch.me?uuid=' + #calendars.createNow().getTimeInMillis()}" alt="" class="circle">
-                        <span class="title" th:text="${comment.user.username}"></span>
+                        <span class="title" th:text="${comment.user.username.toUpperCase() + ' at ' + #dates
+                        .format(comment.createdAt)}"></span>
                         <p th:text="${comment.body}"></p>
                         <p th:text="${comment.children}"></p>
                         <th:block th:if="comment.children != null" th:each="child : ${comment.children}">
