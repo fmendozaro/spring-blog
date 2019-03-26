@@ -64,9 +64,6 @@ public class PostsController {
         Post post = postRepositoryRepo.getOne(id);
         m.addAttribute("isOwner", usersSvc.isOwner(post.getUser()));
         m.addAttribute("post", post);
-        for (Comment child : post.getComments().get(0).getChildren()){
-            System.out.println("child = " + child.getId());
-        }
         return "posts/show";
     }
 

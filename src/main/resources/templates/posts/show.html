@@ -46,12 +46,11 @@
                         <span class="title" th:text="${comment.user.username.toUpperCase() + ' at ' + #dates
                         .format(comment.createdAt)}"></span>
                         <p th:text="${comment.body}"></p>
-                        <p th:text="${comment.children}"></p>
-                        <th:block th:if="comment.children != null" th:each="child : ${comment.children}">
-                            <img th:src="${'https://fer-uig.glitch.me?uuid=' + #calendars.createNow().getTimeInMillis()}" alt="" class="circle">
-                            <span class="title" th:text="${child.user.username}"></span>
+                        <div class="child-comment" th:if="comment.children != null" th:each="child : ${comment.children}">
+                            <img th:src="${'https://fer-uig.glitch.me?uuid=' + child.id}" alt="" class="circle child-circle">
+                            <span class="title" th:text="${child.user.username.toUpperCase()}"></span>
                             <blockquote th:text="${child.body}"></blockquote>
-                        </th:block>
+                        </div>
                     </li>
                 </ul>
             </div>
