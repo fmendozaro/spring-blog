@@ -1,13 +1,7 @@
 package us.tacos4.blog.seeders;
 
-import us.tacos4.blog.models.Post;
-import us.tacos4.blog.models.Tag;
-import us.tacos4.blog.models.User;
-import us.tacos4.blog.models.UserRole;
-import us.tacos4.blog.repositories.PostRepository;
-import us.tacos4.blog.repositories.TagRepository;
-import us.tacos4.blog.repositories.UserRoles;
-import us.tacos4.blog.repositories.UsersRepository;
+import us.tacos4.blog.models.*;
+import us.tacos4.blog.repositories.*;
 import com.github.javafaker.Faker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,16 +24,18 @@ public class DbSeeder implements CommandLineRunner{
     private final UserRoles userRoles;
     private final Faker faker;
     private final PasswordEncoder passwordEncoder;
+    private final CommentRepository commentRepository;
     @Value("${app.env}")
     private String environment;
 
-    public DbSeeder(PostRepository postDao, UsersRepository userDao, TagRepository tagDao, PasswordEncoder passwordEncoder, UserRoles userRoles){
+    public DbSeeder(PostRepository postDao, UsersRepository userDao, TagRepository tagDao, PasswordEncoder passwordEncoder, UserRoles userRoles, CommentRepository commentRepository){
         this.postDao = postDao;
         this.userDao = userDao;
         this.tagDao = tagDao;
         this.passwordEncoder = passwordEncoder;
         this.userRoles = userRoles;
         this.faker = new Faker();
+        this.commentRepository = commentRepository;
     }
 
     private void seedTags(){
@@ -86,10 +82,6 @@ public class DbSeeder implements CommandLineRunner{
         List<Tag> allTags = tagDao.findAll();
         List<Tag> randomTags;
 
-        for (User user: users) {
-            System.out.println("user = " + user);
-        }
-
         for(int i = 0;i <= 50;i++){
             randomTags = new ArrayList<>();
 
@@ -105,15 +97,37 @@ public class DbSeeder implements CommandLineRunner{
             rnd = (long) 1 + (int)(Math.random() * ((allTags.size() - 1) + 1));
             randomTags.add(tagDao.getOne(rnd));
 
-            posts.add(new Post(this.faker.chuckNorris().fact(), this.faker.lorem().paragraph(6), randomTags, randomUser, null));
+            posts.add(new Post(this.faker.chuckNorris().fact(), this.faker.lorem().paragraph(6), randomTags, randomUser, null, null));
         }
 
         for (Post post: posts) {
             System.out.println("post = " + post);
         }
 
-        postDao.saveAll(posts);
+        List<Post> savedPosts = postDao.saveAll(posts);
 
+        for (Post savedPost: savedPosts) {
+            Comment savedComment = commentRepository.save(createRandomComment(users, savedPost, null));
+            commentRepository.save(createRandomComment(users, null, savedComment));
+            commentRepository.save(createRandomComment(users, null, savedComment));
+            commentRepository.save(createRandomComment(users, null, savedComment));
+        }
+
+    }
+
+    public Comment createRandomComment(List<User> users, Post post, Comment parentComment){
+        long rnd = (long) 1 + (int)(Math.random() * ((users.size() - 1) + 1));
+        User randomUser = userDao.getOne(rnd);
+        Comment comment = new Comment();
+        comment.setBody(this.faker.harryPotter().quote());
+        comment.setUser(randomUser);
+        if(post != null){
+            comment.setPost(post);
+        }
+        if(parentComment != null){
+            comment.setParent(parentComment);
+        }
+        return comment;
     }
 
     @Override
@@ -139,7 +153,7 @@ public class DbSeeder implements CommandLineRunner{
         log.info("Seeding users...");
         this.seedUsers();
 
-        log.info("Seeding posts...");
+        log.info("Seeding posts and comments...");
         this.seedPosts();
 
         log.info("Finished running seeders!");

@@ -60,3 +60,16 @@ main {
     color: #fff;
     padding: 5px 0;
 }
+
+.child-comment {
+    padding: 0 25px;
+    margin-left: 10px;
+}
+
+#comments > ul > li > div:nth-child(4) {
+    padding-top: 10px;
+}
+
+.child-circle {
+    margin-left: 38px;
+}

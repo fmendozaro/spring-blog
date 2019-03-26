@@ -7,7 +7,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col l8 offset-l2">
+        <div class="col l0 offset-l1">
         <div>
             <form class="right" th:method="POST" th:action="@{/posts/delete}">
                 <input type="hidden" name="id" th:value="${post.id}" />
@@ -22,9 +22,9 @@
             </form>
             <h3 th:text="${post.title}"></h3>
             <br/>
-            <img th:if="${post.imageUrl == ''}" class="responsive-img" src="https://placehold.it/500x500" alt="placeholder" />
+            <img th:if="${post.imageUrl == null}" class="responsive-img center-align" th:src="${'https://picsum.photos/300?pic=' + #strings.randomAlphanumeric(2)}" alt="placeholder" />
 
-            <img class="responsive-img" th:if="${post.imageUrl != ''}" th:src="${'/uploads/' +post.imageUrl}" width="500px" height="500px;" />
+            <img class="responsive-img center-align" th:if="${post.imageUrl != null}" th:src="${'/uploads/' +post.imageUrl}" />
 
             <p th:text="${post.body}"></p>
             <hr/>
@@ -38,6 +38,22 @@
                 <p>Posted by <a th:href="@{ /users/{id} (id=${post.user.id}) }" th:text="${post.user.email}">some user</a> on <span th:text="${#dates.format(post.createDate,'MMM dd YYYY')}"></span>
                 </p>
             </b>
+            <div id="comments">
+                <h4>Comments</h4>
+                <ul class="collection">
+                    <li th:each="comment : ${post.comments}" class="collection-item avatar">
+                        <img th:src="${'https://fer-uig.glitch.me?uuid=' + #calendars.createNow().getTimeInMillis()}" alt="" class="circle">
+                        <span class="title" th:text="${comment.user.username.toUpperCase() + ' at ' + #dates
+                        .format(comment.createdAt)}"></span>
+                        <p th:text="${comment.body}"></p>
+                        <div class="child-comment" th:if="comment.children != null" th:each="child : ${comment.children}">
+                            <img th:src="${'https://fer-uig.glitch.me?uuid=' + child.id}" alt="" class="circle child-circle">
+                            <span class="title" th:text="${child.user.username.toUpperCase()}"></span>
+                            <blockquote th:text="${child.body}"></blockquote>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
    </div>
