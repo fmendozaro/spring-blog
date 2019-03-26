@@ -50,7 +50,7 @@
                         <th:block th:if="comment.children != null" th:each="child : ${comment.children}">
                             <img th:src="${'https://fer-uig.glitch.me?uuid=' + #calendars.createNow().getTimeInMillis()}" alt="" class="circle">
                             <span class="title" th:text="${child.user.username}"></span>
-                            <blockquote th:text="child.body"></blockquote>
+                            <blockquote th:text="${child.body}"></blockquote>
                         </th:block>
                     </li>
                 </ul>

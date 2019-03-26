@@ -39,7 +39,7 @@ public class Comment {
     @Column()
     private Date createdAt;
 
-    @Transient
+    @OneToMany(mappedBy = "parent")
     private List<Comment> children;
 
     public Comment(){}
