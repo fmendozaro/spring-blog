@@ -62,8 +62,12 @@ main {
 }
 
 .child-comment {
-    padding: 25px;
+    padding: 0 25px;
     margin-left: 10px;
+}
+
+#comments > ul > li > div:nth-child(4) {
+    padding-top: 10px;
 }
 
 .child-circle {
