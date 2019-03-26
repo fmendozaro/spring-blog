@@ -60,3 +60,12 @@ main {
     color: #fff;
     padding: 5px 0;
 }
+
+.child-comment {
+    padding: 25px;
+    margin-left: 10px;
+}
+
+.child-circle {
+    margin-left: 38px;
+}
