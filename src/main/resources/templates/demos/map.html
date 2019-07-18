@@ -32,7 +32,6 @@
         });
     }
 </script>
-<script th:src="@{ 'https://maps.googleapis.com/maps/api/js?key=' + ${mapkey} + '&amp;callback=initMap' }"
-        async="async" defer="defer"></script>
+<script th:src="@{ 'https://maps.googleapis.com/maps/api/js?key=' + ${mapkey} + '&amp;libraries=places&amp;callback=initMap' }" async="async" defer="defer"></script>
 </body>
 </html>
