@@ -1,11 +1,11 @@
-spring.datasource.driver-class-name=com.mysql.jdbc.Driver
 spring.datasource.url=jdbc:mysql://localhost/blog_db?createDatabaseIfNotExist=true&useSSL=false
 spring.datasource.username=root
 spring.datasource.password=pass
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 file-upload-path=/Users/fer/IdeaProjects/spring-blog/target/classes/static/uploads/
-# for server deployment your file path might look like this: /srv/blog.tacos4.us/public/uploads
+# for server deployment your file path might look like this:
+#file-upload-path=/srv/blog.fer-mendoza.com/public/uploads
 spring.servlet.multipart.max-file-size=20MB
 linkedin-id=0
 linkeding-secret=0
