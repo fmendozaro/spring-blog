@@ -1,6 +1,5 @@
 package us.tacos4.blog.controllers;
 
-import us.tacos4.blog.models.Comment;
 import us.tacos4.blog.models.Post;
 import us.tacos4.blog.models.Tag;
 import us.tacos4.blog.repositories.PostRepository;

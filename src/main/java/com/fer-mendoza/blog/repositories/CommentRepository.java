@@ -3,7 +3,6 @@ package us.tacos4.blog.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import us.tacos4.blog.models.Comment;
-import us.tacos4.blog.models.Tag;
 
 import java.util.List;
 

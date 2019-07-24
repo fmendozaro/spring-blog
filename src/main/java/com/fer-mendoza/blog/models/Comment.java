@@ -1,7 +1,5 @@
 package us.tacos4.blog.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import us.tacos4.blog.repositories.CommentRepository;
