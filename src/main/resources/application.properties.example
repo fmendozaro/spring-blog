@@ -1,4 +1,4 @@
-spring.datasource.url=jdbc:mysql://localhost/blog_db?createDatabaseIfNotExist=true&useSSL=false
+spring.datasource.url=jdbc:mysql://localhost/blog_db?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
 spring.datasource.username=root
 spring.datasource.password=pass
 spring.jpa.hibernate.ddl-auto=update
