@@ -15,7 +15,7 @@
             <h4>User Profile</h4>
             <ul class="collection">
                 <li class="collection-item avatar">
-                    <img src="https://avatars1.githubusercontent.com/u/13546596" alt="" class="circle" />
+                    <img src="" alt="" class="circle user-icon" />
                     <a th:if="${showEditControls}" class="btn btn-floating right" th:href="@{/users/{id}/edit(id=${user.id}) }"><i class="material-icons ">edit</i></a>
                     <a th:if="${user.id != sessionUser.id}" class="btn btn-floating right" th:href="@{/users/{id}/friend-request(id=${user.id}) }"><i class="material-icons ">add</i> Friend Request</a>
                     <p>
@@ -34,6 +34,12 @@
 </div>
 
 <div th:replace="fragments/footer :: footer"></div>
+
+<script th:inline="javascript">
+    for (let e of document.getElementsByClassName('user-icon')) {
+        e.src = 'https://fer-uig.glitch.me?r='+ Math.random();
+    }
+</script>
 
 </body>
 </html>
