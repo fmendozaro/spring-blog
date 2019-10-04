@@ -14,11 +14,12 @@ A simple blog Java example project made with Spring boot / Hibernate for Codeup 
 - jQuery
 - WebSockets
 - Joda Time
+- User Icon Generator [link](https://github.com/fmendozaro/user-icon-generator)
 
 ### First steps
 
 1. Create an `application.properties` file with valid credentials for a MySQL connection, use the `application.properties.example` as a template.
-1. If you want to use the seeder file leave the `app.env=dev` property, change it to: `app.env=prod` when you don't want to use it anymore.
+1. If you want to use the seeder file leave the `app.env=dev` property, change it to: `app.env=prod` or any value that makes sense to you when you don't want to seed the database.
 
 ### Some General Examples
 
