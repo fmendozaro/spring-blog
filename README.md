@@ -19,7 +19,7 @@ A simple blog Java example project made with Spring boot / Hibernate for Codeup 
 ### First steps
 
 1. Create an `application.properties` file with valid credentials for a MySQL connection, use the `application.properties.example` as a template.
-1. If you want to use the seeder file leave the `app.env=dev` property, change it to: `app.env=prod` or any value that makes sense to you when you don't want to seed the database.
+1. If you want to use the seeder file leave the `seed.db=true` property, change it to: `seed.db=false` or any value that makes sense to you when you don't want to seed the database.
 
 ### Some General Examples
 

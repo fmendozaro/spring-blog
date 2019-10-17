@@ -10,6 +10,7 @@ spring.servlet.multipart.max-file-size=20MB
 linkedin-id=0
 linkeding-secret=0
 app.env=dev
+seed.db=false
 server.port=8080
 google-maps-key=API_KEY
 spring.mail.host=smtp.mailtrap.io

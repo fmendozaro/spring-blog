@@ -25,7 +25,7 @@ public class DbSeeder implements CommandLineRunner{
     private final Faker faker;
     private final PasswordEncoder passwordEncoder;
     private final CommentRepository commentRepository;
-    @Value("${app.env}")
+    @Value("${seed.db}")
     private String environment;
 
     public DbSeeder(PostRepository postDao, UsersRepository userDao, TagRepository tagDao, PasswordEncoder passwordEncoder, UserRoles userRoles, CommentRepository commentRepository){
@@ -134,7 +134,7 @@ public class DbSeeder implements CommandLineRunner{
     public void run(String... strings) throws Exception {
 
         if(!environment.equals("dev")){
-            log.info("app.env is not in dev mode, skip the seeders");
+            log.info("seed.db is not in dev mode, skip the seeders");
             return;
         }
 
