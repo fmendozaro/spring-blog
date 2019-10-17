@@ -1,5 +1,5 @@
-import com.fer_mendoza.blog.BlogApp;
-import com.fer_mendoza.blog.repositories.UsersRepository;
+package com.fer_mendoza.blog;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
