@@ -1,5 +1,6 @@
 package com.fer_mendoza.blog;
 
+import com.fer_mendoza.blog.models.Tag;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,16 +13,18 @@ import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = BlogApp.class)
 @AutoConfigureMockMvc
-public class UserIntegrationTests {
+public class PostIntegrationTests {
 
     String TOKEN_ATTR_NAME = "org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN";
     HttpSessionCsrfTokenRepository httpSessionCsrfTokenRepository = new HttpSessionCsrfTokenRepository();
@@ -36,49 +39,26 @@ public class UserIntegrationTests {
         assertThat(mvc).isNotNull();
     }
 
+    // https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/util/AntPathMatcher.html
     @Test
-    public void testShowLoginPage() throws Exception {
-        this.mvc.perform(get("/login"))
-                .andExpect(status().isOk());
+    public void testShowCreatePostPage() throws Exception {
+        this.mvc.perform(get("/posts/create"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrlPattern("**/login"));
     }
 
     @Test
-    public void testShowRegisterPage() throws Exception {
-        this.mvc.perform(get("/register"))
-                .andExpect(status().isOk());
-    }
+    public void testCreateAPost() throws Exception {
 
-    @Test
-    public void testRegisterAUser() throws Exception {
-
-        this.mvc.perform(post("/register")
+        this.mvc.perform(post("/posts/create")
                 .sessionAttr(TOKEN_ATTR_NAME, csrfToken)
                 .param(csrfToken.getParameterName(), csrfToken.getToken())
-                .param("username", "stacy")
-                .param("email", "stacy@email.com")
-                .param("password", "malibu")
+                .param("title", "test post")
+                .param("body", "lorem")
+                .param("tags", "1")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
-//                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/"));
-
-//        this.mvc.perform(post("/register")
-//                .param("username", "stacy")
-//                .param("email", "stacy@email.com")
-//                .param("password", "malibu")
-//                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
-//                .andExpect(status().is3xxRedirection())
-//                .andExpect(redirectedUrl("/"));
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrlPattern("**/"));
     }
-
-//    @Test
-//    public void testRegisterUserMismatchedPasswords() throws Exception{
-//        this.mvc.perform(post("/register")
-//                .param("username", "stacy")
-//                .param("email", "stacy@email.com")
-//                .param("password", "kitty")
-//                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
-//                .andExpect(status().isFound())
-//                .andExpect(redirectedUrl("/register?error"));
-//    }
 
 }
