@@ -98,7 +98,7 @@ public class UserController {
         User logUser = usersService.loggedInUser();
 
         if(logUser == null){
-            viewModel.addAttribute("msg", "You need to be logged in to be able to see");
+            viewModel.addAttribute("msg", "You need to be logged in to be able to see this page");
             return "error/custom";
         }
 

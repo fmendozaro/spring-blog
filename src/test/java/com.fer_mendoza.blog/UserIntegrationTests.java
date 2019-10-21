@@ -11,12 +11,12 @@ import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import static org.hamcrest.Matchers.*;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = BlogApp.class)
@@ -39,7 +39,8 @@ public class UserIntegrationTests {
     @Test
     public void testShowLoginPage() throws Exception {
         this.mvc.perform(get("/login"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("Username")));
     }
 
     @Test
@@ -49,8 +50,14 @@ public class UserIntegrationTests {
     }
 
     @Test
-    public void testRegisterAUser() throws Exception {
+    public void testRedirectToLoginIfNoSessionIsActive() throws Exception {
+        mvc.perform(get("/users/profile"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("You need to be logged in to be able to see this page")));
+    }
 
+    @Test
+    public void testRegisterAUser() throws Exception {
         this.mvc.perform(post("/register")
                 .sessionAttr(TOKEN_ATTR_NAME, csrfToken)
                 .param(csrfToken.getParameterName(), csrfToken.getToken())
@@ -60,25 +67,6 @@ public class UserIntegrationTests {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
 //                .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/"));
-
-//        this.mvc.perform(post("/register")
-//                .param("username", "stacy")
-//                .param("email", "stacy@email.com")
-//                .param("password", "malibu")
-//                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
-//                .andExpect(status().is3xxRedirection())
-//                .andExpect(redirectedUrl("/"));
     }
-
-//    @Test
-//    public void testRegisterUserMismatchedPasswords() throws Exception{
-//        this.mvc.perform(post("/register")
-//                .param("username", "stacy")
-//                .param("email", "stacy@email.com")
-//                .param("password", "kitty")
-//                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
-//                .andExpect(status().isFound())
-//                .andExpect(redirectedUrl("/register?error"));
-//    }
 
 }
