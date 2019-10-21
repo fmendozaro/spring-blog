@@ -7,13 +7,13 @@
 <body>
 
 <th:block th:fragment="searchForm">
-    <div class="container">
+    <main class="container">
         <form th:action="@{/posts/search}" th:method="POST">
             <label for="term">Search</label>
             <input type="text" id="term" name="term" placeholder="Search by title or content"/>
             <input class="btn-large wave-effect" type="submit" value="Search" />
         </form>
-    </div>
+    </main>
 </th:block>
 
 <div th:fragment="postsForm(actionUrl, showEdit)">

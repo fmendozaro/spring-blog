@@ -3,7 +3,7 @@
 <head th:replace="fragments/header :: header('Blog posts')"></head>
 <body>
 <div th:replace="fragments/navbar :: navbar"></div>
-<div class="container">
+<main class="container">
     <h4 class="page-title" th:text="${title != null ? title:'All posts'}"></h4>
     <div class="row">
         <div id="postsContainer" class="col s8 offset-s2">
@@ -12,7 +12,7 @@
         <br/>
     </div>
     <!--Content-->
-</div>
+</main>
 <!--container-->
 
 <div th:replace="fragments/footer :: footer"></div>
