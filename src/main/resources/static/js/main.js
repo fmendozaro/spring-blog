@@ -6,7 +6,6 @@
     $(".dropdown-button").dropdown();
     $('.materialboxed').materialbox();
     $(".sideNav-btn").sideNav();
-    $('.parallax').parallax();
     $('select').material_select();
 
     // Event listeners
