@@ -1,6 +1,8 @@
 package com.fer_mendoza.blog;
 
 import com.fer_mendoza.blog.models.Tag;
+import com.fer_mendoza.blog.models.User;
+import com.fer_mendoza.blog.repositories.UsersRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,9 @@ public class PostIntegrationTests {
     @Autowired
     private MockMvc mvc;
 
+    @Autowired
+    UsersRepository usersRepository;
+
     // Sanity Test, just to make sure the mvc bean is working
     @Test
     public void contextLoads() throws Exception {
@@ -50,12 +55,16 @@ public class PostIntegrationTests {
     @Test
     public void testCreateAPost() throws Exception {
 
+        User testUser = usersRepository.findByUsername("fer");
+        assertThat(testUser != null);
+
         this.mvc.perform(post("/posts/create")
                 .sessionAttr(TOKEN_ATTR_NAME, csrfToken)
                 .param(csrfToken.getParameterName(), csrfToken.getToken())
                 .param("title", "test post")
                 .param("body", "lorem")
                 .param("tags", "1")
+                .param("user", String.valueOf(testUser.getId()))
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrlPattern("**/"));

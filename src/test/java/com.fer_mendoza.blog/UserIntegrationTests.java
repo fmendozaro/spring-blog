@@ -73,8 +73,10 @@ public class UserIntegrationTests {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/"));
+
         // Delete the test user
         usersRepository.delete(usersRepository.findByEmail("stacy@email.com"));
+
         // Make sure the test user is gone from the DB
         assertThat(usersRepository.findByEmail("stacy@email.com") == null);
     }
