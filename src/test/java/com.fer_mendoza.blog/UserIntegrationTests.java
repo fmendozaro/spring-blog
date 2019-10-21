@@ -1,5 +1,6 @@
 package com.fer_mendoza.blog;
 
+import com.fer_mendoza.blog.repositories.UsersRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class UserIntegrationTests {
     @Autowired
     private MockMvc mvc;
 
+    @Autowired
+    UsersRepository usersRepository;
+
     // Sanity Test, just to make sure the mvc bean is working
     @Test
     public void contextLoads() throws Exception {
@@ -58,15 +62,21 @@ public class UserIntegrationTests {
 
     @Test
     public void testRegisterAUser() throws Exception {
-        this.mvc.perform(post("/register")
+
+        // Create a test user
+        this.mvc.perform(post("/users/create")
                 .sessionAttr(TOKEN_ATTR_NAME, csrfToken)
                 .param(csrfToken.getParameterName(), csrfToken.getToken())
                 .param("username", "stacy")
                 .param("email", "stacy@email.com")
                 .param("password", "malibu")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
-//                .andExpect(status().is3xxRedirection())
+                .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/"));
+        // Delete the test user
+        usersRepository.delete(usersRepository.findByEmail("stacy@email.com"));
+        // Make sure the test user is gone from the DB
+        assertThat(usersRepository.findByEmail("stacy@email.com") == null);
     }
 
 }

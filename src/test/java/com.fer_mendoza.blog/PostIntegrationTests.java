@@ -59,6 +59,7 @@ public class PostIntegrationTests {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrlPattern("**/"));
+
     }
 
 }
