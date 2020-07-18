@@ -4,8 +4,8 @@ spring.datasource.password=pass
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 file-upload-path=/Users/fer/IdeaProjects/spring-blog/target/classes/static/uploads/
-# for server deployment your file path might look like this:
-#file-upload-path=/srv/blog.fer-mendoza.com/public/uploads
+# for server uploads your file path might look like this:
+#file-upload-path=/srv/yourdomain.com/public/uploads
 spring.servlet.multipart.max-file-size=20MB
 linkedin-id=0
 linkeding-secret=0
