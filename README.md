@@ -1,8 +1,8 @@
-# Java Spring-Blog
-A simple blog Java example project made with Spring boot / Hibernate for Codeup students.
+# Java Spring Boot Blog
+A simple blog application example project made with Spring Boot for Codeup students.
 
 - Implementing Materialize CSS Framework
-- Spring Boot
+- Spring Boot 2.1.x
 - Hibernate ORM + JPA
 - Thymeleaf
 - MySQL
@@ -18,7 +18,9 @@ A simple blog Java example project made with Spring boot / Hibernate for Codeup 
 
 ### First steps
 
+1. Clone this repo locally.
 1. Create an `application.properties` file with valid credentials for a MySQL connection, use the `application.properties.example` as a template.
+1. Add any API keys needed to test the full functionality .
 1. If you want to use the seeder file leave the `seed.db=true` property, change it to: `seed.db=false` or any value that makes sense to you when you don't want to seed the database.
 
 ### Some General Examples
