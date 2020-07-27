@@ -9,7 +9,7 @@ A simple blog application example project made with Spring Boot for Codeup stude
  
 ### Libraries and Utilities Applied
 
-- FullCalendar.js
+- FullCalendar.js [link](https://fullcalendar.io/)
 - Moments.js
 - jQuery
 - WebSockets
