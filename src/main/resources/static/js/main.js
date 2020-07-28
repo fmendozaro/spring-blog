@@ -7,6 +7,7 @@
     $('.materialboxed').materialbox();
     $(".sideNav-btn").sideNav();
     $('select').material_select();
+    $('.parallax').parallax();
 
     // Event listeners
     $("#create-btn").click(function(e){
