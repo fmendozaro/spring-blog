@@ -206,4 +206,19 @@ public class PostsController {
         return events;
     }
 
+    @GetMapping("/posts/remove-tag")
+    public String deleteTagsUI(){
+        return "demos/simplified/remove-tag";
+    }
+
+    @PostMapping("/posts/remove-tag")
+    @ResponseBody
+    public String deleteTagFromPost(@RequestParam(value = "tag_id") long tagIdToRemove, @RequestParam(value = "post_id") long postId){
+        Post post = postRepositoryRepo.getOne(postId);
+        List<Tag> tags = post.getTags();
+        tags.removeIf(tag -> tag.getId().equals(tagIdToRemove));
+        postRepositoryRepo.save(post);
+        return "deleted";
+    }
+
 }

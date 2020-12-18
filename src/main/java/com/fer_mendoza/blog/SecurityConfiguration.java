@@ -35,7 +35,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .permitAll() // Anyone can go to the login page
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/", "/logout", "/async-login") // anyone can see the home and logout page
+                    .antMatchers("/", "/logout", "/async-login", "/posts/remove-tag") // anyone can see the home and logout page
                     .permitAll()
                 .and()
                     .logout()
