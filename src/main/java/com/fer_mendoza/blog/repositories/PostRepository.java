@@ -5,6 +5,7 @@ import com.fer_mendoza.blog.models.Tag;
 import com.fer_mendoza.blog.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -30,6 +31,9 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     // Get the list of posts in reverse order.
     @Query("select p from Post p order by p.id desc")
     List<Post> postsInReverse();
+
+//    @Query("delete from post_tags where post_id = :postId and tag_id = :tagId")
+//    boolean deleteTagFromPost(@Param("postId") long postId, @Param("tagId") long tagId);
 
     List<Post> findAllByTags(List<Tag> tags);
 

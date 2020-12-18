@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header('Create a post')"></head>
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<main class="container">
+    <div class="row form-wrap">
+        <div class="col l8 offset-l2">
+            <form th:action="@{/posts/remove-tag}" method="post">
+                <label for="post_id">Post ID</label>
+                <input type="text" name="post_id">
+                <label for="tag_id">Tag ID</label>
+                <input type="text" name="tag_id">
+                <button>Remove Tag</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>
