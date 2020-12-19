@@ -35,6 +35,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 //    @Query("delete from post_tags where post_id = :postId and tag_id = :tagId")
 //    boolean deleteTagFromPost(@Param("postId") long postId, @Param("tagId") long tagId);
 
-    List<Post> findAllByTags(List<Tag> tags);
+    List<Post> findAllByTagsIn(List<Tag> tags);
 
 }

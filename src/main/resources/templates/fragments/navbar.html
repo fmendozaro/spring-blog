@@ -28,13 +28,6 @@
                      </th:block>
                      <li><a class="waves-effect waves-light" th:href="@{/posts}">All Posts</a></li>
                      <li><a class="waves-effect waves-light" th:href="@{/postsCalendar}">Calendar</a></li>
-                     <th:block sec:authorize="isAuthenticated()">
-                         <li>
-                             <form th:action="@{/logout}" th:method="POST">
-                                 <button class="waves-effect waves-light navbar-text btn-flat white-text">Logout</button>
-                             </form>
-                         </li>
-                     </th:block>
                      <li>
                          <a href="#" data-activates="slide-out" class="waves-effect waves-light sideNav-btn">
                              <i class="material-icons">search</i>

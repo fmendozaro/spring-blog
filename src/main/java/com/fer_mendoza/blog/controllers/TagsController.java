@@ -35,7 +35,7 @@ public class TagsController {
     public String showPostsByTag(@PathVariable long id, Model vModel){
         List<Tag> tags = new ArrayList<>();
         tags.add(tagRepository.getOne(id));
-        vModel.addAttribute("page", postRepository.findAllByTags(tags));
+        vModel.addAttribute("page", postRepository.findAllByTagsIn(tags));
         vModel.addAttribute("title", "Posts by tag: " + tags.get(0).getName());
         return "posts/index";
     }
