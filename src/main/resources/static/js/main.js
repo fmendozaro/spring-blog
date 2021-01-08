@@ -3,6 +3,8 @@
  */
 // $(document).ready(function(){
 
+    console.log('fsAPIKey', fsAPIKey);
+
     $(".dropdown-button").dropdown();
     $('.materialboxed').materialbox();
     $(".sideNav-btn").sideNav();
