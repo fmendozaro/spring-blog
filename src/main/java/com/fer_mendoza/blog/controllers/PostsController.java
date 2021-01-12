@@ -169,9 +169,16 @@ public class PostsController {
         return "posts/index";
     }
 
-    @GetMapping(value = "/posts.json")
+    // Shows all the posts via json
+    @GetMapping(value = "/posts.json", produces = "application/json")
     public @ResponseBody Iterable<Post> viewAllPostsInJSONFormat() {
         return postRepositoryRepo.findAll();
+    }
+
+    // Shows one post at a time via json
+    @GetMapping(value = "/posts/{id}.json", produces = "application/json")
+    public @ResponseBody Post viewPostInJSONFormat(@PathVariable long id) {
+        return postRepositoryRepo.findById(id).get();
     }
 
     @PostMapping("/posts/delete")

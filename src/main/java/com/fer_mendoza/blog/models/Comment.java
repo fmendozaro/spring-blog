@@ -1,5 +1,7 @@
 package com.fer_mendoza.blog.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.fer_mendoza.blog.repositories.CommentRepository;
@@ -24,12 +26,15 @@ public class Comment {
     private String body;
 
     @ManyToOne
+    @JsonManagedReference
     private User user;
 
     @ManyToOne
+    @JsonManagedReference
     private Comment parent;
 
     @ManyToOne
+    @JsonManagedReference
     private Post post;
 
     @CreationTimestamp
@@ -38,6 +43,7 @@ public class Comment {
     private Date createdAt;
 
     @OneToMany(mappedBy = "parent")
+    @JsonBackReference
     private List<Comment> children;
 
     public Comment(){}

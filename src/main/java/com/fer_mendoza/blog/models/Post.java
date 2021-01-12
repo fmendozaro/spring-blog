@@ -1,5 +1,6 @@
 package com.fer_mendoza.blog.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -57,6 +58,7 @@ public class Post {
     private List<Tag> tags;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    @JsonBackReference
     private List<Comment> comments;
 
     public Post(Long id, String title, String body, List<Comment> comments) {

@@ -42,6 +42,7 @@ public class User {
     private List<FriendList> friends;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonBackReference
     private List<Comment> comments;
 
     public User() {
