@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,6 +21,9 @@ public class TestsController {
 
     @Value("${google-maps-key}")
     private String mapsKey;
+
+    @Value("${app.url}")
+    private String appUrl;
 
     EventRepository eventRepo;
 
@@ -85,5 +88,11 @@ public class TestsController {
 
         vModel.addAttribute("mapkey", mapsKey);
         return "demos/map";
+    }
+
+    @GetMapping("/testPathContext")
+    @ResponseBody
+    public String testPathContext(HttpServletRequest request){
+        return "app.url = " + appUrl;
     }
 }
