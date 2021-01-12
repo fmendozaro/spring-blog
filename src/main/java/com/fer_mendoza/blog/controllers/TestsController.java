@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -92,7 +91,7 @@ public class TestsController {
 
     @GetMapping("/testPathContext")
     @ResponseBody
-    public String testPathContext(HttpServletRequest request){
+    public String testPathContext(){
         return "app.url = " + appUrl;
     }
 }
