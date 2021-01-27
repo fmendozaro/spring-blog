@@ -20,5 +20,5 @@ spring.mail.password=password
 spring.mail.properties.mail.smtp.auth=true
 spring.mail.properties.mail.smtp.starttls.enable=true
 spring.mail.from=admin@domain.com
-fsAPIKey=fakekey123
+fileStackApiKey=fakekey123
 app.url=localhost:8081
